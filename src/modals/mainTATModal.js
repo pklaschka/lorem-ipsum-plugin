@@ -37,7 +37,7 @@ async function modalAsync(selection) {
         // Removing old instances
         document.body.innerHTML = '';
 
-        const dialog = document.createElement('dialog') as HTMLDialogElement;
+        const dialog = document.createElement('dialog');
         dialog.id = 'mainTATDialog';
         dialog.innerHTML = `
     <style>
@@ -107,7 +107,7 @@ async function modalAsync(selection) {
         form.appendChild(heading);
 
 
-        console.log(dialog);
+
 
         form.appendChild(buttonGroup([
             {

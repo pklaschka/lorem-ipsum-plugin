@@ -9,8 +9,33 @@
   "uiEntryPoints": [
     {
       "type": "menu",
-      "label": "Text Area Toolbox commands…",
+      "label": "TAT: Show commands…",
       "commandId": "modal"
+    },
+    {
+      "type": "menu",
+      "label": "TAT: Trim Height",
+      "commandId": "trimHeight"
+    },
+    {
+      "type": "menu",
+      "label": "TAT: Lorem Ipsum…",
+      "commandId": "lorem"
+    },
+    {
+      "type": "menu",
+      "label": "TAT: Copy HTML…",
+      "commandId": "copyHTML"
+    },
+    {
+      "type": "menu",
+      "label": "TAT: Settings…",
+      "commandId": "settings"
+    },
+    {
+      "type": "menu",
+      "label": "TAT: Help",
+      "commandId": "help"
     }
   ]
 }
