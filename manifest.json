@@ -1,0 +1,16 @@
+{
+  "id": "de.pabloklaschka.xdplugins.textAreaToolbox",
+  "name": "Text Area Toolbox",
+  "version": "0.0.1",
+  "host": {
+    "app": "XD",
+    "minVersion": "8.0"
+  },
+  "uiEntryPoints": [
+    {
+      "type": "menu",
+      "label": "Text Area Toolbox commands…",
+      "commandId": "modal"
+    }
+  ]
+}
