@@ -37,7 +37,7 @@ async function modalAsync(selection) {
         // Removing old instances
         document.body.innerHTML = '';
 
-        const dialog = document.createElement('dialog');
+        const dialog = document.createElement('dialog') as HTMLDialogElement;
         dialog.id = 'mainTATDialog';
         dialog.innerHTML = `
     <style>
@@ -149,13 +149,8 @@ async function modalAsync(selection) {
         };
         footer.appendChild(btnCancel);
         form.appendChild(footer);
-
         dialog.appendChild(form);
-
         document.body.appendChild(dialog);
-
-        const cancelButton = document.getElementById("cancel");
-
         dialog.showModal().then(() => resolve()).catch(() => reject());
     });
 

@@ -15,8 +15,8 @@ function trimHeight(selection) {
     trim(selection);
 }
 
-function placeholderText(selection) {
-    console.log('placeholderText()');
+function lorem(selection) {
+    console.log('lorem()');
 }
 
 function copyHTML(selection) {
@@ -31,8 +31,14 @@ function help() {
     console.log('help()');
 }
 
+// noinspection JSUnusedGlobalSymbols
 module.exports = {
     commands: {
-        modal: modal
+        modal: modal,
+        lorem: lorem,
+        trimHeight: trimHeight,
+        copyHTML: copyHTML,
+        settings: settings,
+        help: help,
     }
-}
+};
