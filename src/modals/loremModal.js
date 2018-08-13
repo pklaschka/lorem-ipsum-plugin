@@ -43,7 +43,7 @@ async function modalAsync(selection) {
         `;
         form.appendChild(description);
 
-        form.appendChild(selectBox('Placeholder text:', [
+        const text = selectBox('Placeholder text:', [
             {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
             {value: 'cicero-lat', label: 'Cicero (Latin)'},
             {value: 'cicero-en', label: 'Cicero (English)'},
@@ -51,12 +51,15 @@ async function modalAsync(selection) {
             {value: 'pangram-de', label: 'Pangram (German)'},
             {value: 'pangram-es', label: 'Pangram (Espagnol)'},
             {value: 'pangram-fr', label: 'Pangram (Français)'},
-        ], 'lorem-lat'));
+        ], 'lorem-lat');
+        const terminate = checkBox('End with Period "."', true);
+        const includeLineBreaks = checkBox('Include line breaks', false);
+        const trim = checkBox('Trim text area height after inserting text', true);
 
-        form.appendChild(checkBox('End with Period "."', true));
-        form.appendChild(checkBox('Include line breaks', false));
-        form.appendChild(document.createElement('hr'));
-        form.appendChild(checkBox('Trim text area height after inserting text', true));
+        form.appendChild(text);
+        form.appendChild(terminate);
+        form.appendChild(includeLineBreaks);
+        form.appendChild(trim);
 
         const footer = document.createElement('footer');
         const btnOk = document.createElement('button');
@@ -67,7 +70,12 @@ async function modalAsync(selection) {
         btnOk.onclick = () => {
             console.log("Lorem Ipsum");
             dialog.close();
-            resolve();
+            resolve({
+                text: text.childNodes.item(1).value,
+                terminate: terminate.childNodes.item(0).checked,
+                includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
+                trim: trim.childNodes.item(0).checked
+            });
             document.body.innerHTML = '';
         };
         const btnCancel = document.createElement('button');
