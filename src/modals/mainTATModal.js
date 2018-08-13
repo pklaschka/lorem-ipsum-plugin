@@ -13,8 +13,9 @@ async function showModal(selection) {
             const trimHeight = require('../functions/trimHeight');
             await trimHeight(selection);
             break;
-        case 'placeholderText':
-            // await placeholderText(selection);
+        case 'lorem':
+            const lorem = require('./loremModal');
+            await lorem(selection);
             break;
         case 'copyHTML':
             // await copyHTML(selection);
@@ -38,7 +39,7 @@ async function modalAsync(selection) {
         document.body.innerHTML = '';
 
         const dialog = document.createElement('dialog');
-        dialog.id = 'mainTATDialog';
+        dialog.id = 'mainTATModal';
         dialog.innerHTML = `
     <style>
     main {
@@ -56,11 +57,10 @@ async function modalAsync(selection) {
         background: #EFEFEF;
         display: flex;
         flex-direction: column;
-        align-content: baseline;
         align-items: center;
+        justify-content: flex-end;
         
         text-align: center;
-        
         padding: 16px;
         
         font-family: "SF Pro Display", sans-serif;
@@ -72,7 +72,8 @@ async function modalAsync(selection) {
     }
     
     .cmdButton img {
-        flex-grow: 1;
+       width: 32px;
+       height: auto;
     }
     
     .cmdButton .label {
@@ -82,7 +83,7 @@ async function modalAsync(selection) {
         font-family: "SF Pro Display", sans-serif;
         display: block;
         width: 80px;
-        margin-top: 10px;
+        margin-top: 4px;
     }
     
     .cmdButton .key {
@@ -106,9 +107,7 @@ async function modalAsync(selection) {
         heading.innerHTML = 'Text Area Toolbox';
         form.appendChild(heading);
 
-
-
-
+        // noinspection JSCheckFunctionSignatures
         form.appendChild(buttonGroup([
             {
                 key: 'Q', label: 'Trim height', image: 'img/trim.png', id: 'btnTrimHeight', action: () => {

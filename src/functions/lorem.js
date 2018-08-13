@@ -8,7 +8,7 @@ const {Text} = require("scenegraph");
  * Fills text area with placeholder text (Lorem Ipsum)
  * @param {Selection} selection
  */
-function lorem(selection) {
+function lorem(selection, options) {
     for (let node of selection.items) {
         if (node instanceof Text && node.areaBox) {
             if (node.clippedByArea) {
