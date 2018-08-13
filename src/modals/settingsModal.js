@@ -24,11 +24,14 @@ async function modalAsync(selection) {
         document.body.innerHTML = '';
 
         const dialog = document.createElement('dialog');
-        dialog.id = 'loremModal';
+        dialog.id = 'settingsModal';
         dialog.innerHTML = `
     <style>    
     form {
         min-width: 360px;
+    }
+    * {
+        width: 100%;
     }
     </style>
     `;

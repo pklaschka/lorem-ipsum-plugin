@@ -13,11 +13,11 @@ class storageHelper {
      */
     static async init() {
         let dataFolder = await fs.getDataFolder();
-        require('uxp').shell.openExternal(dataFolder.url);
         try {
             const file = await dataFolder.getEntry('data.json');
-            if (file)
+            if (file) { // noinspection JSValidateTypes
                 return file;
+            }
             else {
                 throw new Error('Text Area Toolbox file data.json was not a file.');
             }
@@ -43,7 +43,7 @@ class storageHelper {
      */
     static async get(key, defaultValue) {
         const dataFile = await this.init();
-        let object = JSON.parse((await dataFile.read({format: storage.formats.utf8})));
+        let object = JSON.parse((await dataFile.read({format: storage.formats.utf8})).toString());
         if (object[key] === undefined) {
             await this.set(key, defaultValue);
             return defaultValue;
