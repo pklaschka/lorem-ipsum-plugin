@@ -47,8 +47,10 @@ async function modalAsync(selection) {
             {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
             {value: 'cicero-lat', label: 'Cicero (Latin)'},
             {value: 'cicero-en', label: 'Cicero (English)'},
-            {value: 'pan-en', label: 'Pangram (English)'},
-            {value: 'pan-de', label: 'Pangram (German)'},
+            {value: 'pangram-en', label: 'Pangram (English)'},
+            {value: 'pangram-de', label: 'Pangram (German)'},
+            {value: 'pangram-es', label: 'Pangram (Espagnol)'},
+            {value: 'pangram-fr', label: 'Pangram (Français)'},
         ], 'lorem-lat'));
 
         form.appendChild(checkBox('End with Period "."', true));
