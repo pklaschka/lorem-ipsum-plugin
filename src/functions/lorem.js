@@ -25,16 +25,16 @@ const texts = {
  * @param {string} options.text
  */
 function lorem(selection, options) {
-    // TODO: Use options.includeLineBreaks
     console.log('Lorem ipsum with options ', (options));
+    let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
         if (element instanceof Text && element.text && element.areaBox) {
             let count = 0;
             do {
                 count++;
-                element.text = loremText(count, options.text) + options.terminate ? '.' : '';
+                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
             } while (!element.clippedByArea && count < 10000);
-            element.text = loremText(count - 1, options.text) + options.terminate ? '.' : '';
+            element.text = loremText(count - 1, options.text, options.includeLineBreaks) + terminationString;
 
             if (options.trim) {
                 trimHeight(selection);
@@ -46,11 +46,11 @@ function lorem(selection, options) {
 
 }
 
-function loremText(count, text) {
-    function trimToNWords(strText, n) {
+function loremText(count, text, includeLineBreaks) {
+    function trimToNWords(strText, n, includeLineBreaks) {
         // Ensure text is long enough:
         while (strText.split(" ").length < n) {
-            strText = strText + " " + strText;
+            strText = includeLineBreaks ? (strText + "\n" + strText) : (strText + " " + strText);
             }
         return strText
             .split(" ")
@@ -59,9 +59,9 @@ function loremText(count, text) {
         }
 
     let originalString = texts[text];
-    let strReturn = trimToNWords(originalString, count).trim();
+    let strReturn = trimToNWords(originalString, count, includeLineBreaks)/*.trim();
     if (strReturn.endsWith('.') || strReturn.endsWith(',') || strReturn.endsWith('?') || strReturn.endsWith(';'))
-        strReturn = strReturn.substr(0, strReturn.length - 1);
+        strReturn = strReturn.substr(0, strReturn.length - 1)*/;
     return strReturn;
 }
 
