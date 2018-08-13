@@ -22,7 +22,8 @@ async function showModal(selection) {
             await copyHTML(selection);
             break;
         case 'settings':
-            // await settings();
+            const settings = require('./settingsModal');
+            await settings(selection);
             break;
         case 'help':
             // await help();
