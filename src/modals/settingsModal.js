@@ -20,34 +20,33 @@ async function showModal(selection) {
  */
 async function modalAsync(selection) {
     return new Promise((resolve, reject) => {
-        // Removing old instances
-        document.body.innerHTML = '';
-
-        const dialog = document.createElement('dialog');
-        dialog.id = 'settingsModal';
-        dialog.innerHTML = `
-    <style>    
-    form {
-        min-width: 360px;
-    }
-    * {
-        width: 100%;
-    }
-    </style>
-    `;
-
-        const form = document.createElement('form');
-        form.method = 'dialog';
-
-        const heading = document.createElement('h1');
-        heading.innerHTML = 'Text Area Toolbox Settings';
-        form.appendChild(heading);
-
         storage.get('settings', {
             optionA: 'a',
             optionB: 'b'
         }).then(settings => {
             console.log('Found settings: ', JSON.stringify(settings));
+
+
+            // Removing old instances
+            document.body.innerHTML = '';
+
+            const dialog = document.createElement('dialog');
+            dialog.id = 'settingsModal';
+            dialog.innerHTML = `
+    <style>    
+    form {
+        min-width: 360px;
+    }
+    </style>
+    `;
+
+            const form = document.createElement('form');
+            form.method = 'dialog';
+
+            const heading = document.createElement('h1');
+            heading.innerHTML = 'Text Area Toolbox Settings';
+            form.appendChild(heading);
+
 
             const optionA = selectBox('Value A', [
                 {value: 'a', label: 'Option A'},
