@@ -59,9 +59,9 @@ function loremText(count, text, includeLineBreaks) {
         }
 
     let originalString = texts[text];
-    let strReturn = trimToNWords(originalString, count, includeLineBreaks)/*.trim();
+    let strReturn = trimToNWords(originalString, count, includeLineBreaks).trim();
     if (strReturn.endsWith('.') || strReturn.endsWith(',') || strReturn.endsWith('?') || strReturn.endsWith(';'))
-        strReturn = strReturn.substr(0, strReturn.length - 1)*/;
+        strReturn = strReturn.substr(0, strReturn.length - 1);
     return strReturn;
 }
 
