@@ -18,7 +18,8 @@ async function showModal(selection) {
             await lorem(selection);
             break;
         case 'copyHTML':
-            // await copyHTML(selection);
+            const copyHTML = require('./copyHTMLModal');
+            await copyHTML(selection);
             break;
         case 'settings':
             // await settings();

@@ -8,8 +8,8 @@
 async function showModal(selection) {
     console.log('Showing TAT main modal');
     let options = await modalAsync(selection);
-    const lorem = require('../functions/lorem');
-    await lorem(selection, options);
+    /*const lorem = require('../functions/lorem');
+    await lorem(selection, options);*/
     return true;
 }
 
@@ -35,32 +35,31 @@ async function modalAsync(selection) {
         form.method = 'dialog';
 
         const heading = document.createElement('h1');
-        heading.innerHTML = 'Lorem Ipsum';
+        heading.innerHTML = 'Copy HTML';
         form.appendChild(heading);
 
         const description = document.createElement('p');
-        description.innerHTML = `Fills text area with placeholder text. This doesn't work with point text.
+        description.innerHTML = `Copies markup for the selected nodes to clipboard as HTML. When multiple nodes are selected, the order the nodes were selected in determines the order in the HTML.
         `;
         form.appendChild(description);
 
-        form.appendChild(selectBox('Placeholder text:', [
-            {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
-            {value: 'cicero-lat', label: 'Cicero (Latin)'},
-            {value: 'cicero-en', label: 'Cicero (English)'},
-            {value: 'pan-en', label: 'Pangram (English)'},
-            {value: 'pan-de', label: 'Pangram (German)'},
-        ], 'lorem-lat'));
-
-        form.appendChild(checkBox('End with Period "."', true));
-        form.appendChild(checkBox('Include line breaks', false));
-        form.appendChild(document.createElement('hr'));
-        form.appendChild(checkBox('Trim text area height after inserting text', true));
+        form.appendChild(checkBox('Include layer name comments', true));
+        form.appendChild(checkBox('Sorround with layer name tags', false));
+        form.appendChild(selectBox('Bold-Tag', [
+            {value: 'strong', label: '&lt;strong&gt;[…]&lt;/strong&gt;'},
+            {value: 'b', label: '&lt;b&gt;[…]&lt;/b&gt;'},
+            {value: 'em', label: '&lt;em&gt;[…]&lt;/em&gt;'},
+        ], 'strong'));
+        form.appendChild(selectBox('Italics-Tag', [
+            {value: 'i', label: '&lt;i&gt;[…]&lt;/strong&gt;'},
+            {value: 'em', label: '&lt;em&gt;[…]&lt;/em&gt;'},
+        ], 'i'));
 
         const footer = document.createElement('footer');
         const btnOk = document.createElement('button');
         btnOk.id = "ok";
         btnOk.type = "submit";
-        btnOk.innerHTML = 'Ok';
+        btnOk.innerHTML = 'Copy HTML to clipboard';
         btnOk.setAttribute('uxp-variant', 'cta');
         btnOk.onclick = () => {
             console.log("Lorem Ipsum");
