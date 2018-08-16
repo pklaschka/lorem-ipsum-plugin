@@ -33,7 +33,7 @@ function copyHTML(selection, options) {
  * @param {boolean} options.layerNameComments Wheter to include layer name comments
  */
 function nodesHTML(node, options) {
-    let code = "<!-- " + node.name + " -->\n"; // Prefix node name (useful when multiple elements get selected)
+    let code = options.layerNameComments ? "<!-- " + node.name + " -->\n" : ""; // Prefix node name (useful when multiple elements get selected)
     if (node instanceof Text) {
         code += "<p>"; // Every node begins with a paragraph
         let beginIndex = 0; // index of the beginning of the text
@@ -72,7 +72,6 @@ function nodesHTML(node, options) {
         );
         code += '</div>';
     }
-    code += "<!-- " + node.name + " -->\n"; // Prefix node name (useful when multiple elements get selected)
     return code;
 }
 
