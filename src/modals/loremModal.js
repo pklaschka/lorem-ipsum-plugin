@@ -2,6 +2,8 @@
  * Copyright (c) 2018. by Pablo Klaschka
  */
 
+const storage = require('../helpers/storage');
+
 /**
  * @param {Selection} selection
  */
@@ -18,12 +20,19 @@ async function showModal(selection) {
  */
 async function modalAsync(selection) {
     return new Promise((resolve, reject) => {
-        // Removing old instances
-        document.body.innerHTML = '';
+        storage.get('loremOptions', {
+            text: 'lorem-lat',
+            terminate: true,
+            includeLineBreaks: true,
+            trim: false
+        }).then(uiOptions => {
 
-        const dialog = document.createElement('dialog');
-        dialog.id = 'loremModal';
-        dialog.innerHTML = `
+            // Removing old instances
+            document.body.innerHTML = '';
+
+            const dialog = document.createElement('dialog');
+            dialog.id = 'loremModal';
+            dialog.innerHTML = `
     <style>    
     form {
         min-width: 360px;
@@ -31,68 +40,72 @@ async function modalAsync(selection) {
     </style>
     `;
 
-        const form = document.createElement('form');
-        form.method = 'dialog';
+            const form = document.createElement('form');
+            form.method = 'dialog';
 
-        const heading = document.createElement('h1');
-        heading.innerHTML = 'Lorem Ipsum';
-        form.appendChild(heading);
+            const heading = document.createElement('h1');
+            heading.innerHTML = 'Lorem Ipsum';
+            form.appendChild(heading);
 
-        const description = document.createElement('p');
-        description.innerHTML = `Fills text area with placeholder text. This doesn't work with point text.
+            const description = document.createElement('p');
+            description.innerHTML = `Fills text area with placeholder text. This doesn't work with point text.
         `;
-        form.appendChild(description);
+            form.appendChild(description);
 
-        const text = selectBox('Placeholder text:', [
-            {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
-            {value: 'cicero-lat', label: 'Cicero (Latin)'},
-            {value: 'cicero-en', label: 'Cicero (English)'},
-            {value: 'pangram-en', label: 'Pangram (English)'},
-            {value: 'pangram-de', label: 'Pangram (German)'},
-            {value: 'pangram-es', label: 'Pangram (Espagnol)'},
-            {value: 'pangram-fr', label: 'Pangram (Français)'},
-        ], 'lorem-lat');
-        const terminate = checkBox('End with Period "."', true);
-        const includeLineBreaks = checkBox('Include line breaks', false);
-        const trim = checkBox('Trim text area height after inserting text', true);
+            const text = selectBox('Placeholder text:', [
+                {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
+                {value: 'cicero-lat', label: 'Cicero (Latin)'},
+                {value: 'cicero-en', label: 'Cicero (English)'},
+                {value: 'pangram-en', label: 'Pangram (English)'},
+                {value: 'pangram-de', label: 'Pangram (German)'},
+                {value: 'pangram-es', label: 'Pangram (Espagnol)'},
+                {value: 'pangram-fr', label: 'Pangram (Français)'},
+            ], uiOptions.text);
+            const terminate = checkBox('End with Period "."', uiOptions.terminate);
+            const includeLineBreaks = checkBox('Include line breaks', uiOptions.includeLineBreaks);
+            const trim = checkBox('Trim text area height after inserting text', uiOptions.trim);
 
-        form.appendChild(text);
-        form.appendChild(terminate);
-        form.appendChild(includeLineBreaks);
-        form.appendChild(trim);
+            form.appendChild(text);
+            form.appendChild(terminate);
+            form.appendChild(includeLineBreaks);
+            form.appendChild(trim);
 
-        const footer = document.createElement('footer');
-        const btnOk = document.createElement('button');
-        btnOk.id = "ok";
-        btnOk.type = "submit";
-        btnOk.innerHTML = 'Ok';
-        btnOk.setAttribute('uxp-variant', 'cta');
-        btnOk.onclick = () => {
-            console.log("Lorem Ipsum");
-            dialog.close();
-            resolve({
-                text: text.childNodes.item(1).value,
-                terminate: terminate.childNodes.item(0).checked,
-                includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
-                trim: trim.childNodes.item(0).checked
-            });
-            document.body.innerHTML = '';
-        };
-        const btnCancel = document.createElement('button');
-        btnCancel.id = "cancel";
-        btnCancel.innerHTML = 'Cancel';
-        btnCancel.onclick = () => {
-            console.log("Closing Text Area Tools");
-            dialog.close();
-            reject();
-            document.body.innerHTML = '';
-        };
-        footer.appendChild(btnCancel);
-        footer.appendChild(btnOk);
-        form.appendChild(footer);
-        dialog.appendChild(form);
-        document.body.appendChild(dialog);
-        dialog.showModal().then(() => resolve()).catch(() => reject());
+            const footer = document.createElement('footer');
+            const btnOk = document.createElement('button');
+            btnOk.id = "ok";
+            btnOk.type = "submit";
+            btnOk.innerHTML = 'Ok';
+            btnOk.setAttribute('uxp-variant', 'cta');
+            btnOk.onclick = () => {
+                const loremOptions = {
+                    text: text.childNodes.item(1).value,
+                    terminate: terminate.childNodes.item(0).checked,
+                    includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
+                    trim: trim.childNodes.item(0).checked
+                };
+                storage.set('loremOptions', loremOptions).then(value1 => {
+                    console.log("Lorem Ipsum");
+                    dialog.close();
+                    resolve(loremOptions);
+                    document.body.innerHTML = '';
+                });
+            };
+            const btnCancel = document.createElement('button');
+            btnCancel.id = "cancel";
+            btnCancel.innerHTML = 'Cancel';
+            btnCancel.onclick = () => {
+                console.log("Closing Text Area Tools");
+                dialog.close();
+                reject();
+                document.body.innerHTML = '';
+            };
+            footer.appendChild(btnCancel);
+            footer.appendChild(btnOk);
+            form.appendChild(footer);
+            dialog.appendChild(form);
+            document.body.appendChild(dialog);
+            dialog.showModal().then(() => resolve()).catch(() => reject());
+        });
     });
 }
 
