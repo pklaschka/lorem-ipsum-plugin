@@ -88,7 +88,7 @@ async function modalAsync(selection) {
                     includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
                     trim: trim.childNodes.item(0).checked
                 };
-                storage.set('loremOptions', loremOptions).then(value1 => {
+                storage.set('loremOptions', loremOptions).then(() => {
                     console.log("Lorem Ipsum");
                     dialog.close();
                     resolve(loremOptions);
