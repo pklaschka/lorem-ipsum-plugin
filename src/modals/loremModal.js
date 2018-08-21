@@ -37,6 +37,11 @@ async function modalAsync(selection) {
     form {
         min-width: 360px;
     }
+    
+    .pseudoInput {
+        width: 0;
+        height: 0;
+    }
     </style>
     `;
 
