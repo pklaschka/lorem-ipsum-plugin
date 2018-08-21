@@ -70,6 +70,11 @@ async function modalAsync(selection) {
             form.appendChild(includeLineBreaks);
             form.appendChild(trim);
 
+
+            const pseudoInput = document.createElement('input');
+            pseudoInput.className = 'pseudoInput';
+            form.appendChild(pseudoInput);
+
             const footer = document.createElement('footer');
             const btnOk = document.createElement('button');
             btnOk.id = "ok";
