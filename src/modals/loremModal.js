@@ -104,6 +104,7 @@ async function modalAsync(selection) {
             form.appendChild(footer);
             dialog.appendChild(form);
             document.body.appendChild(dialog);
+
             dialog.showModal().then(() => resolve()).catch(() => reject());
         });
     });

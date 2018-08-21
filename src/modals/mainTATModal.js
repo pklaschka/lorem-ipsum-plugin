@@ -53,6 +53,11 @@ async function modalAsync(selection) {
         width: 100%;
     }
     
+    .pseudoInput {
+        width: 0;
+        height: 0;
+    }
+    
     .cmdButton {
         width: 102px;
         height: 102px;
@@ -109,8 +114,7 @@ async function modalAsync(selection) {
         heading.innerHTML = 'Text Area Toolbox';
         form.appendChild(heading);
 
-        // noinspection JSCheckFunctionSignatures
-        form.appendChild(buttonGroup([
+        const commands = [
             {
                 key: 'Q', label: 'Trim height', image: 'img/trim.png', id: 'btnTrimHeight', action: () => {
                     resolve('trimHeight');
@@ -136,7 +140,25 @@ async function modalAsync(selection) {
                     resolve('help');
                 }
             }
-        ], dialog));
+        ];
+
+        // noinspection JSCheckFunctionSignatures
+        form.appendChild(buttonGroup(commands, dialog));
+
+        dialog.addEventListener("keydown", evt => {
+            console.log('KeyDown: ', evt.key);
+            const command = commands.find(value => value.key.toLowerCase() === evt.key.toLowerCase());
+            if (command) {
+                console.log('Key registered command: ', JSON.stringify(command));
+                command.action();
+                dialog.close();
+            }
+        });
+
+
+        const pseudoInput = document.createElement('input');
+        pseudoInput.className = 'pseudoInput';
+        form.appendChild(pseudoInput);
 
         const footer = document.createElement('footer');
         const btnCancel = document.createElement('button');
