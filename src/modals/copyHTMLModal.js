@@ -37,6 +37,11 @@ async function modalAsync(selection) {
     form {
         min-width: 360px;
     }
+    
+    .pseudoInput {
+        width: 0;
+        height: 0;
+    }
     </style>
     `;
 
@@ -74,6 +79,10 @@ async function modalAsync(selection) {
                 {value: '<u>$</u>', label: '&lt;u&gt;[…]&lt;/u&gt;'},
             ], uiOptions.underline);
             form.appendChild(underline);
+
+            const pseudoInput = document.createElement('input');
+            pseudoInput.className = 'pseudoInput';
+            form.appendChild(pseudoInput);
 
             const footer = document.createElement('footer');
             const btnOk = document.createElement('button');
