@@ -1,7 +1,7 @@
 {
-  "id": "de.pabloklaschka.xdplugins.textAreaToolbox",
-  "name": "Text Area Toolbox",
-  "version": "0.0.1",
+  "id": "de.pabloklaschka.xdplugins.loremIpsum",
+  "name": "Lorem Ipsum",
+  "version": "0.3.0",
   "host": {
     "app": "XD",
     "minVersion": "8.0"
@@ -9,33 +9,13 @@
   "uiEntryPoints": [
     {
       "type": "menu",
-      "label": "TAT: Show commands…",
-      "commandId": "modal"
-    },
-    {
-      "type": "menu",
-      "label": "TAT: Trim Height",
-      "commandId": "trimHeight"
-    },
-    {
-      "type": "menu",
-      "label": "TAT: Lorem Ipsum…",
+      "label": "Fill with placeholder text…",
       "commandId": "lorem"
     },
     {
       "type": "menu",
-      "label": "TAT: Copy HTML…",
-      "commandId": "copyHTML"
-    },
-    {
-      "type": "menu",
-      "label": "TAT: Settings…",
-      "commandId": "settings"
-    },
-    {
-      "type": "menu",
-      "label": "TAT: Help",
-      "commandId": "help"
+      "label": "Fill with placeholder text (use last options)",
+      "commandId": "quickLorem"
     }
   ]
 }

@@ -2,43 +2,31 @@
  * Copyright (c) 2018. by Pablo Klaschka
  */
 
-const showModal = require('./src/modals/mainTATModal');
+const loremModal = require('./src/modals/loremModal');
+const loremFunction = require('./src/functions/lorem');
+const storage = require('./src/helpers/storage');
 
-async function modal(selection) {
-    await showModal(selection);
-    console.log('TAT is done.')
+async function settings() {
+    return await storage.get('loremOptions', {
+        text: 'lorem-lat',
+        terminate: true,
+        includeLineBreaks: true,
+        trim: false
+    })
 }
 
-function trimHeight(selection) {
-    console.log('trimHeight()');
-    const trim = require('./src/functions/trimHeight');
-    trim(selection);
+async function lorem(selection) {
+    await loremModal(selection);
 }
 
-function lorem(selection) {
-    console.log('lorem()');
-}
-
-function copyHTML(selection) {
-    console.log('copyHTML()');
-}
-
-function settings() {
-    console.log('settings()');
-}
-
-function help() {
-    console.log('help()');
+async function quickLorem(selection) {
+    loremFunction(selection, await settings());
 }
 
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
     commands: {
-        modal: modal,
         lorem: lorem,
-        trimHeight: trimHeight,
-        copyHTML: copyHTML,
-        settings: settings,
-        help: help,
+        quickLorem: quickLorem
     }
 };
