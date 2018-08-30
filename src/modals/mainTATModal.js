@@ -26,7 +26,8 @@ async function showModal(selection) {
             await settings(selection);
             break;
         case 'help':
-            // await help();
+            const help = require('./helpModal');
+            await help(selection);
             break;
     }
     return true;

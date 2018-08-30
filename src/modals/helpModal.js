@@ -8,10 +8,8 @@ const storage = require('../helpers/storage');
  * @param {Selection} selection
  */
 async function showModal(selection) {
-    console.log('Showing TAT Lorem Ipsum modal');
+    console.log('Showing TAT help modal');
     let options = await modalAsync(selection);
-    const lorem = require('../functions/lorem');
-    await lorem(selection, options);
     return true;
 }
 
@@ -20,27 +18,22 @@ async function showModal(selection) {
  */
 async function modalAsync(selection) {
     return new Promise((resolve, reject) => {
-        storage.get('loremOptions', {
-            text: 'lorem-lat',
-            terminate: true,
-            includeLineBreaks: true,
-            trim: false
-        }).then(uiOptions => {
+        storage.get('settings', {
+            optionA: 'a',
+            optionB: 'b'
+        }).then(settings => {
+            console.log('Found settings: ', JSON.stringify(settings));
+
 
             // Removing old instances
             document.body.innerHTML = '';
 
             const dialog = document.createElement('dialog');
-            dialog.id = 'loremModal';
+            dialog.id = 'settingsModal';
             dialog.innerHTML = `
     <style>    
     form {
         min-width: 360px;
-    }
-    
-    .pseudoInput {
-        width: 0;
-        height: 0;
     }
     </style>
     `;
@@ -49,60 +42,22 @@ async function modalAsync(selection) {
             form.method = 'dialog';
 
             const heading = document.createElement('h1');
-            heading.innerHTML = 'Lorem Ipsum';
+            heading.innerHTML = 'Text Area Toolbox Help';
             form.appendChild(heading);
 
             const description = document.createElement('p');
-            description.innerHTML = `Fills text area with placeholder text. This doesn't work with point text.
-        `;
-            form.appendChild(description);
+            description.innerHTML = `
+            Help is coming soon. For now, I hope everything is intuitive enough ;-)
+            <br>
+            <b>Quick Tip:</b><br>
+            You can use the keyboard shortcuts (i.e. Q, W, E, R & T) shown below the action in the main dialog to quickly perform the corresponding action.
+            `;
 
-            const text = selectBox('Placeholder text:', [
-                {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
-                {value: 'cicero-lat', label: 'Cicero (Latin)'},
-                {value: 'cicero-en', label: 'Cicero (English)'},
-                {value: 'pangram-en', label: 'Pangram (English)'},
-                {value: 'pangram-de', label: 'Pangram (German)'},
-                {value: 'pangram-es', label: 'Pangram (Espagnol)'},
-                {value: 'pangram-fr', label: 'Pangram (Français)'},
-            ], uiOptions.text);
-            const terminate = checkBox('End with Period "."', uiOptions.terminate);
-            const includeLineBreaks = checkBox('Include line breaks', uiOptions.includeLineBreaks);
-            const trim = checkBox('Trim text area height after inserting text', uiOptions.trim);
-
-            form.appendChild(text);
-            form.appendChild(terminate);
-            form.appendChild(includeLineBreaks);
-            form.appendChild(trim);
-
-
-            const pseudoInput = document.createElement('input');
-            pseudoInput.className = 'pseudoInput';
-            form.appendChild(pseudoInput);
 
             const footer = document.createElement('footer');
-            const btnOk = document.createElement('button');
-            btnOk.id = "ok";
-            btnOk.type = "submit";
-            btnOk.innerHTML = 'Ok';
-            btnOk.setAttribute('uxp-variant', 'cta');
-            btnOk.onclick = () => {
-                const loremOptions = {
-                    text: text.childNodes.item(1).value,
-                    terminate: terminate.childNodes.item(0).checked,
-                    includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
-                    trim: trim.childNodes.item(0).checked
-                };
-                storage.set('loremOptions', loremOptions).then(() => {
-                    console.log("Lorem Ipsum");
-                    dialog.close();
-                    resolve(loremOptions);
-                    document.body.innerHTML = '';
-                });
-            };
             const btnCancel = document.createElement('button');
             btnCancel.id = "cancel";
-            btnCancel.innerHTML = 'Cancel';
+            btnCancel.innerHTML = 'Close';
             btnCancel.onclick = () => {
                 console.log("Closing Text Area Tools");
                 dialog.close();
@@ -110,13 +65,12 @@ async function modalAsync(selection) {
                 document.body.innerHTML = '';
             };
             footer.appendChild(btnCancel);
-            footer.appendChild(btnOk);
             form.appendChild(footer);
             dialog.appendChild(form);
             document.body.appendChild(dialog);
-
             dialog.showModal().then(() => resolve()).catch(() => reject());
-        });
+        }).catch(reason => reject(reason));
+
     });
 }
 
