@@ -52,7 +52,7 @@ async function modalAsync(selection) {
             <b>Quick Tip:</b><br>
             You can use the keyboard shortcuts (i.e. Q, W, E, R & T) shown below the action in the main dialog to quickly perform the corresponding action.
             `;
-
+            form.appendChild(description);
 
             const footer = document.createElement('footer');
             const btnCancel = document.createElement('button');
