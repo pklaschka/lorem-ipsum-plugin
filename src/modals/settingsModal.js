@@ -37,6 +37,11 @@ async function modalAsync(selection) {
     form {
         min-width: 360px;
     }
+    
+    .pseudoInput {
+        width: 0;
+        height: 0;
+    }
     </style>
     `;
 
@@ -47,6 +52,10 @@ async function modalAsync(selection) {
             heading.innerHTML = 'Text Area Toolbox Settings';
             form.appendChild(heading);
 
+
+            const pseudoInput = document.createElement('input');
+            pseudoInput.className = 'pseudoInput';
+            form.appendChild(pseudoInput);
 
             const optionA = selectBox('Value A', [
                 {value: 'a', label: 'Option A'},
