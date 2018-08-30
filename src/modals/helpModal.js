@@ -9,7 +9,7 @@ const storage = require('../helpers/storage');
  */
 async function showModal(selection) {
     console.log('Showing TAT help modal');
-    let options = await modalAsync(selection);
+    await modalAsync(selection);
     return true;
 }
 
@@ -72,46 +72,6 @@ You can use the keyboard shortcuts (i.e. Q, W, E, R & T) shown below the action 
         }).catch(reason => reject(reason));
 
     });
-}
-
-function selectBox(label, entries, defaultValue) {
-    const lblSelect = document.createElement("label");
-    const spanLblSelect = document.createElement('span');
-    spanLblSelect.innerHTML = label;
-    lblSelect.appendChild(spanLblSelect);
-    const select = document.createElement('select');
-
-    for (let entry of entries) {
-        let optEntry = document.createElement("option");
-        optEntry.value = entry.value;
-        optEntry.innerHTML = entry.label;
-        select.appendChild(optEntry);
-    }
-    if (defaultValue) {
-        select.value = defaultValue;
-    }
-    lblSelect.appendChild(select);
-
-    return lblSelect;
-}
-
-function checkBox(label, defaultChecked) {
-    const lblCheck = document.createElement("label");
-    Object.assign(lblCheck.style, {flexDirection: "row", alignItems: "center"});
-    // lblCheck.class = 'row';
-    const checkBox = document.createElement('input');
-    checkBox.type = 'checkbox';
-    checkBox.id = label;
-    checkBox.placeholder = label;
-    if (defaultChecked) {
-        checkBox.checked = true;
-    }
-    lblCheck.appendChild(checkBox);
-    const spanLblCheck = document.createElement('span');
-    spanLblCheck.innerHTML = label;
-    lblCheck.appendChild(spanLblCheck);
-
-    return lblCheck;
 }
 
 module.exports = showModal;

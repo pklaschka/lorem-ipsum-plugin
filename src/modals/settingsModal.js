@@ -52,6 +52,10 @@ async function modalAsync(selection) {
             heading.innerHTML = 'Text Area Toolbox Settings';
             form.appendChild(heading);
 
+            const description = document.createElement('p');
+            description.innerHTML = 'Real settings are coming soon…';
+            form.appendChild(description);
+
 
             const pseudoInput = document.createElement('input');
             pseudoInput.className = 'pseudoInput';
