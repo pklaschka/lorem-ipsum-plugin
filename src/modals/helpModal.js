@@ -47,11 +47,11 @@ async function modalAsync(selection) {
 
             const description = document.createElement('p');
             description.innerHTML = `
-            Help is coming soon. For now, I hope everything is intuitive enough ;-)
-            <br>
-            <b>Quick Tip:</b><br>
-            You can use the keyboard shortcuts (i.e. Q, W, E, R & T) shown below the action in the main dialog to quickly perform the corresponding action.
-            `;
+Help is coming soon. For now, I hope everything is intuitive enough ;-)
+<br>
+<b>Quick Tip:</b><br>
+You can use the keyboard shortcuts (i.e. Q, W, E, R & T) shown below the action in the main dialog to quickly perform the corresponding action.
+`;
             form.appendChild(description);
 
             const footer = document.createElement('footer');
