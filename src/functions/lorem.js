@@ -29,13 +29,23 @@ function lorem(selection, options) {
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
         if (element instanceof Text && element.text && element.areaBox) {
-            let count = 0;
+            let prevCount = 0;
+            let count = 1;
+            console.log('Propagating forward');
             do {
-                count++;
+                prevCount = count;
+                count *= 2;
                 element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
-            } while (!element.clippedByArea && count < 10000);
-            element.text = loremText(count - 1, options.text, options.includeLineBreaks) + terminationString;
+            } while (!element.clippedByArea && count < 100000);
+            console.log('Propagating backwards from ', count);
 
+            count = checkBetween(prevCount, count, (count) => {
+                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+                return element.clippedByArea;
+            });
+            element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+
+            console.log('Completed at ', count);
             if (options.trim) {
                 trimHeight(selection);
             }
@@ -43,7 +53,22 @@ function lorem(selection, options) {
             console.log('Node ', element, ' is not a text area.');
         }
     }
+}
 
+/**
+ * @param oldCount The highest count that was clipped
+ * @param newCount The lowest count that wasn't clipped
+ * @param {function(count:number): boolean} isClipped
+ */
+function checkBetween(oldCount, newCount, isClipped) {
+    console.log('Checking between ', oldCount, ' and ', newCount);
+
+    if (Math.abs(oldCount - newCount) < 2)
+        return oldCount;
+
+    let half = Math.floor((oldCount + newCount) / 2);
+
+    return isClipped(half) ? checkBetween(oldCount, half, isClipped) : checkBetween(half, newCount, isClipped);
 }
 
 function loremText(count, text, includeLineBreaks) {
@@ -51,12 +76,12 @@ function loremText(count, text, includeLineBreaks) {
         // Ensure text is long enough:
         while (strText.split(" ").length < n) {
             strText = includeLineBreaks ? (strText + "\n" + strText) : (strText + " " + strText);
-            }
+        }
         return strText
             .split(" ")
             .splice(0, n)
             .join(" ");
-        }
+    }
 
     let originalString = texts[text];
     let strReturn = trimToNWords(originalString, count, includeLineBreaks).trim();
