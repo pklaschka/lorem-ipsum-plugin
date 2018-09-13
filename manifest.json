@@ -1,7 +1,7 @@
 {
   "id": "de.pabloklaschka.xdplugins.loremIpsum",
   "name": "Lorem Ipsum",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "host": {
     "app": "XD",
     "minVersion": "8.0"
@@ -9,13 +9,19 @@
   "uiEntryPoints": [
     {
       "type": "menu",
-      "label": "Fill with placeholder text…",
-      "commandId": "lorem"
-    },
-    {
-      "type": "menu",
-      "label": "Fill with placeholder text (use previous settings)",
-      "commandId": "quickLorem"
+      "label": "Lorem Ipsum...",
+      "menuItems": [
+        {
+          "type": "menu",
+          "label": "Fill with placeholder text…",
+          "commandId": "lorem"
+        },
+        {
+          "type": "menu",
+          "label": "Fill with placeholder text (use previous settings)",
+          "commandId": "quickLorem"
+        }
+      ]
     }
   ]
 }
