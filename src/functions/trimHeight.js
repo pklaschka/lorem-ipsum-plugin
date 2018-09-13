@@ -4,6 +4,7 @@
 
 const {Text} = require("scenegraph");
 const debugHelper = require('../helpers/debug');
+const SelectionChecker = require('../helpers/check-selection');
 
 /**
  * Trims text area to suitable height
@@ -11,7 +12,7 @@ const debugHelper = require('../helpers/debug');
  */
 function trim(selection) {
     for (let node of selection.items) {
-        if (node instanceof Text && node.areaBox) {
+        if (SelectionChecker.checkForType(node, 'AreaText')) {
             let oldHeight = node.localBounds.height;
             if (node.clippedByArea) {
                 // Need to increase the height

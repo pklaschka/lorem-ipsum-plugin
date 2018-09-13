@@ -5,6 +5,7 @@
 const {Text} = require("scenegraph");
 const trimHeight = require('./trimHeight');
 const debugHelper = require('../helpers/debug');
+const SelectionChecker = require('../helpers/check-selection');
 
 const texts = {
     'lorem-lat': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -26,10 +27,11 @@ const texts = {
  * @param {string} options.text
  */
 function lorem(selection, options) {
+
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
-        if (element instanceof Text && element.text && element.areaBox) {
+        if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
             let count = 1;
             debugHelper.log('Propagating forward');
@@ -50,7 +52,7 @@ function lorem(selection, options) {
             if (options.trim) {
                 trimHeight(selection);
             }
-        } else if (element instanceof Text && element.text && !element.areaBox) {
+        } else if (SelectionChecker.checkForType(element, 'PointText')) {
             element.text = loremText(2, options.text, false) + terminationString;
         } else {
             debugHelper.log('Node ', element, ' is not a text area.');
