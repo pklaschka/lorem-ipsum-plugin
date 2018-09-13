@@ -43,6 +43,10 @@ async function modalAsync(selection) {
         width: 0;
         height: 0;
     }
+    
+    input[type="checkbox"] {
+    width: 18px;
+    }
     </style>
     `;
 
@@ -85,7 +89,7 @@ async function modalAsync(selection) {
             const btnOk = document.createElement('button');
             btnOk.id = "ok";
             btnOk.type = "submit";
-            btnOk.innerHTML = 'Ok';
+            btnOk.innerHTML = 'Insert text';
             btnOk.setAttribute('uxp-variant', 'cta');
             btnOk.onclick = () => {
                 const loremOptions = {
