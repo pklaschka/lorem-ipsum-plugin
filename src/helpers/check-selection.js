@@ -77,7 +77,7 @@ class SelectionChecker {
         return this.selection.items.reduce((previousValue, currentValue) => {
             let isOfOneOfTypes = false;
             for (let type of types) {
-                if (this.checkForType(currentValue, type)) {
+                if (SelectionChecker.checkForType(currentValue, type)) {
                     isOfOneOfTypes = true;
                     break;
                 }
@@ -92,7 +92,7 @@ class SelectionChecker {
      * @param {string} type
      * @returns {boolean} `true` if `node` matches specified ``type`
      */
-    checkForType(node, type) {
+    static checkForType(node, type) {
         const typeCheckLookupTable = {
             'Text': (node) => {
                 const {Text} = require('scenegraph');
