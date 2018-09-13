@@ -9,8 +9,6 @@ const loremFunction = require('./src/functions/lorem');
 const storage = require('./src/helpers/storage');
 const SelectionChekcer = require('./src/helpers/check-selection');
 
-const {Text} = require("scenegraph");
-
 async function settings() {
     return await storage.get('loremOptions', {
         text: 'lorem-lat',
@@ -22,7 +20,7 @@ async function settings() {
 
 function checkSelection(selection) {
     let checker = new SelectionChekcer(selection);
-    return checker.oneOrMore(Text);
+    return checker.oneOrMore('Text');
 }
 
 async function lorem(selection) {
