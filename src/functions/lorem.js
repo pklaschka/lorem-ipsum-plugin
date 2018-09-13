@@ -4,6 +4,7 @@
 
 const {Text} = require("scenegraph");
 const trimHeight = require('./trimHeight');
+const debugHelper = require('../helpers/debug');
 
 const texts = {
     'lorem-lat': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -25,19 +26,19 @@ const texts = {
  * @param {string} options.text
  */
 function lorem(selection, options) {
-    console.log('Lorem ipsum with options ', (options));
+    debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
         if (element instanceof Text && element.text && element.areaBox) {
             let prevCount = 0;
             let count = 1;
-            console.log('Propagating forward');
+            debugHelper.log('Propagating forward');
             do {
                 prevCount = count;
                 count *= 2;
                 element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
             } while (!element.clippedByArea && count < 100000);
-            console.log('Propagating backwards from ', count);
+            debugHelper.log('Propagating backwards from ', count);
 
             count = checkBetween(prevCount, count, (count) => {
                 element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
@@ -45,12 +46,12 @@ function lorem(selection, options) {
             });
             element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
 
-            console.log('Completed at ', count);
+            debugHelper.log('Completed at ', count);
             if (options.trim) {
                 trimHeight(selection);
             }
         } else {
-            console.log('Node ', element, ' is not a text area.');
+            debugHelper.log('Node ', element, ' is not a text area.');
         }
     }
 }
@@ -61,7 +62,7 @@ function lorem(selection, options) {
  * @param {function(count:number): boolean} isClipped
  */
 function checkBetween(oldCount, newCount, isClipped) {
-    console.log('Checking between ', oldCount, ' and ', newCount);
+    debugHelper.log('Checking between ', oldCount, ' and ', newCount);
 
     if (Math.abs(oldCount - newCount) < 2)
         return oldCount;

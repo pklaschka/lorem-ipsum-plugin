@@ -4,6 +4,7 @@
 
 const storage = require('uxp').storage;
 const fs = storage.localFileSystem;
+const debugHelper = require('./debug');
 
 class storageHelper {
     /**
@@ -23,7 +24,7 @@ class storageHelper {
             }
 
         } catch {
-            console.log('Creating file');
+            debugHelper.log('Creating file');
             const file = await dataFolder.createEntry('data.json', {type: storage.types.file, overwrite: true});
             if (file.isFile) {
                 await file.write('{}', {append: false});

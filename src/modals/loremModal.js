@@ -3,12 +3,13 @@
  */
 
 const storage = require('../helpers/storage');
+const debugHelper = require('../helpers/debug');
 
 /**
  * @param {Selection} selection
  */
 async function showModal(selection) {
-    console.log('Showing TAT Lorem Ipsum modal');
+    debugHelper.log('Showing Lorem Ipsum modal');
     let options = await modalAsync(selection);
     const lorem = require('../functions/lorem');
     await lorem(selection, options);
@@ -94,7 +95,7 @@ async function modalAsync(selection) {
                     trim: trim.childNodes.item(0).checked
                 };
                 storage.set('loremOptions', loremOptions).then(() => {
-                    console.log("Lorem Ipsum");
+                    debugHelper.log("Lorem Ipsum");
                     dialog.close();
                     resolve(loremOptions);
                     document.body.innerHTML = '';
@@ -104,7 +105,7 @@ async function modalAsync(selection) {
             btnCancel.id = "cancel";
             btnCancel.innerHTML = 'Cancel';
             btnCancel.onclick = () => {
-                console.log("Closing Text Area Tools");
+                debugHelper.log("Closing Text Area Tools");
                 dialog.close();
                 reject();
                 document.body.innerHTML = '';

@@ -3,6 +3,7 @@
  */
 
 const {Text} = require("scenegraph");
+const debugHelper = require('../helpers/debug');
 
 /**
  * Trims text area to suitable height
@@ -53,7 +54,7 @@ function trim(selection) {
  * @param {function(height:number): boolean} isClipped
  */
 function checkBetween(smallerHeight, biggerHeight, isClipped) {
-    console.log('Checking between ', smallerHeight, ' and ', biggerHeight);
+    debugHelper.log('Checking between ', smallerHeight, ' and ', biggerHeight);
 
     if (Math.abs(smallerHeight - biggerHeight) < 2)
         return biggerHeight;
