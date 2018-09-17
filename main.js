@@ -39,14 +39,14 @@ async function quickLorem(selection) {
 
 async function loremPreconfigured(selection) {
     if (checkSelection(selection))
-        await loremFunction(selection, {includeLineBreaks: true, trim: false, terminate: true, text: 'lorem'});
+        await loremFunction(selection, {includeLineBreaks: true, trim: false, terminate: true, text: 'lorem-lat'});
     else
         await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
 }
 
 async function loremPreconfiguredTrim(selection) {
     if (checkSelection(selection))
-        await loremFunction(selection, {includeLineBreaks: true, trim: true, terminate: true, text: 'lorem'});
+        await loremFunction(selection, {includeLineBreaks: true, trim: true, terminate: true, text: 'lorem-lat'});
     else
         await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
 }
