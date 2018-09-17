@@ -24,12 +24,12 @@
         {
           "type": "menu",
           "label": "Quick Lorem Ipsum",
-          "commandId": "quickLoremPreconfigured"
+          "commandId": "loremPreconfigured"
         },
         {
           "type": "menu",
           "label": "Quick Lorem Ipsum (trim text area)",
-          "commandId": "quickLoremPreconfiguredTrim"
+          "commandId": "loremPreconfiguredTrim"
         }
       ]
     }
