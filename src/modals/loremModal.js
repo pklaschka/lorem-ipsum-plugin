@@ -58,7 +58,7 @@ async function modalAsync(selection) {
             form.appendChild(heading);
 
             const description = document.createElement('p');
-            description.innerHTML = `Fills text area with placeholder text. This doesn't work with point text.
+            description.innerHTML = `Fills selected text elements with placeholder text.
         `;
             form.appendChild(description);
 
