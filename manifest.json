@@ -1,11 +1,33 @@
 {
   "id": "de.pabloklaschka.xdplugins.loremIpsum",
   "name": "Lorem Ipsum",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "host": {
     "app": "XD",
-    "minVersion": "8.0"
+    "minVersion": "12.0"
   },
+  "icons": [
+    {
+      "width": 24,
+      "height": 24,
+      "path": "assets/24w/logo-24.png"
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "path": "assets/48w/logo-48.png"
+    },
+    {
+      "width": 96,
+      "height": 96,
+      "path": "assets/1x/logo-96.png"
+    },
+    {
+      "width": 512,
+      "height": 512,
+      "path": "assets/512w/logo-512.png"
+    }
+  ],
   "uiEntryPoints": [
     {
       "type": "menu",
