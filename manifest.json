@@ -40,7 +40,7 @@
         },
         {
           "type": "menu",
-          "label": "Fill with placeholder text (use previous settings)",
+          "label": "Fill with placeholder text (last settings)",
           "commandId": "quickLorem"
         },
         {
@@ -50,7 +50,7 @@
         },
         {
           "type": "menu",
-          "label": "Quick Lorem Ipsum (trim text area)",
+          "label": "Quick Lorem Ipsum (trim height)",
           "commandId": "loremPreconfiguredTrim"
         }
       ]
