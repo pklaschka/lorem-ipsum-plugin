@@ -58,7 +58,7 @@ async function modalAsync(selection) {
             form.appendChild(heading);
 
             const description = document.createElement('p');
-            description.innerHTML = `Fills selected text elements with placeholder text.
+            description.innerHTML = `Fills selected text element(s) with placeholder text.
         `;
             form.appendChild(description);
 
@@ -73,7 +73,7 @@ async function modalAsync(selection) {
             ], uiOptions.text);
             const terminate = checkBox('End with Period "."', uiOptions.terminate);
             const includeLineBreaks = checkBox('Include line breaks', uiOptions.includeLineBreaks);
-            const trim = checkBox('Trim text area height after inserting text', uiOptions.trim);
+            const trim = checkBox('Trim text area height to fit inserted text', uiOptions.trim);
 
             form.appendChild(text);
             form.appendChild(terminate);
