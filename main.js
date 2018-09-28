@@ -27,28 +27,28 @@ async function lorem(selection) {
     if (checkSelection(selection))
         await loremModal(selection);
     else
-        await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
+        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
 }
 
 async function quickLorem(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, await settings());
     else
-        await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
+        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
 }
 
 async function loremPreconfigured(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, {includeLineBreaks: true, trim: false, terminate: true, text: 'lorem-lat'});
     else
-        await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
+        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
 }
 
 async function loremPreconfiguredTrim(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, {includeLineBreaks: true, trim: true, terminate: true, text: 'lorem-lat'});
     else
-        await errorHelper.showErrorDialog('No text selected', 'The Lorem Ipsum plugin could not load since you haven\'t selected any text elements. Please select at least one text element and try again.');
+        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
 }
 
 // noinspection JSUnusedGlobalSymbols
