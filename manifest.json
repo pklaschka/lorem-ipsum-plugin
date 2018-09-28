@@ -1,7 +1,7 @@
 {
   "id": "700b7996",
   "name": "Lorem Ipsum",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "host": {
     "app": "XD",
     "minVersion": "12.0"
