@@ -8,6 +8,7 @@ const loremModal = require('./src/modals/loremModal');
 const loremFunction = require('./src/functions/lorem');
 const storage = require('./src/helpers/storage');
 const SelectionChekcer = require('./src/helpers/check-selection');
+const lang = require('./src/helpers/language');
 
 async function settings() {
     return await storage.get('loremOptions', {
@@ -16,6 +17,10 @@ async function settings() {
         includeLineBreaks: true,
         trim: false
     })
+}
+
+async function selectionError() {
+    return await errorHelper.showErrorDialog(lang.getString('error-selection-title'), lang.getString('error-selection-description'));
 }
 
 function checkSelection(selection) {
@@ -27,28 +32,28 @@ async function lorem(selection) {
     if (checkSelection(selection))
         await loremModal(selection);
     else
-        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
+        await selectionError();
 }
 
 async function quickLorem(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, await settings());
     else
-        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
+        await selectionError();
 }
 
 async function loremPreconfigured(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, {includeLineBreaks: true, trim: false, terminate: true, text: 'lorem-lat'});
     else
-        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
+        await selectionError();
 }
 
 async function loremPreconfiguredTrim(selection) {
     if (checkSelection(selection))
         await loremFunction(selection, {includeLineBreaks: true, trim: true, terminate: true, text: 'lorem-lat'});
     else
-        await errorHelper.showErrorDialog('No text selected', 'Please include at least one text node in your selection and try again.');
+        await selectionError();
 }
 
 // noinspection JSUnusedGlobalSymbols

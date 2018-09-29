@@ -4,6 +4,7 @@
 
 const storage = require('../helpers/storage');
 const debugHelper = require('../helpers/debug');
+const lang = require('../helpers/language');
 
 /**
  * @param {Selection} selection
@@ -36,7 +37,7 @@ async function modalAsync(selection) {
             dialog.innerHTML = `
     <style>    
     form {
-        min-width: 360px;
+        width: 360px;
     }
     
     input[type="checkbox"] {
@@ -53,11 +54,10 @@ async function modalAsync(selection) {
             form.appendChild(heading);
 
             const description = document.createElement('p');
-            description.innerHTML = `Fills selected text element(s) with placeholder text.
-        `;
+            description.innerHTML = lang.getString('modal-lorem-description');
             form.appendChild(description);
 
-            const text = selectBox('Placeholder text:', [
+            const text = selectBox(lang.getString('modal-lorem-text-label'), [
                 {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
                 {value: 'cicero-lat', label: 'Cicero (Latin)'},
                 {value: 'cicero-en', label: 'Cicero (English)'},
@@ -66,9 +66,9 @@ async function modalAsync(selection) {
                 {value: 'pangram-es', label: 'Pangram (Espagnol)'},
                 {value: 'pangram-fr', label: 'Pangram (Français)'},
             ], uiOptions.text);
-            const terminate = checkBox('End with Period "."', uiOptions.terminate);
-            const includeLineBreaks = checkBox('Include line breaks', uiOptions.includeLineBreaks);
-            const trim = checkBox('Trim text area height to fit inserted text', uiOptions.trim);
+            const terminate = checkBox(lang.getString('modal-lorem-terminate-label'), uiOptions.terminate);
+            const includeLineBreaks = checkBox(lang.getString('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
+            const trim = checkBox(lang.getString('modal-lorem-trim-label'), uiOptions.trim);
 
             form.appendChild(text);
             form.appendChild(terminate);
@@ -81,7 +81,7 @@ async function modalAsync(selection) {
             const btnOk = document.createElement('button');
             btnOk.id = "ok";
             btnOk.type = "submit";
-            btnOk.innerHTML = 'Insert text';
+            btnOk.innerHTML = lang.getString('modal-lorem-btn-ok');
             btnOk.setAttribute('uxp-variant', 'cta');
             btnOk.onclick = () => {
                 const loremOptions = {
@@ -99,7 +99,7 @@ async function modalAsync(selection) {
             };
             const btnCancel = document.createElement('button');
             btnCancel.id = "cancel";
-            btnCancel.innerHTML = 'Cancel';
+            btnCancel.innerHTML = lang.getString('modal-lorem-btn-cancel');
             btnCancel.onclick = () => {
                 debugHelper.log("Closing Lorem Ipsum");
                 dialog.close();
