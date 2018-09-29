@@ -9,6 +9,9 @@ cache:
 
 build:
   stage: build
+  before_script:
+    - apt-get update && apt-get install -y \
+    zip
   script:
     - zip -R build '*.js' 'manifest.json' 'src/*'
   artifacts:
