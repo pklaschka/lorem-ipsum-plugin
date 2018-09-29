@@ -22,9 +22,6 @@ class errorHelper {
         height: 0;
     }
     
-    p {
-    width:100%;
-    }
     </style>
     `;
 
@@ -36,7 +33,7 @@ class errorHelper {
         form.appendChild(heading);
 
         const description = document.createElement('p');
-        description.innerText = message;
+        description.innerHTML = message;
         form.appendChild(description);
 
         const pseudoInput = document.createElement('input');
