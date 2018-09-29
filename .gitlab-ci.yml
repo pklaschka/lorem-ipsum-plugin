@@ -1,4 +1,10 @@
+image: node
+
+stages:
+  - release-job
+
 release-job:
+  stage: release-job
   script:
     - zip -R build '*.js' 'manifest.json' 'src/*'
   artifacts:
