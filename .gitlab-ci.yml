@@ -12,7 +12,9 @@ release-build:
   before_script:
     - apt-get update && apt-get install -y zip
   script:
-    - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*'
+    - ls
+    - ls assets
+    - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*' '*.png'
     - mv build.zip lorem_$CI_COMMIT_TAG.xdx
   artifacts:
     name: "lorem_$CI_COMMIT_TAG.xdx"
