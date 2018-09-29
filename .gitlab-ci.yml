@@ -13,9 +13,9 @@ release-build:
     - apt-get update && apt-get install -y zip
   script:
     - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*'
-    - mv build.zip build.xdx
+    - mv build.zip de.pabloklaschka.xdplugins.lorem.xdx
   artifacts:
-    name: "$CI_COMMIT_REF_NAME"
+    name: "lorem_$CI_COMMIT_REF_NAME.xdx"
     paths:
       - de.pabloklaschka.xdplugins.lorem.xdx
   only:
