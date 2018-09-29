@@ -1,0 +1,8 @@
+release-job:
+  script:
+    - zip -R build '*.js' 'manifest.json' 'src/*'
+  artifacts:
+    paths:
+      - build.zip
+  only:
+    - tags
