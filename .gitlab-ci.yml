@@ -1,14 +1,16 @@
-image: node
+image: node:latest
 
 stages:
-  - release-job
+  - build
 
-release-job:
-  stage: release-job
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
   script:
     - zip -R build '*.js' 'manifest.json' 'src/*'
   artifacts:
     paths:
       - build.zip
-  only:
-    - tags
