@@ -7,12 +7,16 @@ cache:
   paths:
     - node_modules/
 
-build:
+release-build:
   stage: build
   before_script:
     - apt-get update && apt-get install -y zip
   script:
-    - zip -R build '*.js' 'manifest.json' 'src/*'
+    - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*'
+    - mv build.zip build.xdx
   artifacts:
+    name: "$CI_COMMIT_REF_NAME"
     paths:
-      - build.zip
+      - de.pabloklaschka.xdplugins.lorem.xdx
+  only:
+    - tags
