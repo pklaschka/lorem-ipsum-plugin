@@ -13,10 +13,10 @@ release-build:
     - apt-get update && apt-get install -y zip
   script:
     - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*'
-    - mv build.zip de.pabloklaschka.xdplugins.lorem.xdx
+    - mv build.zip lorem_$CI_COMMIT_TAG.xdx
   artifacts:
-    name: "lorem_$CI_COMMIT_REF_NAME.xdx"
+    name: "lorem_$CI_COMMIT_TAG.xdx"
     paths:
-      - de.pabloklaschka.xdplugins.lorem.xdx
+      - lorem_$CI_COMMIT_TAG.xdx
   only:
     - tags
