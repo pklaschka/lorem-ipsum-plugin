@@ -14,12 +14,16 @@ class errorHelper {
         dialog.innerHTML = `
     <style>    
     form {
-        min-width: 360px;
+        width: 360px;
     }
     
     .pseudoInput {
         width: 0;
         height: 0;
+    }
+    
+    p {
+    width:100%;
     }
     </style>
     `;
@@ -32,7 +36,7 @@ class errorHelper {
         form.appendChild(heading);
 
         const description = document.createElement('p');
-        description.innerHTML = message;
+        description.innerText = message;
         form.appendChild(description);
 
         const pseudoInput = document.createElement('input');

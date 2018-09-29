@@ -35,22 +35,38 @@
       "menuItems": [
         {
           "type": "menu",
-          "label": "Fill with placeholder text…",
-          "commandId": "lorem"
+          "label": {
+            "default": "Fill with placeholder text…",
+            "de": "Mit Platzhaltertext füllen…"
+          },
+          "commandId": "lorem",
+          "shortcut": {
+            "mac": "Cmd+Alt+L",
+            "windows": "Ctrl+Alt+L"
+          }
         },
         {
           "type": "menu",
-          "label": "Fill with placeholder text (last settings)",
+          "label": {
+            "default": "Fill with placeholder text (last settings)",
+            "de": "Mit Platzhaltertext füllen (wie letztes mal)"
+          },
           "commandId": "quickLorem"
         },
         {
           "type": "menu",
-          "label": "Quick Lorem Ipsum",
+          "label": {
+            "default": "Quick Lorem Ipsum",
+            "de": "Schnelles Lorem Ipsum"
+          },
           "commandId": "loremPreconfigured"
         },
         {
           "type": "menu",
-          "label": "Quick Lorem Ipsum (trim height)",
+          "label": {
+            "default": "Quick Lorem Ipsum (trim height)",
+            "de": "Schnelles Lorem Ipsum (Höhe anpassen)"
+          },
           "commandId": "loremPreconfiguredTrim"
         }
       ]

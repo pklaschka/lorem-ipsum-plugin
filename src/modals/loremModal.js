@@ -62,6 +62,10 @@ async function modalAsync(selection) {
         `;
             form.appendChild(description);
 
+            const pseudoInput = document.createElement('input');
+            pseudoInput.className = 'pseudoInput';
+            form.appendChild(pseudoInput);
+
             const text = selectBox('Placeholder text:', [
                 {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
                 {value: 'cicero-lat', label: 'Cicero (Latin)'},
@@ -81,9 +85,6 @@ async function modalAsync(selection) {
             form.appendChild(trim);
 
 
-            const pseudoInput = document.createElement('input');
-            pseudoInput.className = 'pseudoInput';
-            form.appendChild(pseudoInput);
 
             const footer = document.createElement('footer');
             const btnOk = document.createElement('button');
@@ -109,7 +110,7 @@ async function modalAsync(selection) {
             btnCancel.id = "cancel";
             btnCancel.innerHTML = 'Cancel';
             btnCancel.onclick = () => {
-                debugHelper.log("Closing Text Area Tools");
+                debugHelper.log("Closing Lorem Ipsum");
                 dialog.close();
                 reject();
                 document.body.innerHTML = '';
