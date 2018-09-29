@@ -42,7 +42,7 @@
           "commandId": "lorem",
           "shortcut": {
             "mac": "Cmd+Alt+L",
-            "windows": "Ctrl+Alt+L"
+            "win": "Ctrl+Alt+L"
           }
         },
         {
