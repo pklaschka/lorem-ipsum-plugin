@@ -39,11 +39,6 @@ async function modalAsync(selection) {
         min-width: 360px;
     }
     
-    .pseudoInput {
-        width: 0;
-        height: 0;
-    }
-    
     input[type="checkbox"] {
     width: 18px;
     }
@@ -61,10 +56,6 @@ async function modalAsync(selection) {
             description.innerHTML = `Fills selected text element(s) with placeholder text.
         `;
             form.appendChild(description);
-
-            const pseudoInput = document.createElement('input');
-            pseudoInput.className = 'pseudoInput';
-            // form.appendChild(pseudoInput);
 
             const text = selectBox('Placeholder text:', [
                 {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},

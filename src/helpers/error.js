@@ -17,11 +17,6 @@ class errorHelper {
         width: 360px;
     }
     
-    .pseudoInput {
-        width: 0;
-        height: 0;
-    }
-    
     </style>
     `;
 
@@ -35,10 +30,6 @@ class errorHelper {
         const description = document.createElement('p');
         description.innerHTML = message;
         form.appendChild(description);
-
-        const pseudoInput = document.createElement('input');
-        pseudoInput.className = 'pseudoInput';
-        // form.appendChild(pseudoInput);
 
         const footer = document.createElement('footer');
         const btnOk = document.createElement('button');
