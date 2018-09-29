@@ -64,7 +64,7 @@ async function modalAsync(selection) {
 
             const pseudoInput = document.createElement('input');
             pseudoInput.className = 'pseudoInput';
-            form.appendChild(pseudoInput);
+            // form.appendChild(pseudoInput);
 
             const text = selectBox('Placeholder text:', [
                 {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},

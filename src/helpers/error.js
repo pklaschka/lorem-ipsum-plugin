@@ -38,7 +38,7 @@ class errorHelper {
 
         const pseudoInput = document.createElement('input');
         pseudoInput.className = 'pseudoInput';
-        form.appendChild(pseudoInput);
+        // form.appendChild(pseudoInput);
 
         const footer = document.createElement('footer');
         const btnOk = document.createElement('button');
