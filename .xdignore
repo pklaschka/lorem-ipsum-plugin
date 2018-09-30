@@ -3,3 +3,4 @@ types
 jsconfig.json
 .gitignore
 .xdignore
+.gitlab-ci.yml
