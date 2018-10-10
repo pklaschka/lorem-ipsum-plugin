@@ -97,6 +97,7 @@ async function modalAsync(selection) {
                     document.body.innerHTML = '';
                 });
             };
+            btnOk.setAttribute('autofocus', 'autofocus');
             const btnCancel = document.createElement('button');
             btnCancel.id = "cancel";
             btnCancel.innerHTML = lang.getString('modal-lorem-btn-cancel');
