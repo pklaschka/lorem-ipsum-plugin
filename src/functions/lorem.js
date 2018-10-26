@@ -27,10 +27,12 @@ const texts = {
  * @param {string} options.text
  */
 function lorem(selection, options) {
-
+    // TODO: Add support for Groups inside RepeatGrids
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
+        const repeatGrid = element.parent.parent.constructor.name === 'RepeatGrid';
+        console.log();
         if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
             let count = 1;
@@ -38,15 +40,25 @@ function lorem(selection, options) {
             do {
                 prevCount = count;
                 count *= 2;
-                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+                if (repeatGrid) {
+                    element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
+                } else {
+                    element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+                }
             } while (!element.clippedByArea && count < 100000);
             debugHelper.log('Propagating backwards from ', count);
 
             count = checkBetween(prevCount, count, (count) => {
-                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+                if (repeatGrid)
+                    element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
+                else
+                    element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
                 return element.clippedByArea;
             });
-            element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+            if (repeatGrid)
+                element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
+            else
+                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
 
             debugHelper.log('Completed at ', count);
             if (options.trim) {
