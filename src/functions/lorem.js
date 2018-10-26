@@ -27,11 +27,10 @@ const texts = {
  * @param {string} options.text
  */
 function lorem(selection, options) {
-    // TODO: Add support for Groups inside RepeatGrids
+    // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
-        const repeatGrid = element.parent.parent.constructor.name === 'RepeatGrid';
         console.log();
         if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
@@ -40,25 +39,15 @@ function lorem(selection, options) {
             do {
                 prevCount = count;
                 count *= 2;
-                if (repeatGrid) {
-                    element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
-                } else {
-                    element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
-                }
+                applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
             } while (!element.clippedByArea && count < 100000);
             debugHelper.log('Propagating backwards from ', count);
 
             count = checkBetween(prevCount, count, (count) => {
-                if (repeatGrid)
-                    element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
-                else
-                    element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+                applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
                 return element.clippedByArea;
             });
-            if (repeatGrid)
-                element.parent.parent.attachTextDataSeries(element, [loremText(count, options.text, options.includeLineBreaks) + terminationString]);
-            else
-                element.text = loremText(count, options.text, options.includeLineBreaks) + terminationString;
+            applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
 
             debugHelper.log('Completed at ', count);
             if (options.trim) {
@@ -70,6 +59,27 @@ function lorem(selection, options) {
             debugHelper.log('Node ', element, ' is not a text area.');
         }
     }
+}
+
+/**
+ * Applies text to the passed text layer (also, if it's e.g. inside a RepeatGrid
+ * @param {Text} textLayer
+ * @param {string} text
+ */
+function applyText(textLayer, text) {
+    /*let optRepeatGridNode = textLayer;
+    do {
+        optRepeatGridNode = optRepeatGridNode.parent;
+    } while (optRepeatGridNode.constructor.name !== 'RepeatGrid' && optRepeatGridNode);*/
+    let optRepeatGridNode;
+    if (textLayer.parent.parent.constructor.name === 'RepeatGrid') {
+        optRepeatGridNode = textLayer.parent.parent;
+    }
+
+    if (optRepeatGridNode)
+        optRepeatGridNode.attachTextDataSeries(textLayer, [text]);
+    else
+        textLayer.text = text;
 }
 
 /**
