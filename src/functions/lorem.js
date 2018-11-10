@@ -31,7 +31,6 @@ function lorem(selection, options) {
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminate ? '.' : '';
     for (let element of selection.items) {
-        console.log();
         if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
             let count = 1;
