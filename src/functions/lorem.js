@@ -72,7 +72,7 @@ function applyText(textLayer, text) {
         optRepeatGridNode = optRepeatGridNode.parent;
     } while (optRepeatGridNode.constructor.name !== 'RepeatGrid' && optRepeatGridNode);*/
     let optRepeatGridNode;
-    if (textLayer.parent.parent.constructor.name === 'RepeatGrid') {
+    if (textLayer.parent.parent && textLayer.parent.parent.constructor.name === 'RepeatGrid') {
         optRepeatGridNode = textLayer.parent.parent;
     }
 
