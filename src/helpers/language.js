@@ -27,10 +27,24 @@ class LanguageHelper {
                 "default": "Placeholder text:",
                 "de": "Platzhaltertext:"
             },
+
             "modal-lorem-terminate-label": {
-                "default": "End with Period \".\"",
-                "de": "Mit Satzzeichen \".\" abschließen"
+                "default": "End with punctuation mark",
+                "de": "Text mit Satzzeichen abschließen"
             },
+            "modal-lorem-terminate-none": {
+                "default": "None",
+                "de": "Kein Zeichen"
+            },
+            "modal-lorem-terminate-period": {
+                "default": "Period ('.')",
+                "de": "Punkt ('.')"
+            },
+            "modal-lorem-terminate-ellipsis": {
+                "default": "Ellipsis ('…')",
+                "de": "Auslassungspunkte ('…')"
+            },
+
             "modal-lorem-includeLineBreaks-label": {
                 "default": "Include line breaks",
                 "de": "Zeilenumbrüche generieren"

@@ -22,14 +22,14 @@ const texts = {
  * @param {Selection} selection
  * @param {object} options
  * @param {boolean} options.trim
- * @param {boolean} options.terminate
+ * @param {string} options.terminationString
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
  */
 function lorem(selection, options) {
     // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
     debugHelper.log('Lorem ipsum with options ', (options));
-    let terminationString = options.terminate ? '.' : '';
+    let terminationString = options.terminationString;
     for (let element of selection.items) {
         if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
@@ -66,10 +66,6 @@ function lorem(selection, options) {
  * @param {string} text
  */
 function applyText(textLayer, text) {
-    /*let optRepeatGridNode = textLayer;
-    do {
-        optRepeatGridNode = optRepeatGridNode.parent;
-    } while (optRepeatGridNode.constructor.name !== 'RepeatGrid' && optRepeatGridNode);*/
     let optRepeatGridNode;
     if (textLayer.parent.parent && textLayer.parent.parent.constructor.name === 'RepeatGrid') {
         optRepeatGridNode = textLayer.parent.parent;

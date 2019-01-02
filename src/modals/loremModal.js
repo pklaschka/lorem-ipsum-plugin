@@ -24,10 +24,12 @@ async function modalAsync(selection) {
     return new Promise((resolve, reject) => {
         storage.get('loremOptions', {
             text: 'lorem-lat',
-            terminate: true,
+            terminationString: '',
             includeLineBreaks: true,
             trim: false
         }).then(uiOptions => {
+            if (!uiOptions['terminationString'])
+                uiOptions['terminationString'] = '';
 
             // Removing old instances
             document.body.innerHTML = '';
@@ -77,12 +79,17 @@ async function modalAsync(selection) {
                 {value: 'pangram-es', label: 'Pangram (Espagnol)'},
                 {value: 'pangram-fr', label: 'Pangram (Français)'},
             ], uiOptions.text);
-            const terminate = checkBox(lang.getString('modal-lorem-terminate-label'), uiOptions.terminate);
+
+            const terminationString = selectBox(lang.getString('modal-lorem-terminate-label'), [
+                {value: '', label: lang.getString('modal-lorem-terminate-none')},
+                {value: '.', label: lang.getString('modal-lorem-terminate-period')},
+                {value: '…', label: lang.getString('modal-lorem-terminate-ellipsis')},
+            ], uiOptions.terminationString);
             const includeLineBreaks = checkBox(lang.getString('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
             const trim = checkBox(lang.getString('modal-lorem-trim-label'), uiOptions.trim);
 
             form.appendChild(text);
-            form.appendChild(terminate);
+            form.appendChild(terminationString);
             form.appendChild(includeLineBreaks);
             form.appendChild(trim);
 
@@ -97,7 +104,7 @@ async function modalAsync(selection) {
             btnOk.onclick = () => {
                 const loremOptions = {
                     text: text.childNodes.item(1).value,
-                    terminate: terminate.childNodes.item(0).checked,
+                    terminationString: terminationString.childNodes.item(1).value,
                     includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
                     trim: trim.childNodes.item(0).checked
                 };
