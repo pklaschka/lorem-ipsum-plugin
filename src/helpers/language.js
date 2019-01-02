@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const app = require('application');
@@ -29,8 +29,8 @@ class LanguageHelper {
             },
 
             "modal-lorem-terminate-label": {
-                "default": "End with punctuation mark",
-                "de": "Text mit Satzzeichen abschließen"
+                "default": "End with punctuation mark:",
+                "de": "Text mit Satzzeichen abschließen:"
             },
             "modal-lorem-terminate-none": {
                 "default": "None",
