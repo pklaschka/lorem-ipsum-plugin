@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const errorHelper = require("./src/helpers/error");
@@ -44,14 +44,24 @@ async function quickLorem(selection) {
 
 async function loremPreconfigured(selection) {
     if (checkSelection(selection))
-        await loremFunction(selection, {includeLineBreaks: true, trim: false, terminate: true, text: 'lorem-lat'});
+        await loremFunction(selection, {
+            includeLineBreaks: true,
+            trim: false,
+            terminationString: 'n/a',
+            text: 'lorem-lat'
+        });
     else
         await selectionError();
 }
 
 async function loremPreconfiguredTrim(selection) {
     if (checkSelection(selection))
-        await loremFunction(selection, {includeLineBreaks: true, trim: true, terminate: true, text: 'lorem-lat'});
+        await loremFunction(selection, {
+            includeLineBreaks: true,
+            trim: true,
+            terminationString: '.',
+            text: 'lorem-lat'
+        });
     else
         await selectionError();
 }

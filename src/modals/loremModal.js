@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const storage = require('../helpers/storage');
@@ -29,12 +29,12 @@ async function modalAsync(selection) {
     return new Promise((resolve, reject) => {
         storage.get('loremOptions', {
             text: 'lorem-lat',
-            terminationString: '',
+            terminationString: 'n/a',
             includeLineBreaks: true,
             trim: false
         }).then(uiOptions => {
             if (!uiOptions['terminationString'])
-                uiOptions['terminationString'] = '';
+                uiOptions['terminationString'] = 'n/a';
 
             // Removing old instances
             document.body.innerHTML = '';
@@ -86,7 +86,7 @@ async function modalAsync(selection) {
             ], uiOptions.text);
 
             const terminationString = selectBox(lang.getString('modal-lorem-terminate-label'), [
-                {value: '', label: lang.getString('modal-lorem-terminate-none')},
+                {value: 'n/a', label: lang.getString('modal-lorem-terminate-none')},
                 {value: '.', label: lang.getString('modal-lorem-terminate-period')},
                 {value: '…', label: lang.getString('modal-lorem-terminate-ellipsis')},
             ], uiOptions.terminationString);

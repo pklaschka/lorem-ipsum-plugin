@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const {Text} = require("scenegraph");
@@ -23,14 +23,14 @@ const texts = {
  * @param {Selection} selection
  * @param {object} options
  * @param {boolean} options.trim
- * @param {string} options.terminationString
+ * @param {string} options.terminationString n/a for no termination string
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
  */
 function lorem(selection, options) {
     // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
     debugHelper.log('Lorem ipsum with options ', (options));
-    let terminationString = options.terminationString;
+    let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
     for (let element of selection.items) {
         if (SelectionChecker.checkForType(element, 'AreaText')) {
             let prevCount = 0;
