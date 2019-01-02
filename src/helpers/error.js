@@ -13,8 +13,18 @@ class errorHelper {
         dialog.id = 'loremErrorModal';
         dialog.innerHTML = `
     <style>    
+    
     form {
         width: 360px;
+    }
+    
+    header {
+        background: #2D4E64;
+        height: 16px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
     }
     
     </style>
@@ -22,6 +32,9 @@ class errorHelper {
 
         const form = document.createElement('form');
         form.method = 'dialog';
+
+        form.appendChild(document.createElement('header'));
+
 
         const heading = document.createElement('h1');
         heading.innerHTML = title;
@@ -38,7 +51,7 @@ class errorHelper {
         btnOk.innerHTML = 'Ok';
         btnOk.setAttribute('uxp-variant', 'cta');
         btnOk.onclick = () => {
-            dialog.close();
+            dialog.close(true);
             document.body.innerHTML = '';
         };
         footer.appendChild(btnOk);

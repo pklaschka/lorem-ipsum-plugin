@@ -40,6 +40,15 @@ async function modalAsync(selection) {
         width: 360px;
     }
     
+    header {
+        background: #2D4E64;
+        height: 16px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+    }
+    
     input[type="checkbox"] {
     width: 18px;
     }
@@ -48,6 +57,8 @@ async function modalAsync(selection) {
 
             const form = document.createElement('form');
             form.method = 'dialog';
+
+            form.appendChild(document.createElement('header'));
 
             const heading = document.createElement('h1');
             heading.innerHTML = 'Lorem Ipsum';
