@@ -6,6 +6,7 @@ const {Text} = require("scenegraph");
 const trimHeight = require('./trimHeight');
 const debugHelper = require('../helpers/debug');
 const SelectionChecker = require('../helpers/check-selection');
+const analytics = require("../helpers/analytics");
 
 const texts = {
     'lorem-lat': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -58,6 +59,12 @@ function lorem(selection, options) {
             debugHelper.log('Node ', element, ' is not a text area.');
         }
     }
+    analytics.verifyAcceptance({
+        pluginName: 'Lorem Ipsum',
+        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy'
+    }).then(()=>{
+        analytics.send('lorem', options);
+    });
 }
 
 /**

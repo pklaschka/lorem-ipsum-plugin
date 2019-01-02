@@ -5,11 +5,16 @@
 const storage = require('../helpers/storage');
 const debugHelper = require('../helpers/debug');
 const lang = require('../helpers/language');
+const analytics = require("../helpers/analytics");
 
 /**
  * @param {Selection} selection
  */
 async function showModal(selection) {
+    await analytics.verifyAcceptance({
+        pluginName: 'Lorem Ipsum',
+        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy'
+    });
     debugHelper.log('Showing Lorem Ipsum modal');
     let options = await modalAsync(selection);
     const lorem = require('../functions/lorem');
