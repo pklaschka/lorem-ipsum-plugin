@@ -11,7 +11,7 @@ class analyticsHelper {
         let req = new XMLHttpRequest();
         req.open('POST', 'https://xdplugins.pabloklaschka.de/_api/submit');
         req.send(JSON.stringify({
-            plugin_name: 'Text Toolbox',
+            plugin_name: 'Lorem Ipsum',
             feature: feature,
             options: options
         }));
