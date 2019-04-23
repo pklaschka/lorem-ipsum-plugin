@@ -1,32 +1,33 @@
 {
   "id": "700b7996",
   "name": "Lorem Ipsum",
-  "description": "A plugin to insert placeholder text that fits your needs: As simple as you want it to be, yet as advanced as you need it to be…",
-  "version": "1.1.0",
+  "releaseNotes": "- Minor updates to ensure compatibility with new versions of Adobe XD",
+  "description": "A small plugin to insert placeholder text that fits your needs: As simple as you want it to be, yet as advanced as you need it to be…\n\nIt is as easy as selecting one or more text layer(s) and running the plugin from the plugin's menu. Alternatively, you can also use the keyboard shortcut \"Ctrl+Alt+L\" on Windows or \"Cmd+Option+L\" on macOS to run the plugin.\n\nLast but not least: I’m always happy to listen to feedback. Therefore, if you have any (may it be feature requests, bug reports or something else), please let me know via the support website, and I'll see how I can accommodate your wishes.",
+  "version": "1.1.1",
   "host": {
     "app": "XD",
-    "minVersion": "13.0.0"
+    "minVersion": "13.0"
   },
   "icons": [
     {
-      "width": 24,
-      "height": 24,
-      "path": "assets/24w/logo-24.png"
-    },
-    {
       "width": 48,
       "height": 48,
-      "path": "assets/48w/logo-48.png"
+      "path": "assets/logo-48.png"
     },
     {
       "width": 96,
       "height": 96,
-      "path": "assets/1x/logo-96.png"
+      "path": "assets/logo-96.png"
     },
     {
-      "width": 512,
-      "height": 512,
-      "path": "assets/512w/logo-512.png"
+      "width": 144,
+      "height": 144,
+      "path": "assets/logo-144.png"
+    },
+    {
+      "width": 192,
+      "height": 192,
+      "path": "assets/logo-192.png"
     }
   ],
   "uiEntryPoints": [
@@ -72,5 +73,19 @@
         }
       ]
     }
+  ],
+  "author": "Pablo Klaschka",
+  "summary": "Insert placeholder text",
+  "website": "https://xdplugins.pabloklaschka.de",
+  "helpUrl": "https://xdplugins.pabloklaschka.de/support#Lorem",
+  "keywords": [
+    "Text",
+    "Placeholder text",
+    "Lorem Ipsum",
+    "Fill"
+  ],
+  "languages": [
+    "de",
+    "en"
   ]
 }
