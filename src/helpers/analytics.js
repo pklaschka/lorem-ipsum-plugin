@@ -11,7 +11,7 @@ class analyticsHelper {
         let req = new XMLHttpRequest();
         req.open('POST', 'https://xdplugins.pabloklaschka.de/_api/submit');
         req.send(JSON.stringify({
-            plugin_name: 'Lorem Ipsum',
+            plugin_name: 'Text Toolbox',
             feature: feature,
             options: options
         }));
@@ -68,10 +68,13 @@ class analyticsHelper {
         top: 0;
         right: 0;
     }
+    
+    main {
+        overflow-y: auto;
+    }
 
     form {
-        width: 480px;
-        max-height: 100%;
+        width: 640px;
         overflow-y: auto;
     }
     h1 {
@@ -91,6 +94,7 @@ class analyticsHelper {
 </style>
 <form method="dialog">
     <header></header>
+    <main>
     <h1>
         <span>Analytics</span>
     </h1>
@@ -106,6 +110,7 @@ class analyticsHelper {
     <label style="flex-direction: row; align-items: center;">
         <input type="checkbox" /><span>I have read and accepted the privacy policy (${options.privacyPolicyLink})</span>
     </label>
+    </main>
     <footer>
         <button id="cancel" uxp-variant="primary">Cancel</button>
         <button id="ok" type="submit" uxp-variant="cta">Accept</button>

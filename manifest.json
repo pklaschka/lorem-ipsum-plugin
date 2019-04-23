@@ -3,7 +3,7 @@
   "name": "Lorem Ipsum",
   "releaseNotes": "- Minor updates to ensure compatibility with new versions of Adobe XD",
   "description": "A small plugin to insert placeholder text that fits your needs: As simple as you want it to be, yet as advanced as you need it to be…\n\nIt is as easy as selecting one or more text layer(s) and running the plugin from the plugin's menu. Alternatively, you can also use the keyboard shortcut \"Ctrl+Alt+L\" on Windows or \"Cmd+Option+L\" on macOS to run the plugin.\n\nLast but not least: I’m always happy to listen to feedback. Therefore, if you have any (may it be feature requests, bug reports or something else), please let me know via the support website, and I'll see how I can accommodate your wishes.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "host": {
     "app": "XD",
     "minVersion": "13.0"
