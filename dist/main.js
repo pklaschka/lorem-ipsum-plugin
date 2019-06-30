@@ -143,7 +143,7 @@ class DialogHelper {
      * Shows a dialog and awaits its results
      * @param {string} id The dialogs name / unique identifier
      * @param {string} title The title that gets displayed in the dialog
-     * @param {Array<contentElement>} [contents=[]] The contents of the dialog
+     * @param {{label: *, id: string, type: number, value: boolean}[]} [contents=[]] The contents of the dialog
      * @param {dialogOptions} [options={}] Additional options for the dialog
      * @return {Promise<object>} Promise, which resolves with the form values or rejects if the dialog gets canceled
      */
@@ -1413,7 +1413,9 @@ class errorHelper {
         await dialogHelper.showDialog('lorem-error-dialog', title, [
             {
                 type: dialogHelper.TEXT,
-                label: message
+                label: message,
+                id: 'message',
+                value: true
             }
         ], {
             width: 360,
@@ -1549,6 +1551,7 @@ const storage = __webpack_require__(/*! xd-storage-helper */ "./node_modules/xd-
 const debugHelper = __webpack_require__(/*! ../helpers/debug */ "./src/helpers/debug.js");
 const lang = __webpack_require__(/*! xd-localization-helper */ "./node_modules/xd-localization-helper/localization-helper.js");
 const analytics = __webpack_require__(/*! ../helpers/analytics */ "./src/helpers/analytics.js");
+const dialogHelper = __webpack_require__(/*! xd-dialog-helper */ "./node_modules/xd-dialog-helper/dialog-helper.js");
 
 /**
  * @param {Selection} selection
@@ -1567,162 +1570,93 @@ async function showModal(selection) {
 }
 
 /**
- * @param {Selection} selection
+ * @throws {Error} error when dialog gets canceled
  */
-async function modalAsync(selection) {
-    return new Promise((resolve, reject) => {
-        storage.get('loremOptions', {
-            text: 'lorem-lat',
-            terminationString: 'n/a',
-            includeLineBreaks: true,
-            trim: false
-        }).then(uiOptions => {
-            if (!uiOptions['terminationString'])
-                uiOptions['terminationString'] = 'n/a';
-
-            // Removing old instances
-            document.body.innerHTML = '';
-
-            const dialog = document.createElement('dialog');
-            dialog.id = 'loremModal';
-            dialog.innerHTML = `
-    <style>    
-    form {
-        width: 360px;
-    }
-    
-    header {
-        background: #2D4E64;
-        height: 16px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-    }
-    
-    input[type="checkbox"] {
-    width: 18px;
-    }
-    </style>
-    `;
-
-            const form = document.createElement('form');
-            form.method = 'dialog';
-
-            form.appendChild(document.createElement('header'));
-
-            const heading = document.createElement('h1');
-            heading.innerHTML = 'Lorem Ipsum';
-            form.appendChild(heading);
-
-            const description = document.createElement('p');
-            description.innerHTML = lang.get('modal-lorem-description');
-            form.appendChild(description);
-
-            const text = selectBox(lang.get('modal-lorem-text-label'), [
-                {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
-                {value: 'cicero-lat', label: 'Cicero (Latin)'},
-                {value: 'cicero-en', label: 'Cicero (English)'},
-                {value: 'pangram-en', label: 'Pangram (English)'},
-                {value: 'pangram-de', label: 'Pangram (German)'},
-                {value: 'pangram-es', label: 'Pangram (Espagnol)'},
-                {value: 'pangram-fr', label: 'Pangram (Français)'},
-            ], uiOptions.text);
-
-            const terminationString = selectBox(lang.get('modal-lorem-terminate-label'), [
-                {value: 'n/a', label: lang.get('modal-lorem-terminate-none')},
-                {value: '.', label: lang.get('modal-lorem-terminate-period')},
-                {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
-            ], uiOptions.terminationString);
-            const includeLineBreaks = checkBox(lang.get('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
-            const trim = checkBox(lang.get('modal-lorem-trim-label'), uiOptions.trim);
-
-            form.appendChild(text);
-            form.appendChild(terminationString);
-            form.appendChild(includeLineBreaks);
-            form.appendChild(trim);
-
-
-
-            const footer = document.createElement('footer');
-            const btnOk = document.createElement('button');
-            btnOk.id = "ok";
-            btnOk.type = "submit";
-            btnOk.innerHTML = lang.get('modal-lorem-btn-ok');
-            btnOk.setAttribute('uxp-variant', 'cta');
-            btnOk.onclick = () => {
-                const loremOptions = {
-                    text: text.childNodes.item(1).value,
-                    terminationString: terminationString.childNodes.item(1).value,
-                    includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
-                    trim: trim.childNodes.item(0).checked
-                };
-                storage.set('loremOptions', loremOptions).then(() => {
-                    debugHelper.log("Lorem Ipsum");
-                    dialog.close();
-                    resolve(loremOptions);
-                    document.body.innerHTML = '';
-                });
-            };
-            btnOk.setAttribute('autofocus', 'autofocus');
-            const btnCancel = document.createElement('button');
-            btnCancel.id = "cancel";
-            btnCancel.innerHTML = lang.get('modal-lorem-btn-cancel');
-            btnCancel.onclick = () => {
-                debugHelper.log("Closing Lorem Ipsum");
-                dialog.close();
-                reject();
-                document.body.innerHTML = '';
-            };
-            footer.appendChild(btnCancel);
-            footer.appendChild(btnOk);
-            form.appendChild(footer);
-            dialog.appendChild(form);
-            document.body.appendChild(dialog);
-
-            dialog.showModal().then(() => resolve()).catch(() => reject());
-        });
+async function modalAsync() {
+    const uiOptions = await storage.get('loremOptions', {
+        text: 'lorem-lat',
+        terminationString: 'n/a',
+        includeLineBreaks: true,
+        trim: false
     });
-}
 
-function selectBox(label, entries, defaultValue) {
-    const lblSelect = document.createElement("label");
-    const spanLblSelect = document.createElement('span');
-    spanLblSelect.innerHTML = label;
-    lblSelect.appendChild(spanLblSelect);
-    const select = document.createElement('select');
+    try {
+        const loremOptions = await dialogHelper.showDialog('lorem-main', 'Lorem Ipsum', [
+                {
+                    id: 'description',
+                    type: dialogHelper.TEXT,
+                    label: lang.get('modal-lorem-description')
+                },
+                {
+                    type: dialogHelper.SELECT,
+                    options: [
+                        {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
+                        {value: 'cicero-lat', label: 'Cicero (Latin)'},
+                        {value: 'cicero-en', label: 'Cicero (English)'},
+                        {value: 'pangram-en', label: 'Pangram (English)'},
+                        {value: 'pangram-de', label: 'Pangram (German)'},
+                        {value: 'pangram-es', label: 'Pangram (Espagnol)'},
+                        {value: 'pangram-fr', label: 'Pangram (Français)'}
+                    ],
+                    id: 'text',
+                    label: lang.get('modal-lorem-text-label'),
+                    value: uiOptions.text
+                },
+                {
+                    type: dialogHelper.SELECT,
+                    id: 'terminationString',
+                    label: lang.get('modal-lorem-terminate-label'),
+                    options: [
+                        {value: 'n/a', label: lang.get('modal-lorem-terminate-none')},
+                        {value: '.', label: lang.get('modal-lorem-terminate-period')},
+                        {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
+                    ],
+                    value: uiOptions.terminationString
+                },
+                {
+                    type: dialogHelper.CHECKBOX,
+                    id: 'includeLineBreaks',
+                    label: lang.get('modal-lorem-includeLineBreaks-label'),
+                    value: uiOptions.includeLineBreaks
+                },
+                {
+                    type: dialogHelper.CHECKBOX,
+                    id: 'trim',
+                    label: lang.get('modal-lorem-trim-label'),
+                    value: uiOptions.trim
+                }
+            ],
+            {
+                okButtonText: lang.get('modal-lorem-btn-ok'),
+                cancelButtonText:
+                    lang.get('modal-lorem-btn-cancel'),
+                width:
+                    400,
+                css: `
+                header {
+                    background: #2D4E64;
+                    height: 16px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                }
+                input[type="checkbox"] {
+                    width: 18px;
+                }`,
+                onBeforeShow:
+                    htmlDialogElement => {
+                        htmlDialogElement.appendChild(document.createElement('header'));
 
-    for (let entry of entries) {
-        let optEntry = document.createElement("option");
-        optEntry.value = entry.value;
-        optEntry.innerHTML = entry.label;
-        select.appendChild(optEntry);
+                        document.getElementById('lorem-main-dialogHelperBtnOk').setAttribute('autofocus', 'autofocus');
+                    }
+            });
+        await storage.set('loremOptions', loremOptions);
+        debugHelper.log("Lorem Ipsum");
+        return loremOptions;
+    } catch (e) {
+        throw new Error('User canceled dialog');
     }
-    if (defaultValue) {
-        select.value = defaultValue;
-    }
-    lblSelect.appendChild(select);
-
-    return lblSelect;
-}
-
-function checkBox(label, defaultChecked) {
-    const lblCheck = document.createElement("label");
-    Object.assign(lblCheck.style, {flexDirection: "row", alignItems: "center"});
-    // lblCheck.class = 'row';
-    const checkBox = document.createElement('input');
-    checkBox.type = 'checkbox';
-    checkBox.id = label;
-    checkBox.placeholder = label;
-    if (defaultChecked) {
-        checkBox.checked = true;
-    }
-    lblCheck.appendChild(checkBox);
-    const spanLblCheck = document.createElement('span');
-    spanLblCheck.innerHTML = label;
-    lblCheck.appendChild(spanLblCheck);
-
-    return lblCheck;
 }
 
 module.exports = showModal;

@@ -9,7 +9,9 @@ class errorHelper {
         await dialogHelper.showDialog('lorem-error-dialog', title, [
             {
                 type: dialogHelper.TEXT,
-                label: message
+                label: message,
+                id: 'message',
+                value: true
             }
         ], {
             width: 360,
