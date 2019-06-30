@@ -44,14 +44,14 @@ async function lorem(selection) {
 
 async function quickLorem(selection) {
     if (await init(selection))
-        await loremFunction(selection, await settings());
+        await loremFunction(await settings());
     else
         await selectionError();
 }
 
 async function loremPreconfigured(selection) {
     if (await init(selection))
-        await loremFunction(selection, {
+        await loremFunction({
             includeLineBreaks: true,
             trim: false,
             terminationString: 'n/a',
@@ -63,7 +63,7 @@ async function loremPreconfigured(selection) {
 
 async function loremPreconfiguredTrim(selection) {
     if (await init(selection))
-        await loremFunction(selection, {
+        await loremFunction({
             includeLineBreaks: true,
             trim: true,
             terminationString: '.',

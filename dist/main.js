@@ -810,15 +810,15 @@ const texts = {
 
 /**
  * Fills text area with placeholder text (Lorem Ipsum)
- * @param {Selection} selection
  * @param {object} options
  * @param {boolean} options.trim
  * @param {string} options.terminationString n/a for no termination string
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
  */
-function lorem(selection, options) {
-    // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
+function lorem(options) {
+    const selection = __webpack_require__(/*! scenegraph */ "scenegraph").selection;
+
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
     for (let element of selection.items) {
@@ -922,20 +922,18 @@ module.exports = lorem;
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
 const debugHelper = __webpack_require__(/*! ../helpers/debug */ "./src/helpers/debug.js");
-const SelectionChecker = __webpack_require__(/*! ../helpers/check-selection */ "./src/helpers/check-selection.js");
 
 /**
  * Trims text area to suitable height
- * @param {Selection} selection
  */
-function trim(selection) {
-    for (let node of selection.items) {
-        if (SelectionChecker.checkForType(node, 'AreaText')) {
+function trim() {
+    for (let node of __webpack_require__(/*! scenegraph */ "scenegraph").selection.items) {
+        if (node instanceof Text && node.areaBox) {
             let oldHeight = node.localBounds.height;
             if (node.clippedByArea) {
                 // Need to increase the height
@@ -989,6 +987,7 @@ function checkBetween(smallerHeight, biggerHeight, isClipped) {
 }
 
 module.exports = trim;
+
 
 /***/ }),
 
@@ -1494,14 +1493,14 @@ async function lorem(selection) {
 
 async function quickLorem(selection) {
     if (await init(selection))
-        await loremFunction(selection, await settings());
+        await loremFunction(await settings());
     else
         await selectionError();
 }
 
 async function loremPreconfigured(selection) {
     if (await init(selection))
-        await loremFunction(selection, {
+        await loremFunction({
             includeLineBreaks: true,
             trim: false,
             terminationString: 'n/a',
@@ -1513,7 +1512,7 @@ async function loremPreconfigured(selection) {
 
 async function loremPreconfiguredTrim(selection) {
     if (await init(selection))
-        await loremFunction(selection, {
+        await loremFunction({
             includeLineBreaks: true,
             trim: true,
             terminationString: '.',
@@ -1554,18 +1553,17 @@ const analytics = __webpack_require__(/*! ../helpers/analytics */ "./src/helpers
 const dialogHelper = __webpack_require__(/*! xd-dialog-helper */ "./node_modules/xd-dialog-helper/dialog-helper.js");
 
 /**
- * @param {Selection} selection
  */
-async function showModal(selection) {
+async function showModal() {
     await analytics.verifyAcceptance({
         pluginName: 'Lorem Ipsum',
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
         color: '#2D4E64'
     });
     debugHelper.log('Showing Lorem Ipsum modal');
-    let options = await modalAsync(selection);
+    let options = await modalAsync();
     const lorem = __webpack_require__(/*! ../functions/lorem */ "./src/functions/lorem.js");
-    await lorem(selection, options);
+    await lorem(options);
     return true;
 }
 

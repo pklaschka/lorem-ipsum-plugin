@@ -9,18 +9,17 @@ const analytics = require("../helpers/analytics");
 const dialogHelper = require("xd-dialog-helper");
 
 /**
- * @param {Selection} selection
  */
-async function showModal(selection) {
+async function showModal() {
     await analytics.verifyAcceptance({
         pluginName: 'Lorem Ipsum',
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
         color: '#2D4E64'
     });
     debugHelper.log('Showing Lorem Ipsum modal');
-    let options = await modalAsync(selection);
+    let options = await modalAsync();
     const lorem = require('../functions/lorem');
-    await lorem(selection, options);
+    await lorem(options);
     return true;
 }
 
