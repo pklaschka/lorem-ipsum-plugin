@@ -1,18 +1,16 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2019. by Pablo Klaschka
  */
 
 const {Text} = require("scenegraph");
 const debugHelper = require('../helpers/debug');
-const SelectionChecker = require('../helpers/check-selection');
 
 /**
  * Trims text area to suitable height
- * @param {Selection} selection
  */
-function trim(selection) {
-    for (let node of selection.items) {
-        if (SelectionChecker.checkForType(node, 'AreaText')) {
+function trim() {
+    for (let node of require('scenegraph').selection.items) {
+        if (node instanceof Text && node.areaBox) {
             let oldHeight = node.localBounds.height;
             if (node.clippedByArea) {
                 // Need to increase the height

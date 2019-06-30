@@ -5,7 +5,7 @@
 const {Text} = require("scenegraph");
 const trimHeight = require('./trimHeight');
 const debugHelper = require('../helpers/debug');
-const SelectionChecker = require('../helpers/check-selection');
+require('../helpers/check-selection');
 const analytics = require("../helpers/analytics");
 
 const texts = {
@@ -20,19 +20,19 @@ const texts = {
 
 /**
  * Fills text area with placeholder text (Lorem Ipsum)
- * @param {Selection} selection
  * @param {object} options
  * @param {boolean} options.trim
  * @param {string} options.terminationString n/a for no termination string
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
  */
-function lorem(selection, options) {
-    // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
+function lorem(options) {
+    const selection = require('scenegraph').selection;
+
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
     for (let element of selection.items) {
-        if (SelectionChecker.checkForType(element, 'AreaText')) {
+        if (element instanceof Text && element.areaBox) {
             let prevCount = 0;
             let count = 1;
             debugHelper.log('Propagating forward');
@@ -53,10 +53,10 @@ function lorem(selection, options) {
             if (options.trim) {
                 trimHeight(selection);
             }
-        } else if (SelectionChecker.checkForType(element, 'PointText')) {
+        } else if (element instanceof Text) {
             element.text = loremText(2, options.text, false) + terminationString;
         } else {
-            debugHelper.log('Node ', element, ' is not a text area.');
+            debugHelper.log('Node ', element, ' is not a text layer.');
         }
     }
     analytics.verifyAcceptance({

@@ -1,24 +1,43 @@
-image: node:latest
+image: node
 
 stages:
+  - test
   - build
 
-cache:
-  paths:
-    - node_modules/
+before_script:
+  - rm package-lock.json
+  - npm install -g @adobe/xdpm jest jsdoc
+  - npm install
 
-release-build:
-  stage: build
-  before_script:
-    - apt-get update && apt-get install -y zip
+unit_tests:
+  stage: test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   script:
+    - npm run test --coverage
+
+lint:
+  stage: test
+  allow_failure: true
+  script:
+    - npm run lint
+
+build:
+  stage: build
+  script:
+    - npm run build
     - ls
-    - ls assets
-    - zip -R build '*.js' 'manifest.json' 'src/*' 'assets/*' '*.png'
-    - mv build.zip lorem_$CI_COMMIT_TAG.xdx
   artifacts:
-    name: "lorem_$CI_COMMIT_TAG.xdx"
+    when: on_success
+    name: "plugin-$CI_COMMIT_REF_NAME.xdx"
     paths:
-      - lorem_$CI_COMMIT_TAG.xdx
-  only:
-    - tags
+      - dist.xdx
+
+build-docs:
+  stage: build
+  script:
+    - npm run docs
+  artifacts:
+    when: on_success
+    name: "plugin-$CI_COMMIT_REF_NAME-docs"
+    paths:
+      - docs

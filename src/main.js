@@ -2,13 +2,14 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const errorHelper = require("./src/helpers/error");
+const errorHelper = require("./helpers/error");
 
-const loremModal = require('./src/modals/loremModal');
-const loremFunction = require('./src/functions/lorem');
-const storage = require('./src/helpers/storage');
-const SelectionChekcer = require('./src/helpers/check-selection');
-const lang = require('./src/helpers/language');
+const loremModal = require('./modals/loremModal');
+const loremFunction = require('./functions/lorem');
+const storage = require('xd-storage-helper');
+const SelectionChekcer = require('./helpers/check-selection');
+
+const lang = require('xd-localization-helper');
 
 async function settings() {
     return await storage.get('loremOptions', {
@@ -20,31 +21,37 @@ async function settings() {
 }
 
 async function selectionError() {
-    return await errorHelper.showErrorDialog(lang.getString('error-selection-title'), lang.getString('error-selection-description'));
+    return await errorHelper.showErrorDialog(lang.get('error-selection-title'), lang.get('error-selection-description'));
 }
 
-function checkSelection(selection) {
+/**
+ * Initialize all necessary components and check the selection for compatibhility
+ * @param {Selection} selection
+ * @return {Promise<boolean>} Selection contains text layer?
+ */
+async function init(selection) {
+    await lang.load();
     let checker = new SelectionChekcer(selection);
     return checker.oneOrMore('Text');
 }
 
 async function lorem(selection) {
-    if (checkSelection(selection))
+    if (await init(selection))
         await loremModal(selection);
     else
         await selectionError();
 }
 
 async function quickLorem(selection) {
-    if (checkSelection(selection))
-        await loremFunction(selection, await settings());
+    if (await init(selection))
+        await loremFunction(await settings());
     else
         await selectionError();
 }
 
 async function loremPreconfigured(selection) {
-    if (checkSelection(selection))
-        await loremFunction(selection, {
+    if (await init(selection))
+        await loremFunction({
             includeLineBreaks: true,
             trim: false,
             terminationString: 'n/a',
@@ -55,8 +62,8 @@ async function loremPreconfigured(selection) {
 }
 
 async function loremPreconfiguredTrim(selection) {
-    if (checkSelection(selection))
-        await loremFunction(selection, {
+    if (await init(selection))
+        await loremFunction({
             includeLineBreaks: true,
             trim: true,
             terminationString: '.',
