@@ -1,2 +1,5 @@
-types
-jsconfig.json
+docs
+node_modules
+.idea
+static/main.js
+coverage

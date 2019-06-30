@@ -2,13 +2,13 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const errorHelper = require("./src/helpers/error");
+const errorHelper = require("./helpers/error");
 
-const loremModal = require('./src/modals/loremModal');
-const loremFunction = require('./src/functions/lorem');
-const storage = require('./src/helpers/storage');
-const SelectionChekcer = require('./src/helpers/check-selection');
-const lang = require('./src/helpers/language');
+const loremModal = require('./modals/loremModal');
+const loremFunction = require('./functions/lorem');
+const storage = require('./helpers/storage');
+const SelectionChekcer = require('./helpers/check-selection');
+const lang = require('./helpers/language');
 
 async function settings() {
     return await storage.get('loremOptions', {
