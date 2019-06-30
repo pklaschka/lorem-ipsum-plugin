@@ -35,7 +35,8 @@ async function modalAsync() {
     });
 
     try {
-        const loremOptions = await dialogHelper.showDialog('lorem-main', 'Lorem Ipsum', [
+        const loremOptions = await dialogHelper.showDialog('lorem-main', 'Lorem Ipsum',
+            [
                 {
                     id: 'description',
                     type: dialogHelper.TEXT,
