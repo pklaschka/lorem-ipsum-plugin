@@ -5,8 +5,8 @@
 const storage = require('xd-storage-helper');
 const debugHelper = require('../helpers/debug');
 const lang = require('xd-localization-helper');
-const analytics = require("../helpers/analytics");
-const dialogHelper = require("xd-dialog-helper");
+const analytics = require('../helpers/analytics');
+const dialogHelper = require('xd-dialog-helper');
 
 /**
  */
@@ -106,7 +106,7 @@ async function modalAsync() {
                     }
             });
         await storage.set('loremOptions', loremOptions);
-        debugHelper.log("Lorem Ipsum");
+        debugHelper.log('Lorem Ipsum');
         return loremOptions;
     } catch (e) {
         throw new Error('User canceled dialog');

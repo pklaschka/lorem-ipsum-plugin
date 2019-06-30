@@ -1,7 +1,7 @@
 {
-  "name": "xd-plugin-boilerplate",
-  "version": "1.0.1",
-  "description": "A simple plugin, built with the xd-webpack-starter-template package",
+  "name": "xd-lorem-ipsum",
+  "version": "1.2.0",
+  "description": "Lorem Ipsum Plugin for Adobe XD CC",
   "private": true,
   "scripts": {
     "start": "npm run debug:watch",
@@ -34,5 +34,5 @@
     "xd"
   ],
   "author": "Pablo Klaschka",
-  "license": "MIT"
+  "license": "NO-LICENSE"
 }

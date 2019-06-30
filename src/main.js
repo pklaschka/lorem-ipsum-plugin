@@ -2,7 +2,7 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const errorHelper = require("./helpers/error");
+const errorHelper = require('./helpers/error');
 
 const loremModal = require('./modals/loremModal');
 const loremFunction = require('./functions/lorem');
@@ -17,7 +17,7 @@ async function settings() {
         terminate: true,
         includeLineBreaks: true,
         trim: false
-    })
+    });
 }
 
 async function selectionError() {

@@ -2,7 +2,7 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const {Text} = require("scenegraph");
+const {Text} = require('scenegraph');
 const debugHelper = require('../helpers/debug');
 
 /**

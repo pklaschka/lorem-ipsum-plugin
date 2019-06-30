@@ -57,7 +57,7 @@ class analyticsHelper {
     static async dialog(options) {
 
         if (!analyticsModal) {
-            analyticsModal = document.createElement("dialog");
+            analyticsModal = document.createElement('dialog');
             analyticsModal.innerHTML = `
 <style>
     header {
@@ -124,17 +124,17 @@ class analyticsHelper {
         let form = document.querySelector('form');
 
         function onsubmit() {
-            analyticsModal.close("ok");
+            analyticsModal.close('ok');
         }
 
         form.onsubmit = onsubmit;
 
-        const cancelButton = document.querySelector("#cancel");
-        cancelButton.addEventListener("click", () => analyticsModal.close("reasonCanceled"));
+        const cancelButton = document.querySelector('#cancel');
+        cancelButton.addEventListener('click', () => analyticsModal.close('reasonCanceled'));
 
-        const okButton = document.querySelector("#ok");
+        const okButton = document.querySelector('#ok');
         okButton.disabled = true;
-        okButton.addEventListener("click", e => {
+        okButton.addEventListener('click', e => {
             onsubmit();
             e.preventDefault();
         });
@@ -147,7 +147,7 @@ class analyticsHelper {
         });
 
 
-        Object.assign(document.querySelector('label').style, {flexDirection: "row", alignItems: "center"});
+        Object.assign(document.querySelector('label').style, {flexDirection: 'row', alignItems: 'center'});
 
         const pseudo = document.createElement('div');
         pseudo.appendChild(checkBox('Test', false));
@@ -160,8 +160,8 @@ class analyticsHelper {
 
 
 function checkBox(label, defaultChecked) {
-    const lblCheck = document.createElement("label");
-    Object.assign(lblCheck.style, {flexDirection: "row", alignItems: "center"});
+    const lblCheck = document.createElement('label');
+    Object.assign(lblCheck.style, {flexDirection: 'row', alignItems: 'center'});
     // lblCheck.class = 'row';
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';

@@ -2,11 +2,11 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const {Text} = require("scenegraph");
+const {Text} = require('scenegraph');
 const trimHeight = require('./trimHeight');
 const debugHelper = require('../helpers/debug');
 require('../helpers/check-selection');
-const analytics = require("../helpers/analytics");
+const analytics = require('../helpers/analytics');
 
 const texts = {
     'lorem-lat': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -103,13 +103,13 @@ function checkBetween(oldCount, newCount, isClipped) {
 function loremText(count, text, includeLineBreaks) {
     function trimToNWords(strText, n, includeLineBreaks) {
         // Ensure text is long enough:
-        while (strText.split(" ").length < n) {
-            strText = includeLineBreaks ? (strText + "\n" + strText) : (strText + " " + strText);
+        while (strText.split(' ').length < n) {
+            strText = includeLineBreaks ? (strText + '\n' + strText) : (strText + ' ' + strText);
         }
         return strText
-            .split(" ")
+            .split(' ')
             .splice(0, n)
-            .join(" ");
+            .join(' ');
     }
 
     let originalString = texts[text];

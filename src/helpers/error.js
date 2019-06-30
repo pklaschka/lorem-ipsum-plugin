@@ -2,7 +2,7 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const dialogHelper = require("xd-dialog-helper");
+const dialogHelper = require('xd-dialog-helper');
 
 class errorHelper {
     static async showErrorDialog(title, message) {
