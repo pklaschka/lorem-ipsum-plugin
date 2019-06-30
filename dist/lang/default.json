@@ -1,0 +1,14 @@
+{
+  "error-selection-title": "No text selected",
+  "error-selection-description": "Please include at least one text node in your selection and try again.",
+  "modal-lorem-description": "Fills selected text element(s) with placeholder text.",
+  "modal-lorem-text-label": "Placeholder text:",
+  "modal-lorem-terminate-label": "End with punctuation mark:",
+  "modal-lorem-terminate-none": "None",
+  "modal-lorem-terminate-period": "Period ('.')",
+  "modal-lorem-terminate-ellipsis": "Ellipsis ('…')",
+  "modal-lorem-includeLineBreaks-label": "Include line breaks",
+  "modal-lorem-trim-label": "Trim text area height to fit inserted text",
+  "modal-lorem-btn-ok": "Insert text",
+  "modal-lorem-btn-cancel": "Cancel"
+}

@@ -2,9 +2,9 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const storage = require('../helpers/storage');
+const storage = require('xd-storage-helper');
 const debugHelper = require('../helpers/debug');
-const lang = require('../helpers/language');
+const lang = require('xd-localization-helper');
 const analytics = require("../helpers/analytics");
 
 /**
@@ -13,7 +13,8 @@ const analytics = require("../helpers/analytics");
 async function showModal(selection) {
     await analytics.verifyAcceptance({
         pluginName: 'Lorem Ipsum',
-        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy'
+        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
+        color: '#2D4E64'
     });
     debugHelper.log('Showing Lorem Ipsum modal');
     let options = await modalAsync(selection);
@@ -72,10 +73,10 @@ async function modalAsync(selection) {
             form.appendChild(heading);
 
             const description = document.createElement('p');
-            description.innerHTML = lang.getString('modal-lorem-description');
+            description.innerHTML = lang.get('modal-lorem-description');
             form.appendChild(description);
 
-            const text = selectBox(lang.getString('modal-lorem-text-label'), [
+            const text = selectBox(lang.get('modal-lorem-text-label'), [
                 {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
                 {value: 'cicero-lat', label: 'Cicero (Latin)'},
                 {value: 'cicero-en', label: 'Cicero (English)'},
@@ -85,13 +86,13 @@ async function modalAsync(selection) {
                 {value: 'pangram-fr', label: 'Pangram (Français)'},
             ], uiOptions.text);
 
-            const terminationString = selectBox(lang.getString('modal-lorem-terminate-label'), [
-                {value: 'n/a', label: lang.getString('modal-lorem-terminate-none')},
-                {value: '.', label: lang.getString('modal-lorem-terminate-period')},
-                {value: '…', label: lang.getString('modal-lorem-terminate-ellipsis')},
+            const terminationString = selectBox(lang.get('modal-lorem-terminate-label'), [
+                {value: 'n/a', label: lang.get('modal-lorem-terminate-none')},
+                {value: '.', label: lang.get('modal-lorem-terminate-period')},
+                {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
             ], uiOptions.terminationString);
-            const includeLineBreaks = checkBox(lang.getString('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
-            const trim = checkBox(lang.getString('modal-lorem-trim-label'), uiOptions.trim);
+            const includeLineBreaks = checkBox(lang.get('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
+            const trim = checkBox(lang.get('modal-lorem-trim-label'), uiOptions.trim);
 
             form.appendChild(text);
             form.appendChild(terminationString);
@@ -104,7 +105,7 @@ async function modalAsync(selection) {
             const btnOk = document.createElement('button');
             btnOk.id = "ok";
             btnOk.type = "submit";
-            btnOk.innerHTML = lang.getString('modal-lorem-btn-ok');
+            btnOk.innerHTML = lang.get('modal-lorem-btn-ok');
             btnOk.setAttribute('uxp-variant', 'cta');
             btnOk.onclick = () => {
                 const loremOptions = {
@@ -123,7 +124,7 @@ async function modalAsync(selection) {
             btnOk.setAttribute('autofocus', 'autofocus');
             const btnCancel = document.createElement('button');
             btnCancel.id = "cancel";
-            btnCancel.innerHTML = lang.getString('modal-lorem-btn-cancel');
+            btnCancel.innerHTML = lang.get('modal-lorem-btn-cancel');
             btnCancel.onclick = () => {
                 debugHelper.log("Closing Lorem Ipsum");
                 dialog.close();

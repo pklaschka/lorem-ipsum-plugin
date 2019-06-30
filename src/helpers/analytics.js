@@ -2,7 +2,7 @@
  * Copyright (c) 2019. by Pablo Klaschka
  */
 
-const storage = require('./storage');
+const storage = require('xd-storage-helper');
 let analyticsModal = null;
 
 

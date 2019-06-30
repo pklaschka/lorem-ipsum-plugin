@@ -1,1 +1,1212 @@
-module.exports=function(e){var t={};function n(a){if(t[a])return t[a].exports;var i=t[a]={i:a,l:!1,exports:{}};return e[a].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:a})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var a=Object.create(null);if(n.r(a),Object.defineProperty(a,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)n.d(a,i,function(t){return e[t]}.bind(null,i));return a},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=7)}([function(e,t){e.exports=require("scenegraph")},function(e,t){class n{static shouldDebug(){return!1}static log(...e){if(n.shouldDebug()){e.unshift("Lorem Ipsum Plugin: ");const t=Array.prototype.slice.call(e.map(e=>e instanceof Object?JSON.stringify(e):e));console.log.apply(console,t)}}}e.exports=n},function(e,t,n){const a=n(10).storage,i=a.localFileSystem,o=n(1);e.exports=class{static async init(){let e=await i.getDataFolder();try{const t=await e.getEntry("data.json");if(t)return t;throw new Error("Text Area Toolbox file data.json was not a file.")}catch{o.log("Creating file");const t=await e.createEntry("data.json",{type:a.types.file,overwrite:!0});if(t.isFile)return await t.write("{}",{append:!1}),t;throw new Error("Text Area Toolbox file data.json was not a file.")}}static async get(e,t){const n=await this.init();let i=JSON.parse((await n.read({format:a.formats.utf8})).toString());return void 0===i[e]?(await this.set(e,t),t):i[e]}static async set(e,t){const n=await this.init();let i=JSON.parse((await n.read({format:a.formats.utf8})).toString());return i[e]=t,await n.write(JSON.stringify(i),{append:!1,format:a.formats.utf8})}}},function(e,t,n){class a{constructor(e){this.selection=e}oneOrMore(...e){return this.count.apply(this,e)>0}nOrMore(e,...t){return this.count.apply(this,t)>=e}nOrLess(e,...t){return this.count.apply(this,t)<=e}exactlyN(e,...t){return this.count.apply(this,t)<=e}exactlyOne(...e){return 1===this.count.apply(this,e)}no(...e){return this.count.apply(this,e)<1}count(...e){return this.selection.items.reduce((t,n)=>{let i=!1;for(let t of e)if(a.checkForType(n,t)){i=!0;break}return t+i?1:0},0)}static checkForType(e,t){const a={Text:e=>{const{Text:t}=n(0);return e instanceof t},AreaText:e=>{const{Text:t}=n(0);return e instanceof t&&e.areaBox},PointText:e=>{const{Text:t}=n(0);return e instanceof t&&null===e.areaBox},Rectangle:e=>{const{Rectangle:t}=n(0);return e instanceof t},Artboard:e=>{const{Artboard:t}=n(0);return e instanceof t},Group:e=>{const{Group:t}=n(0);return e instanceof t},BooleanGroup:e=>{const{BooleanGroup:t}=n(0);return e instanceof t},Ellipse:e=>{const{Ellipse:t}=n(0);return e instanceof t},GraphicsNode:e=>{const{GraphicsNode:t}=n(0);return e instanceof t},Line:e=>{const{Line:t}=n(0);return e instanceof t},LinkedGraphic:e=>{const{LinkedGraphic:t}=n(0);return e instanceof t},Path:e=>{const{Path:t}=n(0);return e instanceof t},RepeatGrid:e=>{const{RepeatGrid:t}=n(0);return e instanceof t},RootNode:e=>{const{RootNode:t}=n(0);return e instanceof t},SceneNode:e=>{const{SceneNode:t}=n(0);return e instanceof t},SymbolInstance:e=>{const{SymbolInstance:t}=n(0);return e instanceof t}};return!!a[t]&&a[t](e)}}e.exports=a},function(e,t,n){const a=n(11);class i{static strings(){return{"error-selection-title":{default:"No text selected",de:"Kein Text ausgewählt"},"error-selection-description":{default:"Please include at least one text node in your selection and try again.",de:"Bitte wählen Sie mind. ein Textelement aus und versuchen Sie es nochmal."},"modal-lorem-description":{default:"Fills selected text element(s) with placeholder text.",de:"Füllt das bzw. die ausgewählte(n) Textelement(e) mit Platzhaltertext."},"modal-lorem-text-label":{default:"Placeholder text:",de:"Platzhaltertext:"},"modal-lorem-terminate-label":{default:"End with punctuation mark:",de:"Text mit Satzzeichen abschließen:"},"modal-lorem-terminate-none":{default:"None",de:"Kein Zeichen"},"modal-lorem-terminate-period":{default:"Period ('.')",de:"Punkt ('.')"},"modal-lorem-terminate-ellipsis":{default:"Ellipsis ('…')",de:"Auslassungspunkte ('…')"},"modal-lorem-includeLineBreaks-label":{default:"Include line breaks",de:"Zeilenumbrüche generieren"},"modal-lorem-trim-label":{default:"Trim text area height to fit inserted text",de:"Höhe dem eingefügten Text genau anpassen"},"modal-lorem-btn-ok":{default:"Insert text",de:"Text einfügen"},"modal-lorem-btn-cancel":{default:"Cancel",de:"Abbrechen"}}}static lang(){return a.appLanguage}static getString(e){if(Object.keys(i.strings()).includes(e)){const t=i.strings()[e];return t[i.lang()]||t.default}throw new Error('Translation for "'+e+'" was not defined.')}}e.exports=i},function(e,t,n){const a=n(2);let i=null;e.exports=class{static async send(e,t){let n=new XMLHttpRequest;n.open("POST","https://xdplugins.pabloklaschka.de/_api/submit"),n.send(JSON.stringify({plugin_name:"Lorem Ipsum",feature:e,options:t}))}static async verifyAcceptance(e){if(await a.get("analytics-accepted",!1))return!0;{let t={pluginName:"My plugin",privacyPolicyLink:"https://www.mysite.com/privacy",color:"#2D4E64"};if(Object.assign(t,e),await this.dialog(t))return await a.set("analytics-accepted",!0),!0;throw new Error("Privacy policy wasn't accepted")}}static async dialog(e){function t(){i.close("ok")}i||((i=document.createElement("dialog")).innerHTML=`\n<style>\n    header {\n        background: ${e.color};\n        height: 16px;\n        position: absolute;\n        left: 0;\n        top: 0;\n        right: 0;\n    }\n    \n    main {\n        overflow-y: auto;\n    }\n\n    form {\n        width: 640px;\n        overflow-y: auto;\n    }\n    h1 {\n        align-items: center;\n        justify-content: space-between;\n        display: flex;\n        flex-direction: row;\n    }\n    \n    input {\n    width: 18px;\n    }\n    \n    input[type="checkbox"] {\n    width: 18px;\n    }\n</style>\n<form method="dialog">\n    <header></header>\n    <main>\n    <h1>\n        <span>Analytics</span>\n    </h1>\n    <hr />\n    <p>To enhance your experience when using the plugin, completely anonymous data regarding your usage will get submitted to (secure) servers in Germany. The submitted data doesn't include any user id or similar means of identifying specific users. Since data gets submitted to our servers in the form of HTTP requests, you'll have to accept the privacy policy <a href="${e.privacyPolicyLink}">${e.privacyPolicyLink}</a>to use the plugin.\n</p>\n<h2>Data that gets submitted:</h2>\n<p>Data that's technically required to perform an HTTP request, a timestamp (current date and time), the plugin that gets used (i.e. ${e.pluginName}), the feature that gets used (e.g., which menu item selected) and the options that get used (e.g., categorical settings you set in dialogs).\n</p>\n<h2>Data that explicitly won't get submitted:</h2>\n<p>Any data identifying you (e.g., user ids or similar), any data regarding your document, files on your computer or similar, any data that I didn't list above in "Data that gets submitted"\n</p>\n    <label style="flex-direction: row; align-items: center;">\n        <input type="checkbox" /><span>I have read and accepted the privacy policy (${e.privacyPolicyLink})</span>\n    </label>\n    </main>\n    <footer>\n        <button id="cancel" uxp-variant="primary">Cancel</button>\n        <button id="ok" type="submit" uxp-variant="cta">Accept</button>\n    </footer>\n</form>\n        `),document.querySelector("body").appendChild(i),document.querySelector("form").onsubmit=t,document.querySelector("#cancel").addEventListener("click",()=>i.close("reasonCanceled"));const n=document.querySelector("#ok");n.disabled=!0,n.addEventListener("click",e=>{t(),e.preventDefault()});const a=document.querySelector("input");a.checked=!1,a.addEventListener("change",e=>{console.log("checkbox: ",e.target.checked),n.disabled=!e.target.checked}),Object.assign(document.querySelector("label").style,{flexDirection:"row",alignItems:"center"});const o=document.createElement("div");return o.appendChild(function(e,t){const n=document.createElement("label");Object.assign(n.style,{flexDirection:"row",alignItems:"center"});const a=document.createElement("input");a.type="checkbox",a.id=e,a.placeholder=e,t&&(a.checked=!0),n.appendChild(a);const i=document.createElement("span");return i.innerHTML=e,n.appendChild(i),n}("Test",!1)),console.log(o.innerHTML),"ok"===await i.showModal()}}},function(e,t,n){const{Text:a}=n(0),i=n(12),o=n(1),r=n(3),l=n(5),s={"lorem-lat":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.","cicero-lat":"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.","cicero-en":"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.","pangram-en":'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game.',"pangram-de":'Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. "Fix, Schwyz!" quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg. Heizölrückstoßabdämpfung. Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. "Fix, Schwyz!" quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg. Heizölrückstoßabdämpfung.Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim.',"pangram-es":"Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán. El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo. El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja. Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán. El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo. El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja.Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso.","pangram-fr":"Voyez ce jeu exquis wallon, de graphie en kit mais bref. Portez ce vieux whisky au juge blond qui fume sur son île intérieure, à côté de l'alcôve ovoïde, où les bûches se consument dans l'âtre, ce qui lui permet de penser à la cænogenèse de l'être dont il est question dans la cause ambiguë entendue à Moÿ, dans un capharnaüm qui, pense-t-il, diminue çà et là la qualité de son œuvre. Prouvez, beau juge, que le fameux sandwich au yak tue. L'île exiguë, Où l'obèse jury mûr Fête l'haï volapük, Âne ex æquo au whist, Ôtez ce vœu déçu. Vieux pelage que je modifie : breitschwanz ou yak ? Dès Noël où un zéphyr haï me vêt de glaçons würmiens, je dîne d’exquis rôtis de bœuf au kir à l’aÿ d’âge mûr & cætera ! Fougueux, j'enivre la squaw au pack de beau zythum. Ketch, yawl, jonque flambant neuve… jugez des prix ! Voyez le brick géant que j'examine près du wharf. Portez ce vieux whisky au juge blond qui fume. Bâchez la queue du wagon-taxi avec les pyjamas du fakir. Voix ambiguë d'un cœur qui, au zéphyr, préfère les jattes de kiwis. Mon pauvre zébu ankylosé choque deux fois ton wagon jaune. Perchez dix, vingt woks. Qu'y flambé-je ? Le moujik équipé de faux breitschwanz voyage. Kiwi fade, aptéryx, quel jambon vous gâchez ! Jugez qu'un vieux whisky blond pur malt fonce. Faux kwachas ? Quel projet de voyage zambien ! Fripon, mixez l'abject whisky qui vidange. Vif juge, trempez ce blond whisky aqueux. Vif P-DG mentor, exhibez la squaw jockey."};function u(e,t){let n;e.parent.parent&&"RepeatGrid"===e.parent.parent.constructor.name&&(n=e.parent.parent),n?n.attachTextDataSeries(e,[t]):e.text=t}function c(e,t,n){if(o.log("Checking between ",e," and ",t),Math.abs(e-t)<2)return e;let a=Math.floor((e+t)/2);return n(a)?c(e,a,n):c(a,t,n)}function d(e,t,n){let a=function(e,t,n){for(;e.split(" ").length<t;)e=n?e+"\n"+e:e+" "+e;return e.split(" ").splice(0,t).join(" ")}(s[t],e,n).trim();return(a.endsWith(".")||a.endsWith(",")||a.endsWith("?")||a.endsWith(";")||a.endsWith(":")||a.endsWith("-")||a.endsWith("–")||a.endsWith("!"))&&(a=a.substr(0,a.length-1)),a}e.exports=function(e,t){o.log("Lorem ipsum with options ",t);let n="n/a"===t.terminationString?"":t.terminationString;for(let a of e.items)if(r.checkForType(a,"AreaText")){let r=0,l=1;o.log("Propagating forward");do{r=l,u(a,d(l*=2,t.text,t.includeLineBreaks)+n)}while(!a.clippedByArea&&l<1e5);o.log("Propagating backwards from ",l),l=c(r,l,e=>(u(a,d(e,t.text,t.includeLineBreaks)+n),a.clippedByArea)),u(a,d(l,t.text,t.includeLineBreaks)+n),o.log("Completed at ",l),t.trim&&i(e)}else r.checkForType(a,"PointText")?a.text=d(2,t.text,!1)+n:o.log("Node ",a," is not a text area.");l.verifyAcceptance({pluginName:"Lorem Ipsum",privacyPolicyLink:"https://xdplugins.pabloklaschka.de/privacy-policy"}).then(()=>{l.send("lorem",t)})}},function(e,t,n){const a=n(8),i=n(9),o=n(6),r=n(2),l=n(3),s=n(4);async function u(){return await a.showErrorDialog(s.getString("error-selection-title"),s.getString("error-selection-description"))}function c(e){return new l(e).oneOrMore("Text")}e.exports={commands:{lorem:async function(e){c(e)?await i(e):await u()},quickLorem:async function(e){c(e)?await o(e,await async function(){return await r.get("loremOptions",{text:"lorem-lat",terminate:!0,includeLineBreaks:!0,trim:!1})}()):await u()},loremPreconfigured:async function(e){c(e)?await o(e,{includeLineBreaks:!0,trim:!1,terminationString:"n/a",text:"lorem-lat"}):await u()},loremPreconfiguredTrim:async function(e){c(e)?await o(e,{includeLineBreaks:!0,trim:!0,terminationString:".",text:"lorem-lat"}):await u()}}}},function(e,t){e.exports=class{static async showErrorDialog(e,t){document.body.innerHTML="";const n=document.createElement("dialog");n.id="loremErrorModal",n.innerHTML="\n    <style>    \n    \n    form {\n        width: 360px;\n    }\n    \n    header {\n        background: #2D4E64;\n        height: 16px;\n        position: absolute;\n        left: 0;\n        top: 0;\n        right: 0;\n    }\n    \n    </style>\n    ";const a=document.createElement("form");a.method="dialog",a.appendChild(document.createElement("header"));const i=document.createElement("h1");i.innerHTML=e,a.appendChild(i);const o=document.createElement("p");o.innerHTML=t,a.appendChild(o);const r=document.createElement("footer"),l=document.createElement("button");return l.id="ok",l.type="submit",l.innerHTML="Ok",l.setAttribute("uxp-variant","cta"),l.onclick=()=>{n.close(!0),document.body.innerHTML=""},r.appendChild(l),a.appendChild(r),n.appendChild(a),document.body.appendChild(n),await n.showModal()}}},function(e,t,n){const a=n(2),i=n(1),o=n(4),r=n(5);function l(e,t,n){const a=document.createElement("label"),i=document.createElement("span");i.innerHTML=e,a.appendChild(i);const o=document.createElement("select");for(let e of t){let t=document.createElement("option");t.value=e.value,t.innerHTML=e.label,o.appendChild(t)}return n&&(o.value=n),a.appendChild(o),a}function s(e,t){const n=document.createElement("label");Object.assign(n.style,{flexDirection:"row",alignItems:"center"});const a=document.createElement("input");a.type="checkbox",a.id=e,a.placeholder=e,t&&(a.checked=!0),n.appendChild(a);const i=document.createElement("span");return i.innerHTML=e,n.appendChild(i),n}e.exports=async function(e){await r.verifyAcceptance({pluginName:"Lorem Ipsum",privacyPolicyLink:"https://xdplugins.pabloklaschka.de/privacy-policy"}),i.log("Showing Lorem Ipsum modal");let t=await async function(e){return new Promise((e,t)=>{a.get("loremOptions",{text:"lorem-lat",terminationString:"n/a",includeLineBreaks:!0,trim:!1}).then(n=>{n.terminationString||(n.terminationString="n/a"),document.body.innerHTML="";const r=document.createElement("dialog");r.id="loremModal",r.innerHTML='\n    <style>    \n    form {\n        width: 360px;\n    }\n    \n    header {\n        background: #2D4E64;\n        height: 16px;\n        position: absolute;\n        left: 0;\n        top: 0;\n        right: 0;\n    }\n    \n    input[type="checkbox"] {\n    width: 18px;\n    }\n    </style>\n    ';const u=document.createElement("form");u.method="dialog",u.appendChild(document.createElement("header"));const c=document.createElement("h1");c.innerHTML="Lorem Ipsum",u.appendChild(c);const d=document.createElement("p");d.innerHTML=o.getString("modal-lorem-description"),u.appendChild(d);const m=l(o.getString("modal-lorem-text-label"),[{value:"lorem-lat",label:"Lorem Ipsum (Latin, Standard)"},{value:"cicero-lat",label:"Cicero (Latin)"},{value:"cicero-en",label:"Cicero (English)"},{value:"pangram-en",label:"Pangram (English)"},{value:"pangram-de",label:"Pangram (German)"},{value:"pangram-es",label:"Pangram (Espagnol)"},{value:"pangram-fr",label:"Pangram (Français)"}],n.text),p=l(o.getString("modal-lorem-terminate-label"),[{value:"n/a",label:o.getString("modal-lorem-terminate-none")},{value:".",label:o.getString("modal-lorem-terminate-period")},{value:"…",label:o.getString("modal-lorem-terminate-ellipsis")}],n.terminationString),h=s(o.getString("modal-lorem-includeLineBreaks-label"),n.includeLineBreaks),g=s(o.getString("modal-lorem-trim-label"),n.trim);u.appendChild(m),u.appendChild(p),u.appendChild(h),u.appendChild(g);const f=document.createElement("footer"),y=document.createElement("button");y.id="ok",y.type="submit",y.innerHTML=o.getString("modal-lorem-btn-ok"),y.setAttribute("uxp-variant","cta"),y.onclick=()=>{const t={text:m.childNodes.item(1).value,terminationString:p.childNodes.item(1).value,includeLineBreaks:h.childNodes.item(0).checked,trim:g.childNodes.item(0).checked};a.set("loremOptions",t).then(()=>{i.log("Lorem Ipsum"),r.close(),e(t),document.body.innerHTML=""})},y.setAttribute("autofocus","autofocus");const b=document.createElement("button");b.id="cancel",b.innerHTML=o.getString("modal-lorem-btn-cancel"),b.onclick=()=>{i.log("Closing Lorem Ipsum"),r.close(),t(),document.body.innerHTML=""},f.appendChild(b),f.appendChild(y),u.appendChild(f),r.appendChild(u),document.body.appendChild(r),r.showModal().then(()=>e()).catch(()=>t())})})}();const u=n(6);return await u(e,t),!0}},function(e,t){e.exports=require("uxp")},function(e,t){e.exports=require("application")},function(e,t,n){const{Text:a}=n(0),i=n(1),o=n(3);function r(e,t,n){if(i.log("Checking between ",e," and ",t),Math.abs(e-t)<2)return t;let a=Math.floor((e+t)/2);return n(a)?r(a,t,n):r(e,a,n)}e.exports=function(e){for(let t of e.items)if(o.checkForType(t,"AreaText")){let e=t.localBounds.height;if(t.clippedByArea){for(;t.clippedByArea;)e=t.localBounds.height,t.resize(t.localBounds.width,2*t.localBounds.height);t.resize(t.localBounds.width,r(e,t.localBounds.height,e=>(t.resize(t.localBounds.width,e),t.clippedByArea)))}else{for(;!t.clippedByArea&&t.localBounds.height>0;)e=t.localBounds.height,t.resize(t.localBounds.width,Math.floor(t.localBounds.height/2));t.resize(t.localBounds.width,r(t.localBounds.height,e,e=>(t.resize(t.localBounds.width,e),t.clippedByArea)))}}}}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/main.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/xd-localization-helper/localization-helper.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/xd-localization-helper/localization-helper.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports=function(t){var e={};function n(r){if(e[r])return e[r].exports;var a=e[r]={i:r,l:!1,exports:{}};return t[r].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var a in t)n.d(r,a,function(e){return t[e]}.bind(null,a));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){const r=n(1).storage,a=r.localFileSystem;let o,i=void 0,s=void 0;class l{static get lang(){return o}static get hasTranslation(){return void 0!==s}static unload(){o=void 0,i=void 0,s=void 0}static async load(t,e){l.unload(),o=n(2).appLanguage,t=t||"lang";let u=Object.assign({overrideLanguage:null},e||{});o=u.overrideLanguage?u.overrideLanguage:o;try{const e=await a.getPluginFolder();if(!(await e.getEntries()).find(e=>e.name===t))throw"translationFolderLocation '"+t+"' doesn't exist";const n=await e.getEntry(t);if(n.isFolder){const e=await n.getEntries();if(!e.find(t=>"default.json"===t.name))throw"required default.json file not available in the translation folder '"+t+"'...";{const t=await n.getEntry("default.json");i=JSON.parse((await t.read({format:r.formats.utf8})).toString())}if(e.find(t=>t.name===o+".json")){const t=await n.getEntry(o+".json");s=JSON.parse((await t.read({format:r.formats.utf8})).toString())}return!0}throw"translationFolderLocation '"+t+"' is not a folder"}catch(t){throw"Localization helper: Translations didn't load successfully: "+t}}static getNamespaced(t,e){if(t.hasOwnProperty(e))return t[e];for(let n=1;n<=e.split(".").length+1;n++){let r=e.split(".",n).join(".");if(t.hasOwnProperty(r))return this.getNamespaced(t[r],e.substring(r.length+1,e.length))}return!1}static get(t){if(s&&this.getNamespaced(s,t))return this.getNamespaced(s,t);if(i){if(this.getNamespaced(i,t))return this.getNamespaced(i,t);throw"Localization helper: String was not found, key: '"+t+"'"}throw"Localization helper: The library wasn't initialized. Please use 'await LocalizationHelper.load()' before getting a string."}}t.exports=l},function(t,e){t.exports=__webpack_require__(/*! uxp */ "uxp")},function(t,e){t.exports=__webpack_require__(/*! application */ "application")}]);
+
+/***/ }),
+
+/***/ "./node_modules/xd-storage-helper/storage-helper.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/xd-storage-helper/storage-helper.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2019. by Pablo Klaschka
+ */
+
+const storage = __webpack_require__(/*! uxp */ "uxp").storage;
+const fs = storage.localFileSystem;
+
+let data;
+
+class storageHelper {
+    /**
+     * Creates a data file if none was previously existent.
+     * @return {Promise<storage.File>} The data file
+     * @private
+     */
+    static async init() {
+        let dataFolder = await fs.getDataFolder();
+        try {
+            let returnFile = await dataFolder.getEntry('storage.json');
+            data = JSON.parse((await returnFile.read({format: storage.formats.utf8})).toString());
+            return returnFile;
+        } catch (e) {
+            const file = await dataFolder.createEntry('storage.json', {type: storage.types.file, overwrite: true});
+            if (file.isFile) {
+                await file.write('{}', {append: false});
+                data = {};
+                return file;
+            } else {
+                throw new Error('Storage file storage.json was not a file.');
+            }
+        }
+    }
+
+    /**
+     * Retrieves a value from storage. Saves default value if none is set.
+     * @param {string} key The identifier
+     * @param {*} defaultValue The default value. Gets saved and returned if no value was previously set for the speciefied key.
+     * @return {Promise<*>} The value retrieved from storage. If none is saved, the `defaultValue` is returned.
+     */
+    static async get(key, defaultValue) {
+        if (!data) {
+            const dataFile = await this.init();
+            data = JSON.parse((await dataFile.read({format: storage.formats.utf8})).toString());
+        }
+        if (data[key] === undefined) {
+            await this.set(key, defaultValue);
+            return defaultValue;
+        } else {
+            return data[key];
+        }
+    }
+
+    /**
+     * Saves a certain key-value-pair to the storage.
+     * @param {string} key The identifier
+     * @param {*} value The value that get's saved
+     * @return {Promise<void>}
+     */
+    static async set(key, value) {
+        const dataFile = await this.init();
+        data[key] = value;
+        return await dataFile.write(JSON.stringify(data), {append: false, format: storage.formats.utf8})
+    }
+
+    /**
+     * Deletes a certain key-value-pair from the storage
+     * @param {string} key The key of the deleted pair
+     * @return {Promise<void>}
+     */
+    static async delete(key) {
+        return await this.set(key, undefined);
+    }
+
+    /**
+     * Resets (i.e. purges) all stored settings.
+     * @returns {Promise<void>}
+     */
+    static async reset() {
+        const dataFile = await this.init();
+        return await dataFile.write('{}', {append: false, format: storage.formats.utf8})
+
+    }
+}
+
+module.exports = storageHelper;
+
+
+/***/ }),
+
+/***/ "./src/functions/lorem.js":
+/*!********************************!*\
+  !*** ./src/functions/lorem.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2019. by Pablo Klaschka
+ */
+
+const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
+const trimHeight = __webpack_require__(/*! ./trimHeight */ "./src/functions/trimHeight.js");
+const debugHelper = __webpack_require__(/*! ../helpers/debug */ "./src/helpers/debug.js");
+__webpack_require__(/*! ../helpers/check-selection */ "./src/helpers/check-selection.js");
+const analytics = __webpack_require__(/*! ../helpers/analytics */ "./src/helpers/analytics.js");
+
+const texts = {
+    'lorem-lat': 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    'cicero-lat': 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.',
+    'cicero-en': 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.',
+    'pangram-en': 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game.',
+    'pangram-de': 'Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. "Fix, Schwyz!" quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg. Heizölrückstoßabdämpfung. Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim. Sylvia wagt quick den Jux bei Pforzheim. Polyfon zwitschernd aßen Mäxchens Vögel Rüben, Joghurt und Quark. "Fix, Schwyz!" quäkt Jürgen blöd vom Paß. Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich. Falsches Üben von Xylophonmusik quält jeden größeren Zwerg. Heizölrückstoßabdämpfung.Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys Pferd Bim.',
+    'pangram-es': 'Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán. El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo. El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja. Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso. El jefe buscó el éxtasis en un imprevisto baño de whisky y gozó como un duque. Exhíbanse politiquillos zafios, con orejas kilométricas y uñas de gavilán. El cadáver de Wamba, rey godo de España, fue exhumado y trasladado en una caja de zinc que pesó un kilo. El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro. El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja.Quiere la boca exhausta vid, kiwi, piña y fugaz jamón. Fabio me exige, sin tapujos, que añada cerveza al whisky. Jovencillo emponzoñado de whisky, ¡qué figurota exhibes! La cigüeña tocaba cada vez mejor el saxofón y el búho pedía kiwi y queso.',
+    'pangram-fr': 'Voyez ce jeu exquis wallon, de graphie en kit mais bref. Portez ce vieux whisky au juge blond qui fume sur son île intérieure, à côté de l\'alcôve ovoïde, où les bûches se consument dans l\'âtre, ce qui lui permet de penser à la cænogenèse de l\'être dont il est question dans la cause ambiguë entendue à Moÿ, dans un capharnaüm qui, pense-t-il, diminue çà et là la qualité de son œuvre. Prouvez, beau juge, que le fameux sandwich au yak tue. L\'île exiguë, Où l\'obèse jury mûr Fête l\'haï volapük, Âne ex æquo au whist, Ôtez ce vœu déçu. Vieux pelage que je modifie : breitschwanz ou yak ? Dès Noël où un zéphyr haï me vêt de glaçons würmiens, je dîne d’exquis rôtis de bœuf au kir à l’aÿ d’âge mûr & cætera ! Fougueux, j\'enivre la squaw au pack de beau zythum. Ketch, yawl, jonque flambant neuve… jugez des prix ! Voyez le brick géant que j\'examine près du wharf. Portez ce vieux whisky au juge blond qui fume. Bâchez la queue du wagon-taxi avec les pyjamas du fakir. Voix ambiguë d\'un cœur qui, au zéphyr, préfère les jattes de kiwis. Mon pauvre zébu ankylosé choque deux fois ton wagon jaune. Perchez dix, vingt woks. Qu\'y flambé-je ? Le moujik équipé de faux breitschwanz voyage. Kiwi fade, aptéryx, quel jambon vous gâchez ! Jugez qu\'un vieux whisky blond pur malt fonce. Faux kwachas ? Quel projet de voyage zambien ! Fripon, mixez l\'abject whisky qui vidange. Vif juge, trempez ce blond whisky aqueux. Vif P-DG mentor, exhibez la squaw jockey.',
+};
+
+/**
+ * Fills text area with placeholder text (Lorem Ipsum)
+ * @param {Selection} selection
+ * @param {object} options
+ * @param {boolean} options.trim
+ * @param {string} options.terminationString n/a for no termination string
+ * @param {boolean} options.includeLineBreaks
+ * @param {string} options.text
+ */
+function lorem(selection, options) {
+    // TODO: Add support for Groups inside RepeatGrids (on the other hand: forget that, it's currently unsupported by the APIs ;-))
+    debugHelper.log('Lorem ipsum with options ', (options));
+    let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
+    for (let element of selection.items) {
+        if (element instanceof Text && element.areaBox) {
+            let prevCount = 0;
+            let count = 1;
+            debugHelper.log('Propagating forward');
+            do {
+                prevCount = count;
+                count *= 2;
+                applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
+            } while (!element.clippedByArea && count < 100000);
+            debugHelper.log('Propagating backwards from ', count);
+
+            count = checkBetween(prevCount, count, (count) => {
+                applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
+                return element.clippedByArea;
+            });
+            applyText(element, loremText(count, options.text, options.includeLineBreaks) + terminationString);
+
+            debugHelper.log('Completed at ', count);
+            if (options.trim) {
+                trimHeight(selection);
+            }
+        } else if (element instanceof Text) {
+            element.text = loremText(2, options.text, false) + terminationString;
+        } else {
+            debugHelper.log('Node ', element, ' is not a text layer.');
+        }
+    }
+    analytics.verifyAcceptance({
+        pluginName: 'Lorem Ipsum',
+        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy'
+    }).then(()=>{
+        analytics.send('lorem', options);
+    });
+}
+
+/**
+ * Applies text to the passed text layer (also, if it's e.g. inside a RepeatGrid
+ * @param {Text} textLayer
+ * @param {string} text
+ */
+function applyText(textLayer, text) {
+    let optRepeatGridNode;
+    if (textLayer.parent.parent && textLayer.parent.parent.constructor.name === 'RepeatGrid') {
+        optRepeatGridNode = textLayer.parent.parent;
+    }
+
+    if (optRepeatGridNode)
+        optRepeatGridNode.attachTextDataSeries(textLayer, [text]);
+    else
+        textLayer.text = text;
+}
+
+/**
+ * @param oldCount The highest count that was clipped
+ * @param newCount The lowest count that wasn't clipped
+ * @param {function(count:number): boolean} isClipped
+ */
+function checkBetween(oldCount, newCount, isClipped) {
+    debugHelper.log('Checking between ', oldCount, ' and ', newCount);
+
+    if (Math.abs(oldCount - newCount) < 2)
+        return oldCount;
+
+    let half = Math.floor((oldCount + newCount) / 2);
+
+    return isClipped(half) ? checkBetween(oldCount, half, isClipped) : checkBetween(half, newCount, isClipped);
+}
+
+function loremText(count, text, includeLineBreaks) {
+    function trimToNWords(strText, n, includeLineBreaks) {
+        // Ensure text is long enough:
+        while (strText.split(" ").length < n) {
+            strText = includeLineBreaks ? (strText + "\n" + strText) : (strText + " " + strText);
+        }
+        return strText
+            .split(" ")
+            .splice(0, n)
+            .join(" ");
+    }
+
+    let originalString = texts[text];
+    let strReturn = trimToNWords(originalString, count, includeLineBreaks).trim();
+    if (strReturn.endsWith('.') || strReturn.endsWith(',') || strReturn.endsWith('?') || strReturn.endsWith(';') || strReturn.endsWith(':') || strReturn.endsWith('-') || strReturn.endsWith('–') || strReturn.endsWith('!'))
+        strReturn = strReturn.substr(0, strReturn.length - 1);
+    return strReturn;
+}
+
+module.exports = lorem;
+
+
+/***/ }),
+
+/***/ "./src/functions/trimHeight.js":
+/*!*************************************!*\
+  !*** ./src/functions/trimHeight.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2018. by Pablo Klaschka
+ */
+
+const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
+const debugHelper = __webpack_require__(/*! ../helpers/debug */ "./src/helpers/debug.js");
+const SelectionChecker = __webpack_require__(/*! ../helpers/check-selection */ "./src/helpers/check-selection.js");
+
+/**
+ * Trims text area to suitable height
+ * @param {Selection} selection
+ */
+function trim(selection) {
+    for (let node of selection.items) {
+        if (SelectionChecker.checkForType(node, 'AreaText')) {
+            let oldHeight = node.localBounds.height;
+            if (node.clippedByArea) {
+                // Need to increase the height
+                while (node.clippedByArea) {
+                    oldHeight = node.localBounds.height;
+                    node.resize(node.localBounds.width, node.localBounds.height * 2);
+                }
+                // Find correct height with O(log n) time complexity
+                node.resize(node.localBounds.width,
+                    checkBetween(oldHeight, node.localBounds.height,
+                        (height) => {
+                            node.resize(node.localBounds.width, height);
+                            return node.clippedByArea;
+                        }
+                    )
+                );
+            } else {
+                // Need to decrease the height
+                while (!node.clippedByArea && node.localBounds.height > 0) {
+                    oldHeight = node.localBounds.height;
+                    node.resize(node.localBounds.width, Math.floor(node.localBounds.height / 2));
+                }
+                // Find correct height with O(log n) time complexity
+                node.resize(node.localBounds.width,
+                    checkBetween(node.localBounds.height, oldHeight,
+                        (height) => {
+                            node.resize(node.localBounds.width, height);
+                            return node.clippedByArea;
+                        }
+                    )
+                );
+            }
+        }
+    }
+}
+
+/**
+ * @param smallerHeight The highest height that was clipped
+ * @param biggerHeight The lowest height that wasn't clipped
+ * @param {function(height:number): boolean} isClipped
+ */
+function checkBetween(smallerHeight, biggerHeight, isClipped) {
+    debugHelper.log('Checking between ', smallerHeight, ' and ', biggerHeight);
+
+    if (Math.abs(smallerHeight - biggerHeight) < 2)
+        return biggerHeight;
+
+    let half = Math.floor((smallerHeight + biggerHeight) / 2);
+
+    return !isClipped(half) ? checkBetween(smallerHeight, half, isClipped) : checkBetween(half, biggerHeight, isClipped);
+}
+
+module.exports = trim;
+
+/***/ }),
+
+/***/ "./src/helpers/analytics.js":
+/*!**********************************!*\
+  !*** ./src/helpers/analytics.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2019. by Pablo Klaschka
+ */
+
+const storage = __webpack_require__(/*! xd-storage-helper */ "./node_modules/xd-storage-helper/storage-helper.js");
+let analyticsModal = null;
+
+
+class analyticsHelper {
+    static async send(feature, options) {
+        let req = new XMLHttpRequest();
+        req.open('POST', 'https://xdplugins.pabloklaschka.de/_api/submit');
+        req.send(JSON.stringify({
+            plugin_name: 'Lorem Ipsum',
+            feature: feature,
+            options: options
+        }));
+    }
+
+    /**
+     * Verifies that the user has accepted the privacy policy.
+     * @param passedOptions
+     * @param {string} passedOptions.pluginName
+     * @param {string} passedOptions.privacyPolicyLink
+     * @param {string} passedOptions.color
+     * @return {Promise<boolean>}
+     */
+    static async verifyAcceptance(passedOptions) {
+        if (await storage.get('analytics-accepted', false)) {
+            return true;
+        } else {
+            let options = {
+                pluginName: 'My plugin',
+                privacyPolicyLink: 'https://www.mysite.com/privacy',
+                color: '#2D4E64',
+            };
+            Object.assign(options, passedOptions);
+
+            if (await this.dialog(options)) {
+                await storage.set('analytics-accepted', true);
+                return true;
+            } else {
+                throw new Error('Privacy policy wasn\'t accepted');
+            }
+        }
+    }
+
+
+    /**
+     * @private
+     * @param {object} options
+     * @param {string} options.pluginName
+     * @param {string} options.privacyPolicyLink
+     * @param {string} options.color
+     * @return {Promise<boolean>}
+     */
+    static async dialog(options) {
+
+        if (!analyticsModal) {
+            analyticsModal = document.createElement("dialog");
+            analyticsModal.innerHTML = `
+<style>
+    header {
+        background: ${options.color};
+        height: 16px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+    }
+    
+    main {
+        overflow-y: auto;
+    }
+
+    form {
+        width: 640px;
+        overflow-y: auto;
+    }
+    h1 {
+        align-items: center;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    input {
+    width: 18px;
+    }
+    
+    input[type="checkbox"] {
+    width: 18px;
+    }
+</style>
+<form method="dialog">
+    <header></header>
+    <main>
+    <h1>
+        <span>Analytics</span>
+    </h1>
+    <hr />
+    <p>To enhance your experience when using the plugin, completely anonymous data regarding your usage will get submitted to (secure) servers in Germany. The submitted data doesn't include any user id or similar means of identifying specific users. Since data gets submitted to our servers in the form of HTTP requests, you'll have to accept the privacy policy <a href="${options.privacyPolicyLink}">${options.privacyPolicyLink}</a>to use the plugin.
+</p>
+<h2>Data that gets submitted:</h2>
+<p>Data that's technically required to perform an HTTP request, a timestamp (current date and time), the plugin that gets used (i.e. ${options.pluginName}), the feature that gets used (e.g., which menu item selected) and the options that get used (e.g., categorical settings you set in dialogs).
+</p>
+<h2>Data that explicitly won't get submitted:</h2>
+<p>Any data identifying you (e.g., user ids or similar), any data regarding your document, files on your computer or similar, any data that I didn't list above in "Data that gets submitted"
+</p>
+    <label style="flex-direction: row; align-items: center;">
+        <input type="checkbox" /><span>I have read and accepted the privacy policy (${options.privacyPolicyLink})</span>
+    </label>
+    </main>
+    <footer>
+        <button id="cancel" uxp-variant="primary">Cancel</button>
+        <button id="ok" type="submit" uxp-variant="cta">Accept</button>
+    </footer>
+</form>
+        `;
+        }
+
+        document.querySelector('body').appendChild(analyticsModal);
+
+        let form = document.querySelector('form');
+
+        function onsubmit() {
+            analyticsModal.close("ok");
+        }
+
+        form.onsubmit = onsubmit;
+
+        const cancelButton = document.querySelector("#cancel");
+        cancelButton.addEventListener("click", () => analyticsModal.close("reasonCanceled"));
+
+        const okButton = document.querySelector("#ok");
+        okButton.disabled = true;
+        okButton.addEventListener("click", e => {
+            onsubmit();
+            e.preventDefault();
+        });
+
+        const checkbox = document.querySelector('input');
+        checkbox.checked = false;
+        checkbox.addEventListener('change', e => {
+            console.log('checkbox: ', e.target.checked);
+            okButton.disabled = !e.target.checked;
+        });
+
+
+        Object.assign(document.querySelector('label').style, {flexDirection: "row", alignItems: "center"});
+
+        const pseudo = document.createElement('div');
+        pseudo.appendChild(checkBox('Test', false));
+
+        console.log(pseudo.innerHTML);
+
+        return (await analyticsModal.showModal()) === 'ok';
+    }
+}
+
+
+function checkBox(label, defaultChecked) {
+    const lblCheck = document.createElement("label");
+    Object.assign(lblCheck.style, {flexDirection: "row", alignItems: "center"});
+    // lblCheck.class = 'row';
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.id = label;
+    checkBox.placeholder = label;
+    if (defaultChecked) {
+        checkBox.checked = true;
+    }
+    lblCheck.appendChild(checkBox);
+    const spanLblCheck = document.createElement('span');
+    spanLblCheck.innerHTML = label;
+    lblCheck.appendChild(spanLblCheck);
+
+    return lblCheck;
+}
+
+
+module.exports = analyticsHelper;
+
+
+/***/ }),
+
+/***/ "./src/helpers/check-selection.js":
+/*!****************************************!*\
+  !*** ./src/helpers/check-selection.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2018. by Pablo Klaschka
+ */
+
+class SelectionChecker {
+    /**
+     * Creates a new selection checker to check types of the selection
+     * @param {Selection} selection The selection passed into the main funciton
+     */
+    constructor(selection) {
+        this.selection = selection;
+    }
+
+    /**
+     * Checks if selection contains one or more of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @returns {boolean} `true` if the selection contains one or more of the specified SceneNode `types`
+     */
+    oneOrMore(...types) {
+        return this.count.apply(this, types) > 0;
+    }
+
+    /**
+     * Checks if selection contains `n` or more of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @param  {number} n The minimum number of occurances in selection
+     * @returns {boolean} `true` if the selection contains `n` or more of the specified SceneNode `types`
+     */
+    nOrMore(n, ...types) {
+        return this.count.apply(this, types) >= n;
+    }
+
+    /**
+     * Checks if selection contains `n` or less of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @param  {number} n The maximum number of occurances in selection
+     * @returns {boolean} `true` if the selection contains `n` or less of the specified SceneNode `types`
+     */
+    nOrLess(n, ...types) {
+        return this.count.apply(this, types) <= n;
+    }
+
+    /**
+     * Checks if selection contains exactly `n` occurances of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @param  {number} n The desired number of occurances in selection
+     * @returns {boolean} `true` if the selection contains exactly `n` occurances of the specified SceneNode `types`
+     */
+    exactlyN(n, ...types) {
+        return this.count.apply(this, types) <= n;
+    }
+
+    /**
+     * Checks if selection contains exactly one occurance of an element of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @returns {boolean} `true` if the selection contains exactly one occurance of an element of the specified SceneNode `types`
+     */
+    exactlyOne(...types) {
+        return this.count.apply(this, types) === 1;
+    }
+
+    /**
+     * Checks if selection contains no occurances of any of the specified SceneNode `types`
+     * @param {...string} types The SceneNode types
+     * @returns {boolean} `true` if the selection contains no occurances of any of the specified SceneNode `types`
+     */
+    no(...types) {
+        return this.count.apply(this, types) < 1;
+    }
+
+    /**
+     * Counts the number of occurences of the scecified types
+     * @returns {number} The number of elements of the specified types
+     * @param {...string} types the SceneNode types
+     */
+    count(...types) {
+        return this.selection.items.reduce((previousValue, currentValue) => {
+            let isOfOneOfTypes = false;
+            for (let type of types) {
+                if (SelectionChecker.checkForType(currentValue, type)) {
+                    isOfOneOfTypes = true;
+                    break;
+                }
+            }
+            return previousValue + isOfOneOfTypes ? 1 : 0;
+        }, 0);
+    }
+
+    /**
+     * Checks if `node` matches type (specified as `string`)
+     * @param {SceneNode} node
+     * @param {string} type
+     * @returns {boolean} `true` if `node` matches specified ``type`
+     */
+    static checkForType(node, type) {
+        const typeCheckLookupTable = {
+            'Text': (node) => {
+                const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Text;
+            },
+            'AreaText': (node) => {
+                const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Text && node.areaBox;
+            },
+            'PointText': (node) => {
+                const {Text} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Text && node.areaBox === null;
+            },
+            'Rectangle': (node) => {
+                const {Rectangle} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Rectangle;
+            },
+            'Artboard': (node) => {
+                const {Artboard} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Artboard;
+            },
+            'Group': (node) => {
+                const {Group} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Group;
+            },
+            'BooleanGroup': (node) => {
+                const {BooleanGroup} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof BooleanGroup;
+            },
+            'Ellipse': (node) => {
+                const {Ellipse} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Ellipse;
+            },
+            'GraphicsNode': (node) => {
+                const {GraphicsNode} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof GraphicsNode;
+            },
+            'Line': (node) => {
+                const {Line} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Line;
+            },
+            'LinkedGraphic': (node) => {
+                const {LinkedGraphic} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof LinkedGraphic;
+            },
+            'Path': (node) => {
+                const {Path} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof Path;
+            },
+            'RepeatGrid': (node) => {
+                const {RepeatGrid} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof RepeatGrid;
+            },
+            'RootNode': (node) => {
+                const {RootNode} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof RootNode;
+            },
+            'SceneNode': (node) => {
+                const {SceneNode} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof SceneNode;
+            },
+            'SymbolInstance': (node) => {
+                const {SymbolInstance} = __webpack_require__(/*! scenegraph */ "scenegraph");
+                return node instanceof SymbolInstance;
+            },
+        };
+        return (typeCheckLookupTable[type]) ? typeCheckLookupTable[type](node) : false;
+    }
+}
+
+module.exports = SelectionChecker;
+
+/***/ }),
+
+/***/ "./src/helpers/debug.js":
+/*!******************************!*\
+  !*** ./src/helpers/debug.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+ * Copyright (c) 2018. by Pablo Klaschka
+ */
+
+class debugHelper {
+    static shouldDebug() {
+        return false;
+    }
+
+    /**
+     * Logs elements to console
+     * @param {*} objects Logged objects
+     */
+    static log(...objects) {
+        if (debugHelper.shouldDebug()) {
+            objects.unshift('Lorem Ipsum Plugin: ');
+            const args = Array.prototype.slice.call(objects.map(value => value instanceof Object ? JSON.stringify(value) : value));
+            console.log.apply(console, args);
+        }
+    }
+}
+
+
+module.exports = debugHelper;
+
+/***/ }),
+
+/***/ "./src/helpers/error.js":
+/*!******************************!*\
+  !*** ./src/helpers/error.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+ * Copyright (c) 2018. by Pablo Klaschka
+ */
+
+class errorHelper {
+    static async showErrorDialog(title, message) {
+
+
+        // Removing old instances
+        document.body.innerHTML = '';
+
+        const dialog = document.createElement('dialog');
+        dialog.id = 'loremErrorModal';
+        dialog.innerHTML = `
+    <style>    
+    
+    form {
+        width: 360px;
+    }
+    
+    header {
+        background: #2D4E64;
+        height: 16px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+    }
+    
+    </style>
+    `;
+
+        const form = document.createElement('form');
+        form.method = 'dialog';
+
+        form.appendChild(document.createElement('header'));
+
+
+        const heading = document.createElement('h1');
+        heading.innerHTML = title;
+        form.appendChild(heading);
+
+        const description = document.createElement('p');
+        description.innerHTML = message;
+        form.appendChild(description);
+
+        const footer = document.createElement('footer');
+        const btnOk = document.createElement('button');
+        btnOk.id = "ok";
+        btnOk.type = "submit";
+        btnOk.innerHTML = 'Ok';
+        btnOk.setAttribute('uxp-variant', 'cta');
+        btnOk.onclick = () => {
+            dialog.close(true);
+            document.body.innerHTML = '';
+        };
+        footer.appendChild(btnOk);
+        form.appendChild(footer);
+        dialog.appendChild(form);
+        document.body.appendChild(dialog);
+
+        return await dialog.showModal();
+    }
+}
+
+
+module.exports = errorHelper;
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2019. by Pablo Klaschka
+ */
+
+const errorHelper = __webpack_require__(/*! ./helpers/error */ "./src/helpers/error.js");
+
+const loremModal = __webpack_require__(/*! ./modals/loremModal */ "./src/modals/loremModal.js");
+const loremFunction = __webpack_require__(/*! ./functions/lorem */ "./src/functions/lorem.js");
+const storage = __webpack_require__(/*! xd-storage-helper */ "./node_modules/xd-storage-helper/storage-helper.js");
+const SelectionChekcer = __webpack_require__(/*! ./helpers/check-selection */ "./src/helpers/check-selection.js");
+
+const lang = __webpack_require__(/*! xd-localization-helper */ "./node_modules/xd-localization-helper/localization-helper.js");
+
+async function settings() {
+    return await storage.get('loremOptions', {
+        text: 'lorem-lat',
+        terminate: true,
+        includeLineBreaks: true,
+        trim: false
+    })
+}
+
+async function selectionError() {
+    return await errorHelper.showErrorDialog(lang.get('error-selection-title'), lang.get('error-selection-description'));
+}
+
+/**
+ * Initialize all necessary components and check the selection for compatibhility
+ * @param {Selection} selection
+ * @return {Promise<boolean>} Selection contains text layer?
+ */
+async function init(selection) {
+    await lang.load();
+    let checker = new SelectionChekcer(selection);
+    return checker.oneOrMore('Text');
+}
+
+async function lorem(selection) {
+    if (await init(selection))
+        await loremModal(selection);
+    else
+        await selectionError();
+}
+
+async function quickLorem(selection) {
+    if (await init(selection))
+        await loremFunction(selection, await settings());
+    else
+        await selectionError();
+}
+
+async function loremPreconfigured(selection) {
+    if (await init(selection))
+        await loremFunction(selection, {
+            includeLineBreaks: true,
+            trim: false,
+            terminationString: 'n/a',
+            text: 'lorem-lat'
+        });
+    else
+        await selectionError();
+}
+
+async function loremPreconfiguredTrim(selection) {
+    if (await init(selection))
+        await loremFunction(selection, {
+            includeLineBreaks: true,
+            trim: true,
+            terminationString: '.',
+            text: 'lorem-lat'
+        });
+    else
+        await selectionError();
+}
+
+// noinspection JSUnusedGlobalSymbols
+module.exports = {
+    commands: {
+        lorem: lorem,
+        quickLorem: quickLorem,
+        loremPreconfigured: loremPreconfigured,
+        loremPreconfiguredTrim: loremPreconfiguredTrim
+    }
+};
+
+
+/***/ }),
+
+/***/ "./src/modals/loremModal.js":
+/*!**********************************!*\
+  !*** ./src/modals/loremModal.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ * Copyright (c) 2019. by Pablo Klaschka
+ */
+
+const storage = __webpack_require__(/*! xd-storage-helper */ "./node_modules/xd-storage-helper/storage-helper.js");
+const debugHelper = __webpack_require__(/*! ../helpers/debug */ "./src/helpers/debug.js");
+const lang = __webpack_require__(/*! xd-localization-helper */ "./node_modules/xd-localization-helper/localization-helper.js");
+const analytics = __webpack_require__(/*! ../helpers/analytics */ "./src/helpers/analytics.js");
+
+/**
+ * @param {Selection} selection
+ */
+async function showModal(selection) {
+    await analytics.verifyAcceptance({
+        pluginName: 'Lorem Ipsum',
+        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
+        color: '#2D4E64'
+    });
+    debugHelper.log('Showing Lorem Ipsum modal');
+    let options = await modalAsync(selection);
+    const lorem = __webpack_require__(/*! ../functions/lorem */ "./src/functions/lorem.js");
+    await lorem(selection, options);
+    return true;
+}
+
+/**
+ * @param {Selection} selection
+ */
+async function modalAsync(selection) {
+    return new Promise((resolve, reject) => {
+        storage.get('loremOptions', {
+            text: 'lorem-lat',
+            terminationString: 'n/a',
+            includeLineBreaks: true,
+            trim: false
+        }).then(uiOptions => {
+            if (!uiOptions['terminationString'])
+                uiOptions['terminationString'] = 'n/a';
+
+            // Removing old instances
+            document.body.innerHTML = '';
+
+            const dialog = document.createElement('dialog');
+            dialog.id = 'loremModal';
+            dialog.innerHTML = `
+    <style>    
+    form {
+        width: 360px;
+    }
+    
+    header {
+        background: #2D4E64;
+        height: 16px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+    }
+    
+    input[type="checkbox"] {
+    width: 18px;
+    }
+    </style>
+    `;
+
+            const form = document.createElement('form');
+            form.method = 'dialog';
+
+            form.appendChild(document.createElement('header'));
+
+            const heading = document.createElement('h1');
+            heading.innerHTML = 'Lorem Ipsum';
+            form.appendChild(heading);
+
+            const description = document.createElement('p');
+            description.innerHTML = lang.get('modal-lorem-description');
+            form.appendChild(description);
+
+            const text = selectBox(lang.get('modal-lorem-text-label'), [
+                {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
+                {value: 'cicero-lat', label: 'Cicero (Latin)'},
+                {value: 'cicero-en', label: 'Cicero (English)'},
+                {value: 'pangram-en', label: 'Pangram (English)'},
+                {value: 'pangram-de', label: 'Pangram (German)'},
+                {value: 'pangram-es', label: 'Pangram (Espagnol)'},
+                {value: 'pangram-fr', label: 'Pangram (Français)'},
+            ], uiOptions.text);
+
+            const terminationString = selectBox(lang.get('modal-lorem-terminate-label'), [
+                {value: 'n/a', label: lang.get('modal-lorem-terminate-none')},
+                {value: '.', label: lang.get('modal-lorem-terminate-period')},
+                {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
+            ], uiOptions.terminationString);
+            const includeLineBreaks = checkBox(lang.get('modal-lorem-includeLineBreaks-label'), uiOptions.includeLineBreaks);
+            const trim = checkBox(lang.get('modal-lorem-trim-label'), uiOptions.trim);
+
+            form.appendChild(text);
+            form.appendChild(terminationString);
+            form.appendChild(includeLineBreaks);
+            form.appendChild(trim);
+
+
+
+            const footer = document.createElement('footer');
+            const btnOk = document.createElement('button');
+            btnOk.id = "ok";
+            btnOk.type = "submit";
+            btnOk.innerHTML = lang.get('modal-lorem-btn-ok');
+            btnOk.setAttribute('uxp-variant', 'cta');
+            btnOk.onclick = () => {
+                const loremOptions = {
+                    text: text.childNodes.item(1).value,
+                    terminationString: terminationString.childNodes.item(1).value,
+                    includeLineBreaks: includeLineBreaks.childNodes.item(0).checked,
+                    trim: trim.childNodes.item(0).checked
+                };
+                storage.set('loremOptions', loremOptions).then(() => {
+                    debugHelper.log("Lorem Ipsum");
+                    dialog.close();
+                    resolve(loremOptions);
+                    document.body.innerHTML = '';
+                });
+            };
+            btnOk.setAttribute('autofocus', 'autofocus');
+            const btnCancel = document.createElement('button');
+            btnCancel.id = "cancel";
+            btnCancel.innerHTML = lang.get('modal-lorem-btn-cancel');
+            btnCancel.onclick = () => {
+                debugHelper.log("Closing Lorem Ipsum");
+                dialog.close();
+                reject();
+                document.body.innerHTML = '';
+            };
+            footer.appendChild(btnCancel);
+            footer.appendChild(btnOk);
+            form.appendChild(footer);
+            dialog.appendChild(form);
+            document.body.appendChild(dialog);
+
+            dialog.showModal().then(() => resolve()).catch(() => reject());
+        });
+    });
+}
+
+function selectBox(label, entries, defaultValue) {
+    const lblSelect = document.createElement("label");
+    const spanLblSelect = document.createElement('span');
+    spanLblSelect.innerHTML = label;
+    lblSelect.appendChild(spanLblSelect);
+    const select = document.createElement('select');
+
+    for (let entry of entries) {
+        let optEntry = document.createElement("option");
+        optEntry.value = entry.value;
+        optEntry.innerHTML = entry.label;
+        select.appendChild(optEntry);
+    }
+    if (defaultValue) {
+        select.value = defaultValue;
+    }
+    lblSelect.appendChild(select);
+
+    return lblSelect;
+}
+
+function checkBox(label, defaultChecked) {
+    const lblCheck = document.createElement("label");
+    Object.assign(lblCheck.style, {flexDirection: "row", alignItems: "center"});
+    // lblCheck.class = 'row';
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.id = label;
+    checkBox.placeholder = label;
+    if (defaultChecked) {
+        checkBox.checked = true;
+    }
+    lblCheck.appendChild(checkBox);
+    const spanLblCheck = document.createElement('span');
+    spanLblCheck.innerHTML = label;
+    lblCheck.appendChild(spanLblCheck);
+
+    return lblCheck;
+}
+
+module.exports = showModal;
+
+
+/***/ }),
+
+/***/ "application":
+/*!******************************!*\
+  !*** external "application" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("application");
+
+/***/ }),
+
+/***/ "scenegraph":
+/*!*****************************!*\
+  !*** external "scenegraph" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("scenegraph");
+
+/***/ }),
+
+/***/ "uxp":
+/*!**********************!*\
+  !*** external "uxp" ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("uxp");
+
+/***/ })
+
+/******/ });

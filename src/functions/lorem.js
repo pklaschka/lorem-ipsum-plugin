@@ -5,7 +5,7 @@
 const {Text} = require("scenegraph");
 const trimHeight = require('./trimHeight');
 const debugHelper = require('../helpers/debug');
-const SelectionChecker = require('../helpers/check-selection');
+require('../helpers/check-selection');
 const analytics = require("../helpers/analytics");
 
 const texts = {
@@ -32,7 +32,7 @@ function lorem(selection, options) {
     debugHelper.log('Lorem ipsum with options ', (options));
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
     for (let element of selection.items) {
-        if (SelectionChecker.checkForType(element, 'AreaText')) {
+        if (element instanceof Text && element.areaBox) {
             let prevCount = 0;
             let count = 1;
             debugHelper.log('Propagating forward');
@@ -53,10 +53,10 @@ function lorem(selection, options) {
             if (options.trim) {
                 trimHeight(selection);
             }
-        } else if (SelectionChecker.checkForType(element, 'PointText')) {
+        } else if (element instanceof Text) {
             element.text = loremText(2, options.text, false) + terminationString;
         } else {
-            debugHelper.log('Node ', element, ' is not a text area.');
+            debugHelper.log('Node ', element, ' is not a text layer.');
         }
     }
     analytics.verifyAcceptance({

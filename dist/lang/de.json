@@ -1,0 +1,14 @@
+{
+  "error-selection-title": "Kein Text ausgewählt",
+  "error-selection-description": "Bitte wählen Sie mind. ein Textelement aus und versuchen Sie es nochmal.",
+  "modal-lorem-description": "Füllt das bzw. die ausgewählte(n) Textelement(e) mit Platzhaltertext.",
+  "modal-lorem-text-label": "Platzhaltertext:",
+  "modal-lorem-terminate-label": "Text mit Satzzeichen abschließen:",
+  "modal-lorem-terminate-none": "Kein Zeichen",
+  "modal-lorem-terminate-period": "Punkt ('.')",
+  "modal-lorem-terminate-ellipsis": "Auslassungspunkte ('…')",
+  "modal-lorem-includeLineBreaks-label": "Zeilenumbrüche generieren",
+  "modal-lorem-trim-label": "Höhe dem eingefügten Text genau anpassen",
+  "modal-lorem-btn-ok": "Text einfügen",
+  "modal-lorem-btn-cancel": "Abbrechen"
+}
