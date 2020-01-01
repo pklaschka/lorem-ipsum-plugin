@@ -9,7 +9,7 @@ module.exports = {
         filename: 'dist/main.js',
         libraryTarget: 'commonjs2'
     },
-    devtool: 'none',
+    devtool: false,
     externals: {
         assets: 'assets',
         scenegraph: 'scenegraph',

@@ -7,7 +7,7 @@ const errorHelper = require('./helpers/error');
 const loremModal = require('./modals/loremModal');
 const loremFunction = require('./functions/lorem');
 const storage = require('xd-storage-helper');
-const SelectionChekcer = require('./helpers/check-selection');
+const SelectionChecker = require('./helpers/check-selection');
 
 const lang = require('xd-localization-helper');
 
@@ -25,23 +25,33 @@ async function selectionError() {
 }
 
 /**
- * Initialize all necessary components and check the selection for compatibhility
- * @param {Selection} selection
+ * Initialize all necessary components and check the selection for compatibility
+ * @param {XDSelection} selection
  * @return {Promise<boolean>} Selection contains text layer?
  */
 async function init(selection) {
     await lang.load();
-    let checker = new SelectionChekcer(selection);
+    let checker = new SelectionChecker(selection);
     return checker.oneOrMore('Text');
 }
 
+/**
+ *
+ * @param {XDSelection} selection
+ * @return {Promise<void>}
+ */
 async function lorem(selection) {
     if (await init(selection))
-        await loremModal(selection);
+        await loremModal();
     else
         await selectionError();
 }
 
+/**
+ *
+ * @param {XDSelection} selection
+ * @return {Promise<void>}
+ */
 async function quickLorem(selection) {
     if (await init(selection))
         await loremFunction(await settings());
@@ -49,6 +59,11 @@ async function quickLorem(selection) {
         await selectionError();
 }
 
+/**
+ *
+ * @param {XDSelection} selection
+ * @return {Promise<void>}
+ */
 async function loremPreconfigured(selection) {
     if (await init(selection))
         await loremFunction({
@@ -61,6 +76,11 @@ async function loremPreconfigured(selection) {
         await selectionError();
 }
 
+/**
+ *
+ * @param {XDSelection} selection
+ * @return {Promise<void>}
+ */
 async function loremPreconfiguredTrim(selection) {
     if (await init(selection))
         await loremFunction({

@@ -5,13 +5,20 @@
 const dialogHelper = require('xd-dialog-helper');
 
 class errorHelper {
+    /**
+     *
+     * @param {string} title
+     * @param {string} message
+     * @return {Promise<void>}
+     */
     static async showErrorDialog(title, message) {
         await dialogHelper.showDialog('lorem-error-dialog', title, [
             {
-                type: dialogHelper.TEXT,
+                type: dialogHelper.types.TEXT,
                 label: message,
                 id: 'message',
-                value: true
+                value: true,
+                htmlAttributes: {}
             }
         ], {
             width: 360,
@@ -26,7 +33,9 @@ class errorHelper {
             }`,
             onBeforeShow: htmlDialogElement => {
                 htmlDialogElement.appendChild(document.createElement('header'));
-                (document.getElementById('lorem-error-dialog-dialogHelperBtnCancel')).remove();
+                const cancelButton = document.querySelector('lorem-error-dialog-dialogHelperBtnCancel');
+                if (cancelButton)
+                    cancelButton.remove();
             }
         });
     }

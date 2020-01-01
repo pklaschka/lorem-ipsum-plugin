@@ -14,8 +14,18 @@ class debugHelper {
     static log(...objects) {
         if (debugHelper.shouldDebug()) {
             objects.unshift('Lorem Ipsum Plugin: ');
-            const args = Array.prototype.slice.call(objects.map(value => value instanceof Object ? JSON.stringify(value) : value));
-            console.log.apply(console, args);
+            const args = Array.prototype.slice.call(
+                objects.map(
+                    /**
+                     *
+                     * @param {any} value
+                     * @return {any}
+                     */
+                    value => value instanceof Object ? JSON.stringify(value) : value
+                )
+            );
+            const first = args.shift();
+            console.log.apply(console, [first, ...args]);
         }
     }
 }

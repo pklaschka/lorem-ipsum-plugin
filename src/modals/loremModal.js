@@ -25,6 +25,7 @@ async function showModal() {
 
 /**
  * @throws {Error} error when dialog gets canceled
+ * @return {Promise<{trim: boolean, terminationString: string, includeLineBreaks: boolean, text: string}>}
  */
 async function modalAsync() {
     const uiOptions = await storage.get('loremOptions', {
@@ -35,15 +36,20 @@ async function modalAsync() {
     });
 
     try {
+        /**
+         * The options for the Lorem Ipsum options
+         * @type {{text: string, terminationString: string, includeLineBreaks: boolean, trim: boolean}}
+         */
         const loremOptions = await dialogHelper.showDialog('lorem-main', 'Lorem Ipsum',
             [
                 {
                     id: 'description',
-                    type: dialogHelper.TEXT,
-                    label: lang.get('modal-lorem-description')
+                    type: dialogHelper.types.TEXT,
+                    label: lang.get('modal-lorem-description'),
+                    htmlAttributes: {},
                 },
                 {
-                    type: dialogHelper.SELECT,
+                    type: dialogHelper.types.SELECT,
                     options: [
                         {value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
                         {value: 'cicero-lat', label: 'Cicero (Latin)'},
@@ -55,10 +61,11 @@ async function modalAsync() {
                     ],
                     id: 'text',
                     label: lang.get('modal-lorem-text-label'),
-                    value: uiOptions.text
+                    value: uiOptions.text,
+                    htmlAttributes: {},
                 },
                 {
-                    type: dialogHelper.SELECT,
+                    type: dialogHelper.types.SELECT,
                     id: 'terminationString',
                     label: lang.get('modal-lorem-terminate-label'),
                     options: [
@@ -66,18 +73,21 @@ async function modalAsync() {
                         {value: '.', label: lang.get('modal-lorem-terminate-period')},
                         {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
                     ],
+                    htmlAttributes: {},
                     value: uiOptions.terminationString
                 },
                 {
-                    type: dialogHelper.CHECKBOX,
+                    type: dialogHelper.types.CHECKBOX,
                     id: 'includeLineBreaks',
                     label: lang.get('modal-lorem-includeLineBreaks-label'),
+                    htmlAttributes: {},
                     value: uiOptions.includeLineBreaks
                 },
                 {
-                    type: dialogHelper.CHECKBOX,
+                    type: dialogHelper.types.CHECKBOX,
                     id: 'trim',
                     label: lang.get('modal-lorem-trim-label'),
+                    htmlAttributes: {},
                     value: uiOptions.trim
                 }
             ],
@@ -103,6 +113,7 @@ async function modalAsync() {
                     htmlDialogElement => {
                         htmlDialogElement.appendChild(document.createElement('header'));
 
+                        // @ts-ignore
                         document.getElementById('lorem-main-dialogHelperBtnOk').setAttribute('autofocus', 'autofocus');
                     }
             });
