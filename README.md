@@ -40,5 +40,10 @@ The project should work out of the box in Visual Studio Code, no further configu
 ### JetBrains WebStorm
 Activate node autocompletion (Preferences=>Languages & Frameworks=>Node.js and npm=>Enable)
 
-## Credits
+## Attribution
 To add autocompletion, this boilerplate uses the MIT-licensed Typescript definitions that can be found at <https://github.com/AdobeXD/typings>.
+
+Furthermore, the following open-source libraries for XD plugin development, developed by Pablo Klaschka, got used:
+- [`xd-storage-helper`](https://github.com/pklaschka/xd-storage-helper)
+- [`xd-localization-helper`](https://github.com/pklaschka/xd-localization-helper)
+- [`xd-dialog-helper`](https://github.com/pklaschka/xd-dialog-helper)

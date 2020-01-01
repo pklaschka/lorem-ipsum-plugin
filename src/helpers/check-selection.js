@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. by Pablo Klaschka
+ * Copyright (c) 2020. by Pablo Klaschka
  */
 
 class SelectionChecker {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019. by Pablo Klaschka
+ * Copyright (c) 2020. by Pablo Klaschka
  */
 
 const {Text, RepeatGrid} = require('scenegraph');

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'assets' {
     import {Color, LinearGradientFill, RadialGradientFill} from "scenegraph";
 

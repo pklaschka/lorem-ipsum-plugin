@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'viewport' {
     /**
      * The `viewport` module represents the current UI view of the XD document's content.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019. by Pablo Klaschka
+ * Copyright (c) 2020. by Pablo Klaschka
  */
 
 // For a detailed explanation regarding each configuration property, visit:

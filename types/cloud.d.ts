@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'cloud' {
     interface BaseSharedArtifact {
         type: ArtifactType;

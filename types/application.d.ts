@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'application' {
     import {Color, SceneNode, RootNode} from "scenegraph";
     import {storage} from "uxp";

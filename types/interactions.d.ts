@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'interactions' {
     import {Artboard, SceneNode} from "scenegraph";
 

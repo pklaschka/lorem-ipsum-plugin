@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'commands' {
     /**
      * Wraps the selected objects in a Group, leaving the Group selected afterward. Equivalent to Object > Group in the UI.

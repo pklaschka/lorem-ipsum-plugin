@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. by Pablo Klaschka
+ */
+
 declare module 'scenegraph' {
     import {Interaction} from 'interactions';
     import {storage} from 'uxp';
