@@ -31,13 +31,3 @@ build:
     name: "plugin-$CI_COMMIT_REF_NAME.xdx"
     paths:
       - dist.xdx
-
-build-docs:
-  stage: build
-  script:
-    - npm run docs
-  artifacts:
-    when: on_success
-    name: "plugin-$CI_COMMIT_REF_NAME-docs"
-    paths:
-      - docs

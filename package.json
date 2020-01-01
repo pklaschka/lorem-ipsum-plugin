@@ -12,8 +12,7 @@
     "debug:watch": "xdpm watch dist | webpack --config webpack.config.js --mode development --watch",
     "debug:watch-prerelease": "xdpm watch dist -w p | webpack --config webpack.config.js --mode development --watch",
     "lint": "eslint src/**/*.js --ignore-pattern node_modules/",
-    "stats": "sloc src",
-    "docs": "jsdoc -r src -d docs"
+    "stats": "sloc src"
   },
   "dependencies": {
     "xd-dialog-helper": "^1.0.5",
@@ -25,7 +24,6 @@
     "@types/jest": "^24.0.25",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
-    "jsdoc": "^3.6.3",
     "sloc": "^0.2.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
@@ -35,5 +33,5 @@
     "xd"
   ],
   "author": "Pablo Klaschka",
-  "license": "NO-LICENSE"
+  "license": "GPL-3"
 }
