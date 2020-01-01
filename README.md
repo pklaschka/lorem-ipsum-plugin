@@ -1,6 +1,10 @@
+![Lorem Ipsum Plugin Logo](./dist/icons/icon@3x.png)
 # Lorem Ipsum plugin for Adobe XD
 
-Private repository for the Lorem Ipsum plugin for Adobe XD CC.
+- [Project Homepage](https://xdplugins.pabloklaschka.de/plugins/lorem-ipsum)
+- [Open in XD Plugin Manager](https://xd.adobelanding.com/en/xd-plugin-download/?name=700b7996)
+
+Official repository for the Lorem Ipsum plugin for Adobe XD.
 
 ## Setup
 Once you've cloned the repo, you merely need to run `npm install` in the root folder of the (cloned) project from your console. After that, you'll need to adjust the `manifest.json` in the `dist` folder and after that, you're ready to go.
@@ -34,8 +38,7 @@ Runs the ESLint linter on the `src` folder to check for style errors in your cod
 The project should work out of the box in Visual Studio Code, no further configuration should be required.
 
 ### JetBrains WebStorm
-1. Activate node autocompletion (Preferences=>Languages & Frameworks=>Node.js and npm=>Enable)
-2. Mark the `types` folder as Resources root (in the project panel)
+Activate node autocompletion (Preferences=>Languages & Frameworks=>Node.js and npm=>Enable)
 
 ## Credits
 To add autocompletion, this boilerplate uses the MIT-licensed Typescript definitions that can be found at <https://github.com/AdobeXD/typings>.
