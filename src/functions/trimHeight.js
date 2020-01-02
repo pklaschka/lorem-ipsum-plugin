@@ -2,14 +2,13 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const {Text} = require('scenegraph');
 const debugHelper = require('../helpers/debug');
 
 /**
  * Trim an Area Text
  * @param {import('scenegraph').Text} node
  */
-function trimAreaTextNode(node) {
+module.exports = function trimAreaTextNode(node) {
     let oldHeight = node.localBounds.height;
     if (node.clippedByArea) {
         // Need to increase the height
@@ -50,18 +49,7 @@ function trimAreaTextNode(node) {
             )
         );
     }
-}
-
-/**
- * Trims text area to suitable height
- */
-function trim() {
-    for (let node of require('scenegraph').selection.items) {
-        if (node instanceof Text && node.areaBox) {
-            trimAreaTextNode(node);
-        }
-    }
-}
+};
 
 /**
  * @param {number} smallerHeight The highest height that was clipped
@@ -79,5 +67,3 @@ function checkBetween(smallerHeight, biggerHeight, isClipped) {
 
     return !isClipped(half) ? checkBetween(smallerHeight, half, isClipped) : checkBetween(half, biggerHeight, isClipped);
 }
-
-module.exports = trim;

@@ -18,7 +18,7 @@ const trimHeight = require('../trimHeight');
 
 /**
  * Apply placeholder text to Area Text
- * @param {import('scenegraph').Text} element
+ * @param {import('scenegraph').Text} textNode
  * @param {object} options
  * @param {boolean} options.trim
  * @param {string} options.terminationString n/a for no termination string
@@ -26,26 +26,26 @@ const trimHeight = require('../trimHeight');
  * @param {string} options.text
  * @param {string} terminationString
  */
-module.exports = function applyToAreaText(element, options, terminationString) {
+module.exports = function applyToAreaText(textNode, options, terminationString) {
     let prevCount = 0;
     let count = 1;
     debugHelper.log('Propagating forward');
     do {
         prevCount = count;
         count *= 2;
-        applyText(element, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
-    } while (!element.clippedByArea && count < 100000);
+        applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
+    } while (!textNode.clippedByArea && count < 100000);
     debugHelper.log('Propagating backwards from ', count);
 
     count = checkBetween(prevCount, count, (count) => {
-        applyText(element, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
-        return element.clippedByArea;
+        applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
+        return textNode.clippedByArea;
     });
-    applyText(element, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
+    applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
 
     debugHelper.log('Completed at ', count);
     if (options.trim) {
-        trimHeight();
+        trimHeight(textNode);
     }
 };
 
