@@ -3,9 +3,9 @@
  */
 
 const {Text} = require('scenegraph');
-const debugHelper = require('../helpers/debug');
-require('../helpers/check-selection');
-const analytics = require('../helpers/analytics');
+const debugHelper = require('../../helpers/debug');
+require('../../helpers/check-selection');
+const analytics = require('../../helpers/analytics');
 const generatePlaceholderText = require('./generate-placeholder-text');
 const applyToAreaText = require('./area-text');
 

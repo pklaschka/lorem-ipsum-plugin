@@ -6,7 +6,7 @@
  * The available placeholder texts
  * @type {Object<string,string>}
  */
-const texts = require('../placeholder-texts.json');
+const texts = require('../../placeholder-texts.json');
 
 /**
  * Generates placeholder text

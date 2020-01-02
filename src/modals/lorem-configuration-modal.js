@@ -19,7 +19,7 @@ async function loremWithModal() {
     });
     debugHelper.log('Showing Lorem Ipsum modal');
     let options = await modalAsync();
-    const lorem = require('../functions/lorem');
+    const lorem = require('../functions/placeholder-text/lorem');
     await lorem(options);
     return true;
 }

@@ -9,11 +9,11 @@
  * @returns {boolean} number of words clip Area Text?
  */
 
-const debugHelper = require('../helpers/debug');
+const debugHelper = require('../../helpers/debug');
 const generatePlaceholderText = require('./generate-placeholder-text');
 
 const applyText = require('./apply-text');
-const trimHeight = require('./trimHeight');
+const trimHeight = require('../trimHeight');
 
 
 /**
