@@ -2,6 +2,9 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
+/**
+ * A helper class for debugging purposes
+ */
 class debugHelper {
     static shouldDebug() {
         return false;

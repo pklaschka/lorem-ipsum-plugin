@@ -2,41 +2,14 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const errorHelper = require('./helpers/error');
-
-const loremModal = require('./modals/loremModal');
-const loremFunction = require('./functions/lorem');
-const storage = require('xd-storage-helper');
-const SelectionChecker = require('./helpers/check-selection');
-
-const lang = require('xd-localization-helper');
-
-async function settings() {
-    return await storage.get('loremOptions', {
-        text: 'lorem-lat',
-        terminate: true,
-        includeLineBreaks: true,
-        trim: false
-    });
-}
-
-async function selectionError() {
-    return await errorHelper.showErrorDialog(lang.get('error-selection-title'), lang.get('error-selection-description'));
-}
+const loremModal = require('./modals/lorem-configuration-modal');
+const loremFunction = require('./functions/placeholder-text/lorem');
+const selectionError = require('./modals/selection-error-modal');
+const init = require('./functions/init');
+const fetchSettings = require('./functions/settings/fetch-settings');
 
 /**
- * Initialize all necessary components and check the selection for compatibility
- * @param {XDSelection} selection
- * @return {Promise<boolean>} Selection contains text layer?
- */
-async function init(selection) {
-    await lang.load();
-    let checker = new SelectionChecker(selection);
-    return checker.oneOrMore('Text');
-}
-
-/**
- *
+ * Run Lorem Ipsum with the configuration dialog
  * @param {XDSelection} selection
  * @return {Promise<void>}
  */
@@ -48,19 +21,19 @@ async function lorem(selection) {
 }
 
 /**
- *
+ * Run Lorem Ipsum with the previously used settings
  * @param {XDSelection} selection
  * @return {Promise<void>}
  */
 async function quickLorem(selection) {
     if (await init(selection))
-        await loremFunction(await settings());
+        await loremFunction(await fetchSettings());
     else
         await selectionError();
 }
 
 /**
- *
+ * Run Lorem Ipsum with Lorem Ipsum, line breaks and unadjusted text layer height
  * @param {XDSelection} selection
  * @return {Promise<void>}
  */
@@ -77,7 +50,7 @@ async function loremPreconfigured(selection) {
 }
 
 /**
- *
+ * Run Lorem Ipsum with Lorem Ipsum, line breaks and adjusted text layer height
  * @param {XDSelection} selection
  * @return {Promise<void>}
  */

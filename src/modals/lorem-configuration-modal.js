@@ -9,8 +9,9 @@ const analytics = require('../helpers/analytics');
 const dialogHelper = require('xd-dialog-helper');
 
 /**
+ * Run Lorem Ipsum with configuration dialog
  */
-async function showModal() {
+async function loremWithModal() {
     await analytics.verifyAcceptance({
         pluginName: 'Lorem Ipsum',
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
@@ -18,12 +19,13 @@ async function showModal() {
     });
     debugHelper.log('Showing Lorem Ipsum modal');
     let options = await modalAsync();
-    const lorem = require('../functions/lorem');
+    const lorem = require('../functions/placeholder-text/lorem');
     await lorem(options);
     return true;
 }
 
 /**
+ * Display the Lorem Ipsum configuration dialog
  * @throws {Error} error when dialog gets canceled
  * @return {Promise<{trim: boolean, terminationString: string, includeLineBreaks: boolean, text: string}>}
  */
@@ -125,4 +127,4 @@ async function modalAsync() {
     }
 }
 
-module.exports = showModal;
+module.exports = loremWithModal;
