@@ -6,7 +6,7 @@ const {Text} = require('scenegraph');
 const debugHelper = require('../helpers/debug');
 
 /**
- *
+ * Trim an Area Text
  * @param {import('scenegraph').Text} node
  */
 function trimAreaTextNode(node) {
