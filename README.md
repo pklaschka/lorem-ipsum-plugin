@@ -1,5 +1,6 @@
 ![Lorem Ipsum Plugin Logo](./dist/icons/icon@3x.png)
 # Lorem Ipsum plugin for Adobe XD
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/pklaschka/lorem-ipsum-plugin/CI/master)](https://github.com/pklaschka/lorem-ipsum-plugin/actions?query=branch%3Amaster+workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/pklaschka/lorem-ipsum-plugin/badge.svg?branch=refs/heads/coveralls)](https://coveralls.io/github/pklaschka/lorem-ipsum-plugin?branch=refs/head/coveralls)
 ![GitHub](https://img.shields.io/github/license/pklaschka/lorem-ipsum-plugin)
 ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/pklaschka/lorem-ipsum-plugin/master)
