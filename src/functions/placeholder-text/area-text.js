@@ -2,18 +2,11 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-/**
- * A callback to determine whether a specific number of words clips the Area Text node
- * @callback isClipped
- * @param {number} n Number of words
- * @returns {boolean} number of words clip Area Text?
- */
-
 const debugHelper = require('../../helpers/debug');
 const generatePlaceholderText = require('./generate-placeholder-text');
-
 const applyText = require('./apply-text');
 const trimHeight = require('../trimHeight');
+const findNotClippingTextLength = require('../binary-length-search');
 
 
 /**
@@ -27,41 +20,41 @@ const trimHeight = require('../trimHeight');
  * @param {string} terminationString
  */
 module.exports = function applyToAreaText(textNode, options, terminationString) {
-    let prevCount = 0;
-    let count = 1;
+    /**
+     * Number of words n that clips the text area, such that n/2 doesn't clip
+     *
+     * A multiple of 2
+     * @type {number}
+     */
+    let numberOfWords = 1;
+
+
+    // Calculate numberOfWords:
     debugHelper.log('Propagating forward');
     do {
-        prevCount = count;
-        count *= 2;
-        applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
-    } while (!textNode.clippedByArea && count < 100000);
-    debugHelper.log('Propagating backwards from ', count);
+        numberOfWords *= 2;
+        applyText(textNode, generatePlaceholderText(numberOfWords, options.text, options.includeLineBreaks) + terminationString);
+    } while (!textNode.clippedByArea && numberOfWords < 100000);
+    debugHelper.log('Propagating backwards from ', numberOfWords);
 
-    count = checkBetween(prevCount, count, (count) => {
-        applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
-        return textNode.clippedByArea;
-    });
-    applyText(textNode, generatePlaceholderText(count, options.text, options.includeLineBreaks) + terminationString);
+    /**
+     * Maximum number of words that doesn't clip the text area
+     * @type {number}
+     */
+    const n = findNotClippingTextLength(numberOfWords, numberOfWords / 2,
+        (n) => {
+            applyText(
+                textNode,
+                generatePlaceholderText(n, options.text, options.includeLineBreaks) + terminationString
+            );
+            return textNode.clippedByArea;
+        }
+    );
+    applyText(textNode, generatePlaceholderText(n, options.text, options.includeLineBreaks) + terminationString);
 
-    debugHelper.log('Completed at ', count);
+    debugHelper.log('Completed at ', n);
     if (options.trim) {
         trimHeight(textNode);
     }
 };
 
-/**
- * @param {number} oldCount The highest count that was clipped
- * @param {number} newCount The lowest count that wasn't clipped
- * @param {isClipped} isClipped
- * @returns {number} The maximum number of words for which the text doesn't clip
- */
-function checkBetween(oldCount, newCount, isClipped) {
-    debugHelper.log('Checking between ', oldCount, ' and ', newCount);
-
-    if (Math.abs(oldCount - newCount) < 2)
-        return oldCount;
-
-    let half = Math.floor((oldCount + newCount) / 2);
-
-    return isClipped(half) ? checkBetween(oldCount, half, isClipped) : checkBetween(half, newCount, isClipped);
-}

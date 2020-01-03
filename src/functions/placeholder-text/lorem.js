@@ -6,8 +6,9 @@ const {Text} = require('scenegraph');
 const debugHelper = require('../../helpers/debug');
 require('../../helpers/check-selection');
 const analytics = require('../../helpers/analytics');
-const generatePlaceholderText = require('./generate-placeholder-text');
+require('./generate-placeholder-text');
 const applyToAreaText = require('./area-text');
+const applyToPointText = require('./point-text');
 
 /**
  * Fills text area with placeholder text (e.g., Lorem Ipsum)
@@ -18,11 +19,14 @@ const applyToAreaText = require('./area-text');
  * @param {string} options.text key of the placeholder text
  * @returns {void}
  */
-module.exports = function lorem(options) {
+module.exports = function fillSelectionWithPlaceholderText(options) {
     const selection = require('scenegraph').selection;
 
     debugHelper.log('Lorem ipsum with options ', (options));
+
+    // Parse termination string:
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
+
     for (let element of selection.items) {
         if (element instanceof Text && element.areaBox) {
             applyToAreaText(element, options, terminationString);
@@ -32,6 +36,7 @@ module.exports = function lorem(options) {
             debugHelper.log('Node ', element, ' is not a text layer.');
         }
     }
+
     analytics.verifyAcceptance({
         pluginName: 'Lorem Ipsum',
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
@@ -40,18 +45,3 @@ module.exports = function lorem(options) {
         analytics.send('lorem', options);
     });
 };
-
-/**
- * Apply placeholder text to Point Text
- * @param {import('scenegraph').Text} element
- * @param {object} options
- * @param {boolean} options.trim
- * @param {string} options.terminationString n/a for no termination string
- * @param {boolean} options.includeLineBreaks
- * @param {string} options.text
- * @param {string} terminationString
- */
-function applyToPointText(element, options, terminationString) {
-    element.text = generatePlaceholderText(2, options.text, false) + terminationString;
-}
-
