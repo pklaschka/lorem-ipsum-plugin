@@ -90,7 +90,7 @@ describe('fillSelectionWithPlaceholderText()', () => {
                 const char = String.fromCharCode(i);
                 const terminateOptions = Object.assign(options, {terminationString: char});
 
-                fillSelectionWithPlaceholderText(options);
+                fillSelectionWithPlaceholderText(terminateOptions);
                 expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, options, char);
             }
         });
