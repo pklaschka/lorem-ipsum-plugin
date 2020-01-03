@@ -5,7 +5,7 @@
 const debugHelper = require('../../helpers/debug');
 const generatePlaceholderText = require('./generate-placeholder-text');
 const applyText = require('./apply-text');
-const trimHeight = require('../trimHeight');
+const trimHeight = require('../trim-height');
 const findNotClippingTextLength = require('../binary-length-search');
 
 
@@ -17,9 +17,9 @@ const findNotClippingTextLength = require('../binary-length-search');
  * @param {string} options.terminationString n/a for no termination string
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
- * @param {string} terminationString
+ * @param {string} parsedTerminationString The parsed termination string, i.e., '' for 'n/a'
  */
-module.exports = function applyToAreaText(textNode, options, terminationString) {
+module.exports = function applyToAreaText(textNode, options, parsedTerminationString) {
     /**
      * Number of words n that clips the text area, such that n/2 doesn't clip
      *
@@ -33,7 +33,7 @@ module.exports = function applyToAreaText(textNode, options, terminationString) 
     debugHelper.log('Propagating forward');
     do {
         numberOfWords *= 2;
-        applyText(textNode, generatePlaceholderText(numberOfWords, options.text, options.includeLineBreaks) + terminationString);
+        applyText(textNode, generatePlaceholderText(numberOfWords, options.text, options.includeLineBreaks) + parsedTerminationString);
     } while (!textNode.clippedByArea && numberOfWords < 100000);
     debugHelper.log('Propagating backwards from ', numberOfWords);
 
@@ -45,12 +45,12 @@ module.exports = function applyToAreaText(textNode, options, terminationString) 
         (n) => {
             applyText(
                 textNode,
-                generatePlaceholderText(n, options.text, options.includeLineBreaks) + terminationString
+                generatePlaceholderText(n, options.text, options.includeLineBreaks) + parsedTerminationString
             );
             return textNode.clippedByArea;
         }
     );
-    applyText(textNode, generatePlaceholderText(n, options.text, options.includeLineBreaks) + terminationString);
+    applyText(textNode, generatePlaceholderText(n, options.text, options.includeLineBreaks) + parsedTerminationString);
 
     debugHelper.log('Completed at ', n);
     if (options.trim) {

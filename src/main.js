@@ -3,7 +3,7 @@
  */
 
 const loremModal = require('./modals/lorem-configuration-modal');
-const loremFunction = require('./functions/placeholder-text/lorem');
+const loremFunction = require('./functions/placeholder-text/fill-selection-with-placeholder-text');
 const selectionError = require('./modals/selection-error-modal');
 const init = require('./functions/init');
 const fetchSettings = require('./functions/settings/fetch-settings');

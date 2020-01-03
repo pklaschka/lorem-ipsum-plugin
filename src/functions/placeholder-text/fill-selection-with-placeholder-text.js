@@ -4,9 +4,7 @@
 
 const {Text} = require('scenegraph');
 const debugHelper = require('../../helpers/debug');
-require('../../helpers/check-selection');
 const analytics = require('../../helpers/analytics');
-require('./generate-placeholder-text');
 const applyToAreaText = require('./area-text');
 const applyToPointText = require('./point-text');
 
@@ -27,13 +25,13 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
     // Parse termination string:
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
 
-    for (let element of selection.items) {
-        if (element instanceof Text && element.areaBox) {
-            applyToAreaText(element, options, terminationString);
-        } else if (element instanceof Text) {
-            applyToPointText(element, options, terminationString);
+    for (let sceneNode of selection.items) {
+        if (sceneNode instanceof Text && sceneNode.areaBox) {
+            applyToAreaText(sceneNode, options, terminationString);
+        } else if (sceneNode instanceof Text) {
+            applyToPointText(sceneNode, options, terminationString);
         } else {
-            debugHelper.log('Node ', element, ' is not a text layer.');
+            debugHelper.log('Node', sceneNode, 'is not a text layer.');
         }
     }
 

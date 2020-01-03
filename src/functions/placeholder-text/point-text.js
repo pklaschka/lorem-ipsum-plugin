@@ -2,6 +2,7 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 const generatePlaceholderText = require('./generate-placeholder-text');
+const applyText = require('./apply-text');
 
 /**
  * Apply placeholder text to Point Text
@@ -11,8 +12,8 @@ const generatePlaceholderText = require('./generate-placeholder-text');
  * @param {string} options.terminationString n/a for no termination string
  * @param {boolean} options.includeLineBreaks
  * @param {string} options.text
- * @param {string} terminationString
+ * @param {string} parsedTerminationString The parsed termination string, i.e., '' for 'n/a'
  */
-module.exports = function pointText(element, options, terminationString) {
-    element.text = generatePlaceholderText(2, options.text, false) + terminationString;
+module.exports = function pointText(element, options, parsedTerminationString) {
+    applyText(element, generatePlaceholderText(2, options.text, false) + parsedTerminationString);
 };

@@ -212,7 +212,7 @@ const typeCheckLookupTable = {
     },
     /**
      * @param {import('scenegraph').SceneNode} node
-     * @return {boolean} node is instanceof SymbalInstance
+     * @return {boolean} node is instanceof SymbolInstance
      */
     'SymbolInstance': (node) => {
         const {SymbolInstance} = require('scenegraph');

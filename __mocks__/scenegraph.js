@@ -27,7 +27,7 @@ class Text extends SceneNode {
         return (this.text.length / 20) > this.localBounds.height;
     }
 
-    get textArea() {
+    get areaBox() {
         if (this._isPointText) {
             return null;
         } else {
@@ -55,12 +55,8 @@ class Text extends SceneNode {
 }
 
 class RepeatGrid extends SceneNode {
-    /**
-     * @param {Text[]} children
-     */
-    constructor(children) {
+    constructor() {
         super();
-        this.children = children;
     }
 
     /**
