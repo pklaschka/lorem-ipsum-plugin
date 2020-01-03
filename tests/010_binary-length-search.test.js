@@ -4,9 +4,7 @@
 
 describe('binary length search ("src/functions/binary-length-search.js"', () => {
     beforeEach(() => {
-        jest.mock('../src/helpers/debug', () => ({
-            log: jest.fn()
-        }));
+        jest.mock('../src/helpers/debug');
     });
 
     it('should find the correct value n=5 where it clips for n > 5', () => {
