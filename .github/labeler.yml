@@ -1,0 +1,9 @@
+static-files:
+  - dist/**/*
+
+tests:
+  - ./**/*.spec.js
+  - ./**/*.test.js
+
+placeholder-texts:
+  - src/placeholder-texts.json
