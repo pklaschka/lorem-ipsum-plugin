@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run debug:watch",
     "test": "jest --coverage",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "build": "npm run compile && xdpm package dist",
     "compile": "webpack --config webpack.config.js --mode production",
     "debug:install": "webpack --config webpack.config.js --mode development && xdpm install dist -o",
@@ -21,8 +22,9 @@
   },
   "devDependencies": {
     "@adobe/xdpm": "^4.0.0",
-    "@types/jest": "^24.0.25",
     "@types/adobe-xd": "AdobeXD/typings",
+    "@types/jest": "^24.0.25",
+    "coveralls": "^3.0.9",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "sloc": "^0.2.1",
