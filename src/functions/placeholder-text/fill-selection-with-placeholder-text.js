@@ -1,12 +1,14 @@
+
 /*
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const {Text} = require('scenegraph');
+const {Text, Rectangle} = require('scenegraph');
 const debugHelper = require('../../helpers/debug');
 const analytics = require('../../helpers/analytics');
 const applyToAreaText = require('./area-text');
 const applyToPointText = require('./point-text');
+const replaceWithText = require('./replace-with-text');
 
 /**
  * Fills text area with placeholder text (e.g., Lorem Ipsum)
@@ -26,7 +28,9 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
 
     for (let sceneNode of selection.items) {
-        if (sceneNode instanceof Text && sceneNode.areaBox) {
+        if (sceneNode instanceof Rectangle) {
+            applyToAreaText(replaceWithText(sceneNode), options, terminationString);
+        } else if (sceneNode instanceof Text && sceneNode.areaBox) {
             applyToAreaText(sceneNode, options, terminationString);
         } else if (sceneNode instanceof Text) {
             applyToPointText(sceneNode, options, terminationString);
@@ -40,6 +44,6 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
         color: '#2D4E64'
     }).then(()=>{
-        analytics.send('lorem', options);
+        analytics.send('lorem', options).then(() => {});
     });
 };
