@@ -10,6 +10,6 @@ const lang = require('xd-localization-helper');
  * @returns {Promise<void>}
  */
 module.exports = async function selectionError() {
-    return await errorHelper.showErrorDialog(lang.get('error-selection-title'), lang.get('error-selection-description'));
+    return await errorHelper.showErrorDialog(lang.get('error.selection.title'), lang.get('error.selection.description'));
 };
 

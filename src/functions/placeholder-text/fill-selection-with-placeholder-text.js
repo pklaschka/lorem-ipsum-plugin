@@ -41,7 +41,7 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
             }
         }
     } catch (e) {
-        showErrorDialog(lang.get('error-general-title'), lang.get('error-general-description') + '<br>' + e.message);
+        showErrorDialog(lang.get('error.general.title'), lang.get('error.general.description') + '<br>' + e.message);
     }
 
     analytics.verifyAcceptance({

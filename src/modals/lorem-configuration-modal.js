@@ -47,7 +47,7 @@ async function modalAsync() {
                 {
                     id: 'description',
                     type: dialogHelper.types.TEXT,
-                    label: lang.get('modal-lorem-description'),
+                    label: lang.get('modal.lorem.description'),
                     htmlAttributes: {},
                 },
                 {
@@ -62,18 +62,18 @@ async function modalAsync() {
                         {value: 'pangram-fr', label: 'Pangram (Français)'}
                     ],
                     id: 'text',
-                    label: lang.get('modal-lorem-text-label'),
+                    label: lang.get('modal.lorem.text.label'),
                     value: uiOptions.text,
                     htmlAttributes: {},
                 },
                 {
                     type: dialogHelper.types.SELECT,
                     id: 'terminationString',
-                    label: lang.get('modal-lorem-terminate-label'),
+                    label: lang.get('modal.lorem.terminate.label'),
                     options: [
-                        {value: 'n/a', label: lang.get('modal-lorem-terminate-none')},
-                        {value: '.', label: lang.get('modal-lorem-terminate-period')},
-                        {value: '…', label: lang.get('modal-lorem-terminate-ellipsis')},
+                        {value: 'n/a', label: lang.get('modal.lorem.terminate.none')},
+                        {value: '.', label: lang.get('modal.lorem.terminate.period')},
+                        {value: '…', label: lang.get('modal.lorem.terminate.ellipsis')},
                     ],
                     htmlAttributes: {},
                     value: uiOptions.terminationString
@@ -81,22 +81,22 @@ async function modalAsync() {
                 {
                     type: dialogHelper.types.CHECKBOX,
                     id: 'includeLineBreaks',
-                    label: lang.get('modal-lorem-includeLineBreaks-label'),
+                    label: lang.get('modal.lorem.includeLineBreaks.label'),
                     htmlAttributes: {},
                     value: uiOptions.includeLineBreaks
                 },
                 {
                     type: dialogHelper.types.CHECKBOX,
                     id: 'trim',
-                    label: lang.get('modal-lorem-trim-label'),
+                    label: lang.get('modal.lorem.trim.label'),
                     htmlAttributes: {},
                     value: uiOptions.trim
                 }
             ],
             {
-                okButtonText: lang.get('modal-lorem-btn-ok'),
+                okButtonText: lang.get('modal.lorem.btn.ok'),
                 cancelButtonText:
-                    lang.get('modal-lorem-btn-cancel'),
+                    lang.get('modal.lorem.btn.cancel'),
                 width:
                     400,
                 css: `
