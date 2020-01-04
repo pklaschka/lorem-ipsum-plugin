@@ -79,4 +79,6 @@ class RepeatGrid extends SceneNode {
 class Rectangle extends GraphicNode {
 }
 
-module.exports = { selection, Text, RepeatGrid, Rectangle, GraphicNode };
+class Group extends SceneNode {}
+
+module.exports = { selection, Text, Group, RepeatGrid, Rectangle, GraphicNode };
