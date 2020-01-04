@@ -26,6 +26,7 @@ describe('fillSelectionWithPlaceholderText()', () => {
         jest.mock('./replace-with-text');
         jest.mock('../../helpers/debug');
         jest.mock('../../helpers/analytics');
+        jest.mock('../../helpers/error');
 
         textNode = new scenegraph.Text();
         textNode.resize(24, 1);

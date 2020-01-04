@@ -10,7 +10,7 @@ module.exports = {
         libraryTarget: 'commonjs2'
     },
     devtool: false,
-    target: ['node'],
+    target: 'node',
     externals: {
         assets: 'assets',
         scenegraph: 'scenegraph',
