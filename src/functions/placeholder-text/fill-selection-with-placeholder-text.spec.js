@@ -23,6 +23,7 @@ describe('fillSelectionWithPlaceholderText()', () => {
 
         jest.mock('./area-text');
         jest.mock('./point-text');
+        jest.mock('./replace-with-text');
         jest.mock('../../helpers/debug');
         jest.mock('../../helpers/analytics');
 
@@ -79,8 +80,8 @@ describe('fillSelectionWithPlaceholderText()', () => {
             const naOptions = Object.assign(options, {terminationString: 'n/a'});
 
             const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
-            fillSelectionWithPlaceholderText(options);
-            expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, options, '');
+            fillSelectionWithPlaceholderText(naOptions);
+            expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, naOptions, '');
         });
 
         it('should parse other chars as themselves', () => {

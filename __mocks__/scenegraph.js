@@ -18,10 +18,27 @@ const selection = {
 
 class SceneNode {}
 
-class Text extends SceneNode {
+class GraphicNode extends SceneNode {
     get localBounds() {
         return JSON.parse(JSON.stringify(this._localBounds));
     }
+
+    constructor() {
+        super();
+        /**
+         * @type {SceneNode}
+         */
+        this.parent = undefined;
+        this._localBounds = { width: 240, height: 240 };
+    }
+
+    resize(width, height) {
+        this._localBounds.width = width;
+        this._localBounds.height = height;
+    }
+}
+
+class Text extends GraphicNode {
 
     get clippedByArea() {
         return (this.text.length / 20) > this.localBounds.height;
@@ -39,19 +56,9 @@ class Text extends SceneNode {
         super();
 
         this.text = '';
-        /**
-         *
-         * @type {SceneNode}
-         */
-        this.parent = undefined;
-        this._localBounds = { width: 240, height: 240 };
         this._isPointText = false;
     }
 
-    resize(width, height) {
-        this._localBounds.width = width;
-        this._localBounds.height = height;
-    }
 }
 
 class RepeatGrid extends SceneNode {
@@ -69,4 +76,7 @@ class RepeatGrid extends SceneNode {
     }
 }
 
-module.exports = { selection, Text, RepeatGrid };
+class Rectangle extends GraphicNode {
+}
+
+module.exports = { selection, Text, RepeatGrid, Rectangle, GraphicNode };

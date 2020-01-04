@@ -44,6 +44,6 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
         privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
         color: '#2D4E64'
     }).then(()=>{
-        analytics.send('lorem', options).then(() => {});
+        analytics.send('lorem', options);
     });
 };
