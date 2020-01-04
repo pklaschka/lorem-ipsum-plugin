@@ -2,7 +2,7 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const {Text, Group, Artboard, selection} = require('scenegraph');
+const {Text, Group, Artboard, Color, selection} = require('scenegraph');
 
 /**
  * Replaces a GraphicNode, e.g., a rectangle, with a Text Area of the same dimensions
@@ -14,12 +14,13 @@ module.exports = function replaceWithText(oldNode) {
     const textNode = new Text();
     textNode.text = 'a';
     textNode.areaBox = {width: 10, height: 10};
+    textNode.fill = new Color('black');
 
     const parent = oldNode.parent;
     if (parent instanceof Group || parent instanceof Artboard) {
         parent.addChildAfter(textNode, oldNode);
 
-        const {x, y} = oldNode.boundsInParent;
+        const {x, y} = oldNode.topLeftInParent;
         const {width, height} = oldNode.localBounds;
         const rotation = oldNode.rotation;
 
@@ -33,13 +34,15 @@ module.exports = function replaceWithText(oldNode) {
     }
 
 
-    selection.items.push(textNode); // Add new node to selection
+    /*
+        selection.items.push(textNode); // Add new node to selection
 
-    const oldIndex = selection.items.findIndex(node => node === oldNode);
+        const oldIndex = selection.items.findIndex(node => node === oldNode);
 
-    // And remove old node from it
-    if (oldIndex >= 0)
-        selection.items.splice(oldIndex, 1);
+        // And remove old node from it
+        if (oldIndex >= 0)
+            selection.items.splice(oldIndex, 1);
+    */
 
     return textNode;
 };
