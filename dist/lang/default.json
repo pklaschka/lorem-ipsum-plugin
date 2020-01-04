@@ -1,6 +1,7 @@
 {
 	"error.general.description": "An unknown error has occurred while executing the plugin. Please consider informing the developer. Details:",
 	"error.general.title": "Error",
+	"error.messages.incompatibleParentNode": "The selected Rectangle has an unknown parent layer type. It can, therefore, not get replaced with text.",
 	"error.selection.description": "Please include at least one text or rectangle node in your selection and try again.",
 	"error.selection.title": "No text or rectangle selected",
 	"modal.lorem.btn.cancel": "Cancel",

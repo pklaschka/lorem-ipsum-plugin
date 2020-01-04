@@ -3,6 +3,7 @@
  */
 
 const {Text, Group, Artboard, Color, selection} = require('scenegraph');
+const lang = require('xd-localization-helper');
 
 /**
  * Replaces a GraphicNode, e.g., a rectangle, with a Text Area of the same dimensions
@@ -30,7 +31,7 @@ module.exports = function replaceWithText(oldNode) {
 
         oldNode.removeFromParent();
     } else {
-        throw new Error('Incompatible parent node');
+        throw new Error(lang.get('error.messages.incompatibleParentNode'));
     }
 
 
