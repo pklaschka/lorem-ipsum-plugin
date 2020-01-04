@@ -1,9 +1,12 @@
 static-files:
   - dist/**/*
 
+translations:
+  - dist/lang/*.json
+
 tests:
-  - ./**/*.spec.js
-  - ./**/*.test.js
+  - src/**/*.spec.js
+  - tests/**/*.test.js
 
 placeholder-texts:
   - src/placeholder-texts.json
