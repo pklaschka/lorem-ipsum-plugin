@@ -21,5 +21,11 @@ module.exports = {
         uxp: 'uxp',
         viewport: 'viewport',
         interactions: 'interactions'
-    }
+    },
+    mode: 'development',
+    plugins: [
+        // new webpack.DefinePlugin({
+        //
+        // });
+    ]
 };

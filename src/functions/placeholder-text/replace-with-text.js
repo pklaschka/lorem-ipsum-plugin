@@ -2,7 +2,7 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const {Text, Group, Artboard, Color, selection} = require('scenegraph');
+const {Text, Color, selection} = require('scenegraph');
 const lang = require('xd-localization-helper');
 
 /**
@@ -12,14 +12,18 @@ const lang = require('xd-localization-helper');
  * @returns {import('scenegraph').Text} The created Text node
  */
 module.exports = function replaceWithText(oldNode) {
+    // Create the base text node
     const textNode = new Text();
     textNode.text = 'a';
     textNode.areaBox = {width: 10, height: 10};
     textNode.fill = new Color('black');
 
     const parent = oldNode.parent;
-    if (parent instanceof Group || parent instanceof Artboard) {
-        parent.addChildAfter(textNode, oldNode);
+    if (isCompatible(parent)) {
+        // Replace old node with text node (apply old transformation)
+        if (isCompatible(parent)) {
+            parent.addChildAfter(textNode, oldNode);
+        }
 
         const {x, y} = oldNode.topLeftInParent;
         const {width, height} = oldNode.localBounds;
@@ -34,16 +38,19 @@ module.exports = function replaceWithText(oldNode) {
         throw new Error(lang.get('error.messages.incompatibleParentNode'));
     }
 
-
-    /*
-        selection.items.push(textNode); // Add new node to selection
-
-        const oldIndex = selection.items.findIndex(node => node === oldNode);
-
-        // And remove old node from it
-        if (oldIndex >= 0)
-            selection.items.splice(oldIndex, 1);
-    */
+    // Replace old node with new text node in selection:
+    const newSelection = [...selection.items];
+    newSelection.splice(newSelection.indexOf(oldNode), 1, textNode);
+    selection.items = newSelection;
 
     return textNode;
 };
+
+/**
+ * Checks whether a node is compatible
+ * @param {import('scenegraph').SceneNode | null} node
+ * @returns {node is {addChildAfter: function}}
+ */
+function isCompatible(node) {
+    return (node !== null) && node.isContainer;
+}
