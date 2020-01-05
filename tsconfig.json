@@ -13,5 +13,5 @@
       "es2015"
     ]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "types/**/*.d.ts"]
 }

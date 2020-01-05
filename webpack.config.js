@@ -10,6 +10,7 @@ module.exports = {
         libraryTarget: 'commonjs2'
     },
     devtool: false,
+    target: 'node',
     externals: {
         assets: 'assets',
         scenegraph: 'scenegraph',
@@ -20,5 +21,6 @@ module.exports = {
         uxp: 'uxp',
         viewport: 'viewport',
         interactions: 'interactions'
-    }
+    },
+    mode: 'development',
 };

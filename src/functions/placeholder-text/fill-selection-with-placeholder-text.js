@@ -2,11 +2,14 @@
  * Copyright (c) 2020. by Pablo Klaschka
  */
 
-const {Text} = require('scenegraph');
+const {Text, Rectangle} = require('scenegraph');
 const debugHelper = require('../../helpers/debug');
 const analytics = require('../../helpers/analytics');
 const applyToAreaText = require('./area-text');
 const applyToPointText = require('./point-text');
+const replaceWithText = require('./replace-with-text');
+const showErrorDialog = require('../../helpers/error').showErrorDialog;
+const lang = require('xd-localization-helper');
 
 /**
  * Fills text area with placeholder text (e.g., Lorem Ipsum)
@@ -25,14 +28,20 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
     // Parse termination string:
     let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
 
-    for (let sceneNode of selection.items) {
-        if (sceneNode instanceof Text && sceneNode.areaBox) {
-            applyToAreaText(sceneNode, options, terminationString);
-        } else if (sceneNode instanceof Text) {
-            applyToPointText(sceneNode, options, terminationString);
-        } else {
-            debugHelper.log('Node', sceneNode, 'is not a text layer.');
+    try {
+        for (let sceneNode of selection.items) {
+            if (sceneNode instanceof Rectangle) {
+                applyToAreaText(replaceWithText(sceneNode), options, terminationString);
+            } else if (sceneNode instanceof Text && sceneNode.areaBox) {
+                applyToAreaText(sceneNode, options, terminationString);
+            } else if (sceneNode instanceof Text) {
+                applyToPointText(sceneNode, options, terminationString);
+            } else {
+                debugHelper.log('Node', sceneNode, 'is not a text layer.');
+            }
         }
+    } catch (e) {
+        showErrorDialog(lang.get('error.general.title'), lang.get('error.general.description') + '<br>' + e.message);
     }
 
     analytics.verifyAcceptance({
