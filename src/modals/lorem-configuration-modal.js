@@ -115,8 +115,18 @@ async function modalAsync() {
                     htmlDialogElement => {
                         htmlDialogElement.appendChild(document.createElement('header'));
 
-                        // @ts-ignore
-                        document.getElementById('lorem-main-dialogHelperBtnOk').setAttribute('autofocus', 'autofocus');
+                        const okButton = document.getElementById('lorem-main-dialogHelperBtnOk');
+
+                        if (!okButton) {
+                            throw new Error('Ok button was not found and could therefore not get selected!');
+                        }
+
+                        okButton.setAttribute('autofocus', 'autofocus');
+
+                        // For Racing condition bug on Windows:
+                        setTimeout(() => {
+                            okButton.focus();
+                        }, 200);
                     }
             });
         await storage.set('loremOptions', loremOptions);
