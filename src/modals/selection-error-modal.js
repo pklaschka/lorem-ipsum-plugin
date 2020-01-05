@@ -10,6 +10,9 @@ const lang = require('xd-localization-helper');
  * @returns {Promise<void>}
  */
 module.exports = async function selectionError() {
-    return await errorHelper.showErrorDialog(lang.get('error.selection.title'), lang.get('error.selection.description'));
+    try {
+        await errorHelper.showErrorDialog(lang.get('error.selection.title'), lang.get('error.selection.description'));
+        // eslint-disable-next-line no-empty
+    } catch (e) { }
 };
 

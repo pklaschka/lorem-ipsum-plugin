@@ -12,13 +12,22 @@ const dialogHelper = require('xd-dialog-helper');
  * Run Lorem Ipsum with configuration dialog
  */
 async function loremWithModal() {
-    await analytics.verifyAcceptance({
-        pluginName: 'Lorem Ipsum',
-        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
-        color: '#2D4E64'
-    });
+    try {
+        await analytics.verifyAcceptance({
+            pluginName: 'Lorem Ipsum',
+            privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
+            color: '#2D4E64'
+        });
+    } catch (e) {
+        return false;
+    }
     debugHelper.log('Showing Lorem Ipsum modal');
-    let options = await modalAsync();
+    let options;
+    try {
+        options = await modalAsync();
+    } catch (e) {
+        return false;
+    }
     const lorem = require('../functions/placeholder-text/fill-selection-with-placeholder-text');
     await lorem(options);
     return true;
@@ -115,8 +124,18 @@ async function modalAsync() {
                     htmlDialogElement => {
                         htmlDialogElement.appendChild(document.createElement('header'));
 
-                        // @ts-ignore
-                        document.getElementById('lorem-main-dialogHelperBtnOk').setAttribute('autofocus', 'autofocus');
+                        const okButton = document.getElementById('lorem-main-dialogHelperBtnOk');
+
+                        if (!okButton) {
+                            throw new Error('Ok button was not found and could therefore not get selected!');
+                        }
+
+                        okButton.setAttribute('autofocus', 'autofocus');
+
+                        // For Racing condition bug on Windows:
+                        setTimeout(() => {
+                            okButton.focus();
+                        }, 200);
                     }
             });
         await storage.set('loremOptions', loremOptions);
