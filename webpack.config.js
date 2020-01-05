@@ -23,9 +23,4 @@ module.exports = {
         interactions: 'interactions'
     },
     mode: 'development',
-    plugins: [
-        // new webpack.DefinePlugin({
-        //
-        // });
-    ]
 };
