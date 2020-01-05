@@ -21,9 +21,7 @@ module.exports = function replaceWithText(oldNode) {
     const parent = oldNode.parent;
     if (isCompatible(parent)) {
         // Replace old node with text node (apply old transformation)
-        if (isCompatible(parent)) {
-            parent.addChildAfter(textNode, oldNode);
-        }
+        parent.addChildAfter(textNode, oldNode);
 
         const {x, y} = oldNode.topLeftInParent;
         const {width, height} = oldNode.localBounds;

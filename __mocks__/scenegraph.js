@@ -16,7 +16,13 @@ const selection = {
     items: []
 };
 
-class SceneNode {}
+class SceneNode {
+    constructor() {
+        this._parent = null;
+    }
+    get isContainer() { return false; }
+    get parent() { return this._parent; }
+}
 
 class GraphicNode extends SceneNode {
     get localBounds() {
@@ -28,18 +34,35 @@ class GraphicNode extends SceneNode {
         /**
          * @type {SceneNode}
          */
-        this.parent = undefined;
-        this._localBounds = { width: 240, height: 240 };
+        this._localBounds = { width: 240, height: 240, x: 5, y: 13 };
+        this._rotation = 0;
+
+        this.removeFromParent = jest.fn();
+    }
+
+    get rotation() { return this._rotation; }
+
+    rotateAround(reference, deltaRotation) {
+        this._rotation += deltaRotation % 360;
     }
 
     resize(width, height) {
         this._localBounds.width = width;
         this._localBounds.height = height;
     }
+
+    get topLeftInParent() {
+        const {y, x} = this.localBounds;
+        return {x, y};
+    }
+
+    placeInParentCoordinates(reference, position) {
+        this._localBounds.x = position.x;
+        this._localBounds.y = position.y;
+    }
 }
 
 class Text extends GraphicNode {
-
     get clippedByArea() {
         return (this.text.length / 20) > this.localBounds.height;
     }
@@ -64,6 +87,8 @@ class Text extends GraphicNode {
 class RepeatGrid extends SceneNode {
     constructor() {
         super();
+        this.addChildAfter = jest.fn();
+        this.addChildBefore = jest.fn();
     }
 
     /**
@@ -74,11 +99,29 @@ class RepeatGrid extends SceneNode {
     attachTextDataSeries(node, texts) {
         node.text = texts[0];
     }
+
+
+    get isContainer() {
+        return true;
+    }
 }
 
 class Rectangle extends GraphicNode {
 }
 
-class Group extends SceneNode {}
+class Group extends SceneNode {
+    get isContainer() { return true; }
+    constructor() {
+        super();
+        this.addChildAfter = jest.fn();
+        this.addChildBefore = jest.fn();
+    }
+}
 
-module.exports = { selection, Text, Group, RepeatGrid, Rectangle, GraphicNode };
+class Color {
+    constructor(color) {
+        this.color = color;
+    }
+}
+
+module.exports = { selection, Text, Group, RepeatGrid, Rectangle, GraphicNode, Color };

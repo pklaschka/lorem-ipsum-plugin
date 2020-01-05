@@ -14,7 +14,7 @@ describe('applyText()', () => {
             textNode.resize(24, 1);
             textNode.text = 'Initial';
             textNode._isPointText = true;
-            textNode.parent = {
+            textNode._parent = {
                 parent: new (require('scenegraph').RepeatGrid)()
             };
             textNode.parent.parent.attachTextDataSeries = jest.fn();
