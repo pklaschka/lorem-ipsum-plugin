@@ -6,7 +6,7 @@ const dialogHelper = require('xd-dialog-helper');
 const lang = require('xd-localization-helper');
 const logger = require('./debug');
 
-class errorHelper {
+class ErrorHelper {
     /**
      * Wraps an operation in an error wrapper, showing an error dialog in case of an exception
      * @param {function} operation The operation that should get run
@@ -20,7 +20,7 @@ class errorHelper {
         } catch (e) {
             logger.log(e);
             try {
-                await errorHelper.showErrorDialog(lang.get('error.general.title'), `${lang.get('error.general.description')}<br><code>${e.message}</code>`);
+                await ErrorHelper.showErrorDialog(lang.get('error.general.title'), `${lang.get('error.general.description')}<br><code>${e.message}</code>`);
             } finally { returnValue = false; }
         }
         return returnValue;
@@ -52,7 +52,7 @@ class errorHelper {
                 top: 0;
                 right: 0;
             }`,
-            onBeforeShow: htmlDialogElement => {
+            onBeforeShow: /* istanbul ignore next */ htmlDialogElement => {
                 htmlDialogElement.appendChild(document.createElement('header'));
                 const cancelButton = document.querySelector('lorem-error-dialog-dialogHelperBtnCancel');
                 if (cancelButton)
@@ -62,4 +62,4 @@ class errorHelper {
     }
 }
 
-module.exports = errorHelper;
+module.exports = ErrorHelper;
