@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/pklaschka/lorem-ipsum-plugin/badge.svg?branch=refs/heads/coveralls)](https://coveralls.io/github/pklaschka/lorem-ipsum-plugin?branch=refs/head/coveralls)
 ![GitHub](https://img.shields.io/github/license/pklaschka/lorem-ipsum-plugin)
 ![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/pklaschka/lorem-ipsum-plugin/master)
+[![Slack Workspace](https://img.shields.io/badge/Slack-pklaschka.slack.com-e51670)](https://join.slack.com/t/pklaschka/shared_invite/enQtNjUyNTU2MDE1OTg3LThhYWY2NGJkODM1MTUxYjY1MWU1ZDgwZTljNDJhNjZjNmUyZmEwZmFmYjZjNjRkMmZlZTE0ZmRjZmVkOGEzNDM)
 
 - [Project Homepage](https://xdplugins.pabloklaschka.de/plugins/lorem-ipsum)
 - [Open in XD Plugin Manager](https://xd.adobelanding.com/en/xd-plugin-download/?name=700b7996)
