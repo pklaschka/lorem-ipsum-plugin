@@ -121,14 +121,24 @@ async function modalAsync() {
                     width: 18px;
                 }`,
                 onBeforeShow:
-                    htmlDialogElement => {
-                        htmlDialogElement.appendChild(document.createElement('header'));
+                    (dialogElement, elements, actions) => {
+                        dialogElement.appendChild(document.createElement('header'));
 
                         const okButton = document.getElementById('lorem-main-dialogHelperBtnOk');
 
                         if (!okButton) {
                             throw new Error('Ok button was not found and could therefore not get selected!');
                         }
+
+                        // Temporary fix for enter key not working on macOS:
+                        okButton.addEventListener('keydown', evt => {
+                            if (evt.key === 'Enter') {
+                                evt.stopPropagation();
+                                evt.preventDefault();
+
+                                actions.close();
+                            }
+                        });
 
                         okButton.setAttribute('autofocus', 'autofocus');
 
