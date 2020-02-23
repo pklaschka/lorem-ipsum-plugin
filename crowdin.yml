@@ -1,0 +1,3 @@
+files:
+  - source: /dist/lang/*.json
+    translation: /dist/lang/%two_letters_code%.json
