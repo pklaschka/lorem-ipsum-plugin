@@ -24,7 +24,7 @@
   "devDependencies": {
     "@adobe/xdpm": "^4.0.0",
     "@types/adobe-xd": "AdobeXD/typings",
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.4",
     "coveralls": "^3.1.0",
     "eslint": "^7.4.0",
     "jest": "^26.1.0",
