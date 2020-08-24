@@ -26,7 +26,7 @@
     "@types/adobe-xd": "AdobeXD/typings",
     "@types/jest": "^26.0.10",
     "coveralls": "^3.1.0",
-    "jest": "^26.4.1",
+    "jest": "^26.4.2",
     "eslint": "^7.7.0",
     "sloc": "^0.2.1",
     "webpack": "^4.44.1",
