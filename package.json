@@ -29,7 +29,7 @@
     "jest": "^26.4.2",
     "eslint": "^7.9.0",
     "sloc": "^0.2.1",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
   "keywords": [
