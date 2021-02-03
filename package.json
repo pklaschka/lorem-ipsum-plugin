@@ -30,7 +30,7 @@
     "eslint": "^7.19.0",
     "sloc": "^0.2.1",
     "webpack": "^5.20.0",
-    "webpack-cli": "^4.4.0"
+    "webpack-cli": "^4.5.0"
   },
   "keywords": [
     "adobe",
