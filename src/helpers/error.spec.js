@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('ErrorHelper', () => {
@@ -23,7 +23,7 @@ describe('ErrorHelper', () => {
                 throw new Error();
             });
 
-            expect(promise).resolves.toReturn();
+            expect(promise).resolves.toBe(false);
         });
 
         it('should resolve with true when the operation succeeds', () => {
@@ -32,7 +32,7 @@ describe('ErrorHelper', () => {
                 return 'abc';
             });
 
-            expect(promise).resolves.toReturnWith(true);
+            expect(promise).resolves.toBe(true);
         });
 
         it('should resolve with false when the operation fails', () => {
@@ -41,7 +41,7 @@ describe('ErrorHelper', () => {
                 throw new Error();
             });
 
-            expect(promise).resolves.toReturnWith(false);
+            expect(promise).resolves.toBe(false);
         });
     });
 });
