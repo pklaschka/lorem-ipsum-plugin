@@ -21,40 +21,70 @@ const lang = require('xd-localization-helper');
  * @returns {void}
  */
 module.exports = function fillSelectionWithPlaceholderText(options) {
-    const selection = require('scenegraph').selection;
+	const selection = require('scenegraph').selection;
 
-    debugHelper.log('Lorem ipsum with options ', options);
+	debugHelper.log('Lorem ipsum with options ', options);
 
-    // Parse termination string:
-    let terminationString =
-        options.terminationString === 'n/a' ? '' : options.terminationString;
+	// Parse termination string:
+	let terminationString =
+		options.terminationString === 'n/a' ? '' : options.terminationString;
 
-    try {
-        for (let sceneNode of selection.items) {
-            if (sceneNode instanceof Rectangle) {
-                applyToAreaText(replaceWithText(sceneNode), options, terminationString);
-            } else if (sceneNode instanceof Text && sceneNode.areaBox) {
-                applyToAreaText(sceneNode, options, terminationString);
-            } else if (sceneNode instanceof Text) {
-                applyToPointText(sceneNode, options, terminationString);
-            } else {
-                debugHelper.log('Node', sceneNode, 'is not a text layer.');
-            }
-        }
-    } catch (e) {
-        showErrorDialog(
-            lang.get('error.general.title'),
-            lang.get('error.general.description') + '<br>' + e.message
-        );
-    }
+	try {
+		for (let sceneNode of selection.items) {
+			if (sceneNode instanceof Rectangle) {
+				applyToAreaText(replaceWithText(sceneNode), options, terminationString);
+			} else if (
+				sceneNode instanceof Text &&
+				// @ts-ignore
+				sceneNode.layoutBox.type === Text.FIXED_HEIGHT
+			) {
+				applyToAreaText(sceneNode, options, terminationString);
+			} else if (
+				sceneNode instanceof Text &&
+				// @ts-ignore
+				sceneNode.layoutBox.type === Text.POINT
+			) {
+				applyToPointText(sceneNode, options, terminationString);
+			} else if (
+				sceneNode instanceof Text &&
+				// @ts-ignore
+				sceneNode.layoutBox.type === Text.AUTO_HEIGHT
+			) {
+				// Convert to fixed-height text with same dimensions, apply "normal" procedure, than convert back.
 
-    analytics
-        .verifyAcceptance({
-            pluginName: 'Lorem Ipsum',
-            privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
-            color: '#2D4E64'
-        })
-        .then(() => {
-            analytics.send('lorem', options);
-        });
+				// @ts-ignore
+				sceneNode.layoutBox = {
+					width: sceneNode.localBounds.width,
+					height: sceneNode.localBounds.height,
+					// @ts-ignore
+					type: Text.FIXED_HEIGHT
+				};
+				applyToAreaText(sceneNode, options, terminationString);
+				// @ts-ignore
+				sceneNode.layoutBox = {
+					// @ts-ignore
+					type: Text.AUTO_HEIGHT,
+					width: sceneNode.localBounds.width
+				};
+				// applyToAutoHeightText(sceneNode, options, terminationString);
+			} else {
+				debugHelper.log('Node', sceneNode, 'is not a text layer.');
+			}
+		}
+	} catch (e) {
+		showErrorDialog(
+			lang.get('error.general.title'),
+			lang.get('error.general.description') + '<br>' + e.message
+		);
+	}
+
+	analytics
+		.verifyAcceptance({
+			pluginName: 'Lorem Ipsum',
+			privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
+			color: '#2D4E64'
+		})
+		.then(() => {
+			analytics.send('lorem', options);
+		});
 };
