@@ -1,0 +1,22 @@
+{
+	"packageFiles": [
+		{
+			"filename": "package.json",
+			"type": "json"
+		}
+	],
+	"bumpFiles": [
+		{
+			"filename": "dist/manifest.json",
+			"type": "json"
+		},
+		{
+			"filename": "package.json",
+			"type": "json"
+		},
+		{
+			"filename": "package-lock.json",
+			"type": "json"
+		}
+	]
+}
