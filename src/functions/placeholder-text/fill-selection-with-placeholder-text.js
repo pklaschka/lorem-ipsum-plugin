@@ -2,7 +2,7 @@
  * Copyright (c) 2021. by Pablo Klaschka
  */
 
-const {Text, Rectangle} = require('scenegraph');
+const { Text, Rectangle } = require('scenegraph');
 const debugHelper = require('../../helpers/debug');
 const analytics = require('../../helpers/analytics');
 const applyToAreaText = require('./area-text');

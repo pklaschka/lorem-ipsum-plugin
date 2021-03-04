@@ -40,7 +40,7 @@ class GraphicNode extends SceneNode {
 		/**
 		 * @type {SceneNode}
 		 */
-		this._localBounds = {width: 240, height: 240, x: 5, y: 13};
+		this._localBounds = { width: 240, height: 240, x: 5, y: 13 };
 		this._rotation = 0;
 
 		this.removeFromParent = jest.fn();
@@ -60,8 +60,8 @@ class GraphicNode extends SceneNode {
 	}
 
 	get topLeftInParent() {
-		const {y, x} = this.localBounds;
-		return {x, y};
+		const { y, x } = this.localBounds;
+		return { x, y };
 	}
 
 	placeInParentCoordinates(reference, position) {
@@ -100,7 +100,7 @@ class Text extends GraphicNode {
 	get layoutBox() {
 		switch (this._mode) {
 			case 'AUTO_HEIGHT':
-				return {type: Text.AUTO_HEIGHT, width: this.localBounds.width};
+				return { type: Text.AUTO_HEIGHT, width: this.localBounds.width };
 			case 'FIXED_HEIGHT':
 				return {
 					type: Text.FIXED_HEIGHT,
@@ -108,7 +108,7 @@ class Text extends GraphicNode {
 					height: this.localBounds.height
 				};
 			case 'POINT':
-				return {type: Text.POINT};
+				return { type: Text.POINT };
 		}
 
 		throw new Error(
@@ -149,8 +149,7 @@ class RepeatGrid extends SceneNode {
 	}
 }
 
-class Rectangle extends GraphicNode {
-}
+class Rectangle extends GraphicNode {}
 
 class Group extends SceneNode {
 	get isContainer() {

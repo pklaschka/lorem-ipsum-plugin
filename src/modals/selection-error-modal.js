@@ -16,6 +16,5 @@ module.exports = async function selectionError() {
 			lang.get('error.selection.description')
 		);
 		// eslint-disable-next-line no-empty
-	} catch (e) {
-	}
+	} catch (e) {}
 };

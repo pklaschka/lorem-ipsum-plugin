@@ -8,7 +8,7 @@ const selectionError = require('./modals/selection-error-modal');
 const init = require('./functions/init');
 const fetchSettings = require('./functions/settings/fetch-settings');
 
-const {handleErrors} = require('./helpers/error');
+const { handleErrors } = require('./helpers/error');
 
 /**
  * Run Lorem Ipsum with the configuration dialog

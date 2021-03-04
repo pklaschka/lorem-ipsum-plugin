@@ -64,13 +64,13 @@ async function modalAsync() {
 				{
 					type: dialogHelper.types.SELECT,
 					options: [
-						{value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)'},
-						{value: 'cicero-lat', label: 'Cicero (Latin)'},
-						{value: 'cicero-en', label: 'Cicero (English)'},
-						{value: 'pangram-en', label: 'Pangram (English)'},
-						{value: 'pangram-de', label: 'Pangram (German)'},
-						{value: 'pangram-es', label: 'Pangram (Espagnol)'},
-						{value: 'pangram-fr', label: 'Pangram (Français)'}
+						{ value: 'lorem-lat', label: 'Lorem Ipsum (Latin, Standard)' },
+						{ value: 'cicero-lat', label: 'Cicero (Latin)' },
+						{ value: 'cicero-en', label: 'Cicero (English)' },
+						{ value: 'pangram-en', label: 'Pangram (English)' },
+						{ value: 'pangram-de', label: 'Pangram (German)' },
+						{ value: 'pangram-es', label: 'Pangram (Espagnol)' },
+						{ value: 'pangram-fr', label: 'Pangram (Français)' }
 					],
 					id: 'text',
 					label: lang.get('modal.lorem.text.label'),
@@ -82,9 +82,9 @@ async function modalAsync() {
 					id: 'terminationString',
 					label: lang.get('modal.lorem.terminate.label'),
 					options: [
-						{value: 'n/a', label: lang.get('modal.lorem.terminate.none')},
-						{value: '.', label: lang.get('modal.lorem.terminate.period')},
-						{value: '…', label: lang.get('modal.lorem.terminate.ellipsis')}
+						{ value: 'n/a', label: lang.get('modal.lorem.terminate.none') },
+						{ value: '.', label: lang.get('modal.lorem.terminate.period') },
+						{ value: '…', label: lang.get('modal.lorem.terminate.ellipsis') }
 					],
 					htmlAttributes: {},
 					value: uiOptions.terminationString

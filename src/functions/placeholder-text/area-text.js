@@ -54,14 +54,14 @@ module.exports = function applyToAreaText(
 		applyText(
 			textNode,
 			generatePlaceholderText(n, options.text, options.includeLineBreaks) +
-			parsedTerminationString
+				parsedTerminationString
 		);
 		return textNode.clippedByArea;
 	});
 	applyText(
 		textNode,
 		generatePlaceholderText(n, options.text, options.includeLineBreaks) +
-		parsedTerminationString
+			parsedTerminationString
 	);
 
 	debugHelper.log('Completed at ', n);

@@ -129,7 +129,7 @@ describe('fillSelectionWithPlaceholderText()', () => {
 
 	describe('parsing options.terminationString', () => {
 		it('should parse "n/a" as ""', () => {
-			const naOptions = Object.assign(options, {terminationString: 'n/a'});
+			const naOptions = Object.assign(options, { terminationString: 'n/a' });
 
 			const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
 			fillSelectionWithPlaceholderText(naOptions);

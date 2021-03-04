@@ -2,7 +2,7 @@
  * Copyright (c) 2021. by Pablo Klaschka
  */
 
-const {RepeatGrid} = require('scenegraph');
+const { RepeatGrid } = require('scenegraph');
 
 /**
  * Applies text to the passed text layer (may the layer be inside a RepeatGrid or not)

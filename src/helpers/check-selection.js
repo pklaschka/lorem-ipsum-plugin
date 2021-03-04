@@ -113,7 +113,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Text
 	 */
 	Text: node => {
-		const {Text} = require('scenegraph');
+		const { Text } = require('scenegraph');
 		return node instanceof Text;
 	},
 	/**
@@ -121,7 +121,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Text as Area Text
 	 */
 	AreaText: node => {
-		const {Text} = require('scenegraph');
+		const { Text } = require('scenegraph');
 		return node instanceof Text && node.areaBox !== undefined;
 	},
 	/**
@@ -129,7 +129,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Text as Point Text
 	 */
 	PointText: node => {
-		const {Text} = require('scenegraph');
+		const { Text } = require('scenegraph');
 		return node instanceof Text && node.areaBox === null;
 	},
 	/**
@@ -137,7 +137,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Rectangle
 	 */
 	Rectangle: node => {
-		const {Rectangle} = require('scenegraph');
+		const { Rectangle } = require('scenegraph');
 		return node instanceof Rectangle;
 	},
 	/**
@@ -145,7 +145,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Artboard
 	 */
 	Artboard: node => {
-		const {Artboard} = require('scenegraph');
+		const { Artboard } = require('scenegraph');
 		return node instanceof Artboard;
 	},
 	/**
@@ -153,7 +153,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Group
 	 */
 	Group: node => {
-		const {Group} = require('scenegraph');
+		const { Group } = require('scenegraph');
 		return node instanceof Group;
 	},
 	/**
@@ -161,7 +161,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof BooleanGroup
 	 */
 	BooleanGroup: node => {
-		const {BooleanGroup} = require('scenegraph');
+		const { BooleanGroup } = require('scenegraph');
 		return node instanceof BooleanGroup;
 	},
 	/**
@@ -169,7 +169,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Ellipse
 	 */
 	Ellipse: node => {
-		const {Ellipse} = require('scenegraph');
+		const { Ellipse } = require('scenegraph');
 		return node instanceof Ellipse;
 	},
 	/**
@@ -177,7 +177,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof GraphicNode
 	 */
 	GraphicNode: node => {
-		const {GraphicNode} = require('scenegraph');
+		const { GraphicNode } = require('scenegraph');
 		return node instanceof GraphicNode;
 	},
 	/**
@@ -185,7 +185,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Line
 	 */
 	Line: node => {
-		const {Line} = require('scenegraph');
+		const { Line } = require('scenegraph');
 		return node instanceof Line;
 	},
 	/**
@@ -193,7 +193,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof LinkedGraphic
 	 */
 	LinkedGraphic: node => {
-		const {LinkedGraphic} = require('scenegraph');
+		const { LinkedGraphic } = require('scenegraph');
 		return node instanceof LinkedGraphic;
 	},
 	/**
@@ -201,7 +201,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof Path
 	 */
 	Path: node => {
-		const {Path} = require('scenegraph');
+		const { Path } = require('scenegraph');
 		return node instanceof Path;
 	},
 	/**
@@ -209,7 +209,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof RepeatGrid
 	 */
 	RepeatGrid: node => {
-		const {RepeatGrid} = require('scenegraph');
+		const { RepeatGrid } = require('scenegraph');
 		return node instanceof RepeatGrid;
 	},
 	/**
@@ -217,7 +217,7 @@ const typeCheckLookupTable = {
 	 * @return {boolean} node is instanceof SymbolInstance
 	 */
 	SymbolInstance: node => {
-		const {SymbolInstance} = require('scenegraph');
+		const { SymbolInstance } = require('scenegraph');
 		return node instanceof SymbolInstance;
 	}
 };

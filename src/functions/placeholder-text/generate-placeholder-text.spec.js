@@ -9,8 +9,7 @@
 const placeholderTexts = require('../../placeholder-texts.json');
 
 describe('Generating placeholder text', () => {
-	beforeEach(() => {
-	});
+	beforeEach(() => {});
 
 	describe('placeholder text', () => {
 		it('shouldgenerate all placeholder texts without line breaks', () => {

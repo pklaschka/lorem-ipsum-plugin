@@ -10,7 +10,7 @@ describe('Trimming the text area height', () => {
 
 	beforeEach(() => {
 		jest.mock('../helpers/debug');
-		const {Text} = require('scenegraph');
+		const { Text } = require('scenegraph');
 		textNode = new Text();
 		// @ts-ignore
 		textNode._mode = Text.FIXED_HEIGHT;

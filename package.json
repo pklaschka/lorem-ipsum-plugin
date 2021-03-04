@@ -4,7 +4,7 @@
 	"description": "Lorem Ipsum Plugin for Adobe XD CC",
 	"private": true,
 	"scripts": {
-		"start": "npm run debug:watch",
+	  "start": "npm run debug:watch",
 	  "test": "jest --coverage",
 	  "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
 	  "build": "npm run compile:production && xdpm package dist",

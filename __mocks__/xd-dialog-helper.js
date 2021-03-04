@@ -4,5 +4,5 @@
 
 module.exports = {
 	showDialog: jest.fn(),
-	types: {TEXT: {}, TEXT_INPUT: {}, SELECT: {}}
+	types: { TEXT: {}, TEXT_INPUT: {}, SELECT: {} }
 };
