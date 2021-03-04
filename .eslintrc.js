@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 module.exports = {
@@ -13,20 +13,8 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": 2017
     },
+    "plugins": ["prettier"],
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": 0,
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
         "no-unused-vars": 0,
         "no-console": "off",
         "no-undef": "off"

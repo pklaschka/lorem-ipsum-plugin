@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('replaceWithText()', () => {
@@ -31,12 +31,14 @@ describe('replaceWithText()', () => {
     });
 
     it('should throw if the parent node is not a container', () => {
+        // @ts-ignore
         myRectangle._parent = new scenegraph.Text();
         expect(() => replaceWithText(myRectangle)).toThrow();
     });
 
     it('should replace the Rectangle with a Text', () => {
         const parent = new scenegraph.Group();
+        // @ts-ignore
         myRectangle._parent = parent;
         const textNode = replaceWithText(myRectangle);
 
@@ -48,6 +50,7 @@ describe('replaceWithText()', () => {
     it('should replace the Rectangle with Text in the selection', () => {
         const parent = new scenegraph.Group();
         let anotherNode = new scenegraph.Text();
+        // @ts-ignore
         myRectangle._parent = parent;
         scenegraph.selection.items = [myRectangle, anotherNode];
         const selectionBefore = [...scenegraph.selection.items];
