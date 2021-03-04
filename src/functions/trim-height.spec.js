@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('Trimming the text area height', () => {
@@ -20,7 +20,7 @@ describe('Trimming the text area height', () => {
 
         trimHeight(textNode);
         const clippedByArea = textNode.clippedByArea;
-        textNode['_localBounds'].height --;
+        textNode['_localBounds'].height--;
         const clippedByAreaWith1PxLessHeight = textNode.clippedByArea;
 
         expect(clippedByArea).toBeFalsy();

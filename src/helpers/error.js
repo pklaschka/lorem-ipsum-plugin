@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const dialogHelper = require('xd-dialog-helper');
@@ -20,8 +20,15 @@ class ErrorHelper {
         } catch (e) {
             logger.log(e);
             try {
-                await ErrorHelper.showErrorDialog(lang.get('error.general.title'), `${lang.get('error.general.description')}<br><code>${e.message}</code>`);
-            } finally { returnValue = false; }
+                await ErrorHelper.showErrorDialog(
+                    lang.get('error.general.title'),
+                    `${lang.get('error.general.description')}<br><code>${
+                        e.message
+                    }</code>`
+                );
+            } finally {
+                returnValue = false;
+            }
         }
         return returnValue;
     }
@@ -33,17 +40,21 @@ class ErrorHelper {
      * @return {Promise<void>}
      */
     static async showErrorDialog(title, message) {
-        await dialogHelper.showDialog('lorem-error-dialog', title, [
+        await dialogHelper.showDialog(
+            'lorem-error-dialog',
+            title,
+            [
+                {
+                    type: dialogHelper.types.TEXT,
+                    label: message,
+                    id: 'message',
+                    value: true,
+                    htmlAttributes: {}
+                }
+            ],
             {
-                type: dialogHelper.types.TEXT,
-                label: message,
-                id: 'message',
-                value: true,
-                htmlAttributes: {}
-            }
-        ], {
-            width: 360,
-            css: `
+                width: 360,
+                css: `
             header {
                 background: #2D4E64;
                 height: 16px;
@@ -52,13 +63,15 @@ class ErrorHelper {
                 top: 0;
                 right: 0;
             }`,
-            onBeforeShow: /* istanbul ignore next */ htmlDialogElement => {
-                htmlDialogElement.appendChild(document.createElement('header'));
-                const cancelButton = document.querySelector('lorem-error-dialog-dialogHelperBtnCancel');
-                if (cancelButton)
-                    cancelButton.remove();
+                onBeforeShow: /* istanbul ignore next */ htmlDialogElement => {
+                    htmlDialogElement.appendChild(document.createElement('header'));
+                    const cancelButton = document.querySelector(
+                        'lorem-error-dialog-dialogHelperBtnCancel'
+                    );
+                    if (cancelButton) cancelButton.remove();
+                }
             }
-        });
+        );
     }
 }
 

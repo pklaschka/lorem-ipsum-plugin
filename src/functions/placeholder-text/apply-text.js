@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const {RepeatGrid} = require('scenegraph');
@@ -11,12 +11,15 @@ const {RepeatGrid} = require('scenegraph');
  */
 module.exports = function applyText(textLayer, text) {
     let optRepeatGridNode;
-    if (textLayer.parent && textLayer.parent.parent && textLayer.parent.parent instanceof RepeatGrid) {
+    if (
+        textLayer.parent &&
+        textLayer.parent.parent &&
+        textLayer.parent.parent instanceof RepeatGrid
+    ) {
         optRepeatGridNode = textLayer.parent.parent;
     }
 
     if (optRepeatGridNode)
         optRepeatGridNode.attachTextDataSeries(textLayer, [text]);
-    else
-        textLayer.text = text;
+    else textLayer.text = text;
 };

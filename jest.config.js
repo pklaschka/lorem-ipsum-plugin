@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 // For a detailed explanation regarding each configuration property, visit:
@@ -133,7 +133,7 @@ module.exports = {
     // snapshotSerializers: [],
 
     // The test environment that will be used for testing
-    testEnvironment: 'node',
+    testEnvironment: 'node'
 
     // Options that will be passed to the testEnvironment
     // testEnvironmentOptions: {},

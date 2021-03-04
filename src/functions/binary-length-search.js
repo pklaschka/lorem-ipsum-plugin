@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 /**
@@ -23,13 +23,24 @@ const debugHelper = require('../helpers/debug');
  * @param {isClipping} isClipping callback for checking whether a number n clips
  * @returns {number} number n that's closest to the clipping number without clipping.
  */
-module.exports = function binaryLengthSearch(clippingNumber, notClippingNumber, isClipping) {
-    debugHelper.log('Checking between ', clippingNumber, ' and ', notClippingNumber);
+module.exports = function binaryLengthSearch(
+    clippingNumber,
+    notClippingNumber,
+    isClipping
+) {
+    debugHelper.log(
+        'Checking between ',
+        clippingNumber,
+        ' and ',
+        notClippingNumber
+    );
 
     if (Math.abs(clippingNumber - notClippingNumber) < 2)
         return notClippingNumber;
 
     let half = Math.floor((clippingNumber + notClippingNumber) / 2);
 
-    return isClipping(half) ? binaryLengthSearch(half, notClippingNumber, isClipping) : binaryLengthSearch(clippingNumber, half, isClipping);
+    return isClipping(half)
+        ? binaryLengthSearch(half, notClippingNumber, isClipping)
+        : binaryLengthSearch(clippingNumber, half, isClipping);
 };

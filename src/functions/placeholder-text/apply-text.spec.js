@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('applyText()', () => {
@@ -23,7 +23,9 @@ describe('applyText()', () => {
         it('should call the RepeatGrid\'s "attachTextDataSeries()" function', () => {
             const applyText = require('./apply-text');
             applyText(textNode, 'Applied');
-            expect(textNode.parent.parent.attachTextDataSeries).toHaveBeenLastCalledWith(textNode, ['Applied']);
+            expect(
+                textNode.parent.parent.attachTextDataSeries
+            ).toHaveBeenLastCalledWith(textNode, ['Applied']);
         });
     });
 

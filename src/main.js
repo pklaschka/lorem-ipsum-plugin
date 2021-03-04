@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const loremModal = require('./modals/lorem-configuration-modal');
@@ -17,10 +17,8 @@ const {handleErrors} = require('./helpers/error');
  */
 async function lorem(selection) {
     await handleErrors(async () => {
-        if (await init(selection))
-            await loremModal();
-        else
-            await selectionError();
+        if (await init(selection)) await loremModal();
+        else await selectionError();
     });
 }
 
@@ -31,10 +29,8 @@ async function lorem(selection) {
  */
 async function quickLorem(selection) {
     await handleErrors(async () => {
-        if (await init(selection))
-            await loremFunction(await fetchSettings());
-        else
-            await selectionError();
+        if (await init(selection)) await loremFunction(await fetchSettings());
+        else await selectionError();
     });
 }
 
@@ -52,8 +48,7 @@ async function loremPreconfigured(selection) {
                 terminationString: 'n/a',
                 text: 'lorem-lat'
             });
-        else
-            await selectionError();
+        else await selectionError();
     });
 }
 
@@ -71,8 +66,7 @@ async function loremPreconfiguredTrim(selection) {
                 terminationString: '.',
                 text: 'lorem-lat'
             });
-        else
-            await selectionError();
+        else await selectionError();
     });
 }
 

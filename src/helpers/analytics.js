@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const storage = require('xd-storage-helper');
@@ -15,11 +15,13 @@ class analyticsHelper {
     static async send(feature, options) {
         let req = new XMLHttpRequest();
         req.open('POST', 'https://xdplugins.pabloklaschka.de/_api/submit');
-        req.send(JSON.stringify({
-            plugin_name: 'Lorem Ipsum',
-            feature: feature,
-            options: options
-        }));
+        req.send(
+            JSON.stringify({
+                plugin_name: 'Lorem Ipsum',
+                feature: feature,
+                options: options
+            })
+        );
     }
 
     /**
@@ -37,7 +39,7 @@ class analyticsHelper {
             let options = {
                 pluginName: 'My plugin',
                 privacyPolicyLink: 'https://www.mysite.com/privacy',
-                color: '#2D4E64',
+                color: '#2D4E64'
             };
             Object.assign(options, passedOptions);
 
@@ -45,11 +47,10 @@ class analyticsHelper {
                 await storage.set('analytics-accepted', true);
                 return true;
             } else {
-                throw new Error('Privacy policy wasn\'t accepted');
+                throw new Error("Privacy policy wasn't accepted");
             }
         }
     }
-
 
     /**
      * @private
@@ -62,11 +63,14 @@ class analyticsHelper {
      */
     static async dialog(options) {
         try {
-            const result = await dialogHelper.showDialog('analytics-agreement', 'Analytics', [
-                {
-                    id: 'description',
-                    type: dialogHelper.types.TEXT,
-                    label: `
+            const result = await dialogHelper.showDialog(
+                'analytics-agreement',
+                'Analytics',
+                [
+                    {
+                        id: 'description',
+                        type: dialogHelper.types.TEXT,
+                        label: `
 <p>To enhance your experience when using the plugin, completely anonymous data regarding your usage will get submitted to (secure) servers in Germany. The submitted data doesn't include any user id or similar means of identifying specific users. Since data gets submitted to our servers in the form of HTTP requests, you'll have to accept the privacy policy <a href="${options.privacyPolicyLink}">${options.privacyPolicyLink}</a>to use the plugin.
 </p>
 <h2>Data that gets submitted:</h2>
@@ -76,19 +80,20 @@ class analyticsHelper {
 <p>Any data identifying you (e.g., user ids or similar), any data regarding your document, files on your computer or similar, any data that I didn't list above in "Data that gets submitted"
 </p>
                 `,
-                    htmlAttributes: {}
-                },
+                        htmlAttributes: {}
+                    },
+                    {
+                        type: dialogHelper.types.CHECKBOX,
+                        htmlAttributes: {},
+                        required: true,
+                        label: `I have read and accepted the privacy policy (${options.privacyPolicyLink})`,
+                        id: 'accepted'
+                    }
+                ],
                 {
-                    type: dialogHelper.types.CHECKBOX,
-                    htmlAttributes: {},
-                    required: true,
-                    label: `I have read and accepted the privacy policy (${options.privacyPolicyLink})`,
-                    id: 'accepted'
-                }
-            ], {
-                width: 640,
-                okButtonText: 'Accept',
-                css: `
+                    width: 640,
+                    okButtonText: 'Accept',
+                    css: `
     header {
         background: ${options.color};
         height: 16px;
@@ -102,10 +107,11 @@ class analyticsHelper {
         overflow-y: auto;
     }
             `,
-                onBeforeShow: (dialogElement) => {
-                    dialogElement.appendChild(document.createElement('header'));
+                    onBeforeShow: dialogElement => {
+                        dialogElement.appendChild(document.createElement('header'));
+                    }
                 }
-            });
+            );
 
             return result['accepted'];
         } catch (e) {

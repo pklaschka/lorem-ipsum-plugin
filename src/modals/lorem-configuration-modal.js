@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const storage = require('xd-storage-helper');
@@ -51,13 +51,15 @@ async function modalAsync() {
          * The options for the Lorem Ipsum options
          * @type {{text: string, terminationString: string, includeLineBreaks: boolean, trim: boolean}}
          */
-        const loremOptions = await dialogHelper.showDialog('lorem-main', 'Lorem Ipsum',
+        const loremOptions = await dialogHelper.showDialog(
+            'lorem-main',
+            'Lorem Ipsum',
             [
                 {
                     id: 'description',
                     type: dialogHelper.types.TEXT,
                     label: lang.get('modal.lorem.description'),
-                    htmlAttributes: {},
+                    htmlAttributes: {}
                 },
                 {
                     type: dialogHelper.types.SELECT,
@@ -73,7 +75,7 @@ async function modalAsync() {
                     id: 'text',
                     label: lang.get('modal.lorem.text.label'),
                     value: uiOptions.text,
-                    htmlAttributes: {},
+                    htmlAttributes: {}
                 },
                 {
                     type: dialogHelper.types.SELECT,
@@ -82,7 +84,7 @@ async function modalAsync() {
                     options: [
                         {value: 'n/a', label: lang.get('modal.lorem.terminate.none')},
                         {value: '.', label: lang.get('modal.lorem.terminate.period')},
-                        {value: '…', label: lang.get('modal.lorem.terminate.ellipsis')},
+                        {value: '…', label: lang.get('modal.lorem.terminate.ellipsis')}
                     ],
                     htmlAttributes: {},
                     value: uiOptions.terminationString
@@ -104,10 +106,8 @@ async function modalAsync() {
             ],
             {
                 okButtonText: lang.get('modal.lorem.btn.ok'),
-                cancelButtonText:
-                    lang.get('modal.lorem.btn.cancel'),
-                width:
-                    400,
+                cancelButtonText: lang.get('modal.lorem.btn.cancel'),
+                width: 400,
                 css: `
                 header {
                     background: #2D4E64;
@@ -120,34 +120,38 @@ async function modalAsync() {
                 input[type="checkbox"] {
                     width: 18px;
                 }`,
-                onBeforeShow:
-                    (dialogElement, elements, actions) => {
-                        dialogElement.appendChild(document.createElement('header'));
+                onBeforeShow: (dialogElement, elements, actions) => {
+                    dialogElement.appendChild(document.createElement('header'));
 
-                        const okButton = document.getElementById('lorem-main-dialogHelperBtnOk');
+                    const okButton = document.getElementById(
+                        'lorem-main-dialogHelperBtnOk'
+                    );
 
-                        if (!okButton) {
-                            throw new Error('Ok button was not found and could therefore not get selected!');
-                        }
-
-                        // Temporary fix for enter key not working on macOS:
-                        okButton.addEventListener('keydown', evt => {
-                            if (evt.key === 'Enter') {
-                                evt.stopPropagation();
-                                evt.preventDefault();
-
-                                actions.close();
-                            }
-                        });
-
-                        okButton.setAttribute('autofocus', 'autofocus');
-
-                        // For Racing condition bug on Windows:
-                        setTimeout(() => {
-                            okButton.focus();
-                        }, 200);
+                    if (!okButton) {
+                        throw new Error(
+                            'Ok button was not found and could therefore not get selected!'
+                        );
                     }
-            });
+
+                    // Temporary fix for enter key not working on macOS:
+                    okButton.addEventListener('keydown', evt => {
+                        if (evt.key === 'Enter') {
+                            evt.stopPropagation();
+                            evt.preventDefault();
+
+                            actions.close();
+                        }
+                    });
+
+                    okButton.setAttribute('autofocus', 'autofocus');
+
+                    // For Racing condition bug on Windows:
+                    setTimeout(() => {
+                        okButton.focus();
+                    }, 200);
+                }
+            }
+        );
         await storage.set('loremOptions', loremOptions);
         debugHelper.log('Lorem Ipsum');
         return loremOptions;

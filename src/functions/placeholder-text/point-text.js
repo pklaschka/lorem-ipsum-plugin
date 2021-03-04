@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 const generatePlaceholderText = require('./generate-placeholder-text');
 const applyText = require('./apply-text');
@@ -15,5 +15,8 @@ const applyText = require('./apply-text');
  * @param {string} parsedTerminationString The parsed termination string, i.e., '' for 'n/a'
  */
 module.exports = function pointText(element, options, parsedTerminationString) {
-    applyText(element, generatePlaceholderText(2, options.text, false) + parsedTerminationString);
+    applyText(
+        element,
+        generatePlaceholderText(2, options.text, false) + parsedTerminationString
+    );
 };

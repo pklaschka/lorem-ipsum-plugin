@@ -3,45 +3,45 @@
  */
 
 describe('ErrorHelper', () => {
-    beforeEach(() => {
-        jest.mock('./debug');
-        jest.mock('xd-dialog-helper');
-    });
+	beforeEach(() => {
+		jest.mock('./debug');
+		jest.mock('xd-dialog-helper');
+	});
 
-    describe('showErrorDialog()', () => {
-        it('should display a dialog using xd-dialog-helper', () => {
-            const ErrorHelper = require('./error');
-            ErrorHelper.showErrorDialog('test', 'test');
-            expect(require('xd-dialog-helper').showDialog).toHaveBeenCalled();
-        });
-    });
+	describe('showErrorDialog()', () => {
+		it('should display a dialog using xd-dialog-helper', () => {
+			const ErrorHelper = require('./error');
+			ErrorHelper.showErrorDialog('test', 'test');
+			expect(require('xd-dialog-helper').showDialog).toHaveBeenCalled();
+		});
+	});
 
-    describe('handleErrors(operation)', () => {
-        it('should not throw even though the operation does', () => {
-            const ErrorHelper = require('./error');
-            const promise = ErrorHelper.handleErrors(() => {
-                throw new Error();
-            });
+	describe('handleErrors(operation)', () => {
+		it('should not throw even though the operation does', () => {
+			const ErrorHelper = require('./error');
+			const promise = ErrorHelper.handleErrors(() => {
+				throw new Error();
+			});
 
-            expect(promise).resolves.toBe(false);
-        });
+			expect(promise).resolves.toBe(false);
+		});
 
-        it('should resolve with true when the operation succeeds', () => {
-            const ErrorHelper = require('./error');
-            const promise = ErrorHelper.handleErrors(async () => {
-                return 'abc';
-            });
+		it('should resolve with true when the operation succeeds', () => {
+			const ErrorHelper = require('./error');
+			const promise = ErrorHelper.handleErrors(async () => {
+				return 'abc';
+			});
 
-            expect(promise).resolves.toBe(true);
-        });
+			expect(promise).resolves.toBe(true);
+		});
 
-        it('should resolve with false when the operation fails', () => {
-            const ErrorHelper = require('./error');
-            const promise = ErrorHelper.handleErrors(async () => {
-                throw new Error();
-            });
+		it('should resolve with false when the operation fails', () => {
+			const ErrorHelper = require('./error');
+			const promise = ErrorHelper.handleErrors(async () => {
+				throw new Error();
+			});
 
-            expect(promise).resolves.toBe(false);
-        });
-    });
+			expect(promise).resolves.toBe(false);
+		});
+	});
 });

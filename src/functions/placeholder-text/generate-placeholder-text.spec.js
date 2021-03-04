@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 /**
@@ -28,7 +28,11 @@ describe('Generating placeholder text', () => {
 
         it('shouldgenerate placeholder texts with line breaks', () => {
             const generatePlaceholderText = require('./generate-placeholder-text');
-            const generatedText = generatePlaceholderText(1000, Object.keys(placeholderTexts)[0], true);
+            const generatedText = generatePlaceholderText(
+                1000,
+                Object.keys(placeholderTexts)[0],
+                true
+            );
 
             expect(generatedText).toMatch(/.*\n.*/);
         });

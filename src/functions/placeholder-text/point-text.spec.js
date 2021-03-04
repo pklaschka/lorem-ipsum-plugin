@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('applyToPointText()', () => {
@@ -23,12 +23,16 @@ describe('applyToPointText()', () => {
         const applyToAreaText = require('./point-text');
         const applyTextMock = require('./apply-text');
 
-        applyToAreaText(textNode, {
-            text: 'lorem-lat',
-            terminationString: '.',
-            trim: false,
-            includeLineBreaks: false
-        }, '.');
+        applyToAreaText(
+            textNode,
+            {
+                text: 'lorem-lat',
+                terminationString: '.',
+                trim: false,
+                includeLineBreaks: false
+            },
+            '.'
+        );
 
         expect(applyTextMock).toHaveBeenLastCalledWith(textNode, 'a a.');
     });

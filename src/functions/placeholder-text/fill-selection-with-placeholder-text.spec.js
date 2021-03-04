@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 describe('fillSelectionWithPlaceholderText()', () => {
@@ -45,14 +45,22 @@ describe('fillSelectionWithPlaceholderText()', () => {
     it('should apply placeholder text to area text', () => {
         const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
         fillSelectionWithPlaceholderText(options);
-        expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, options, '.');
+        expect(require('./area-text')).toHaveBeenLastCalledWith(
+            textNode,
+            options,
+            '.'
+        );
     });
 
     it('should apply placeholder text to point text', () => {
         const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
         textNode._isPointText = true;
         fillSelectionWithPlaceholderText(options);
-        expect(require('./point-text')).toHaveBeenLastCalledWith(textNode, options, '.');
+        expect(require('./point-text')).toHaveBeenLastCalledWith(
+            textNode,
+            options,
+            '.'
+        );
     });
 
     it('should convert Rectangles to text and apply placeholder text', () => {
@@ -93,7 +101,7 @@ describe('fillSelectionWithPlaceholderText()', () => {
         expect(require('../../helpers/error').showErrorDialog).toHaveBeenCalled();
     });
 
-    it('should correctly send analytics data', (done) => {
+    it('should correctly send analytics data', done => {
         const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
         const analyticsMock = require('../../helpers/analytics');
 
@@ -112,7 +120,11 @@ describe('fillSelectionWithPlaceholderText()', () => {
 
             const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
             fillSelectionWithPlaceholderText(naOptions);
-            expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, naOptions, '');
+            expect(require('./area-text')).toHaveBeenLastCalledWith(
+                textNode,
+                naOptions,
+                ''
+            );
         });
 
         it('should parse other chars as themselves', () => {
@@ -120,10 +132,16 @@ describe('fillSelectionWithPlaceholderText()', () => {
 
             for (let i = 21; i < 255; i++) {
                 const char = String.fromCharCode(i);
-                const terminateOptions = Object.assign(options, {terminationString: char});
+                const terminateOptions = Object.assign(options, {
+                    terminationString: char
+                });
 
                 fillSelectionWithPlaceholderText(terminateOptions);
-                expect(require('./area-text')).toHaveBeenLastCalledWith(textNode, options, char);
+                expect(require('./area-text')).toHaveBeenLastCalledWith(
+                    textNode,
+                    options,
+                    char
+                );
             }
         });
     });

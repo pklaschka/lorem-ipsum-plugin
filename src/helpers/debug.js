@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 /**
@@ -24,7 +24,7 @@ class debugHelper {
                      * @param {any} value
                      * @return {any}
                      */
-                    value => value instanceof Object ? JSON.stringify(value) : value
+                    value => (value instanceof Object ? JSON.stringify(value) : value)
                 )
             );
             const first = args.shift();
@@ -32,6 +32,5 @@ class debugHelper {
         }
     }
 }
-
 
 module.exports = debugHelper;

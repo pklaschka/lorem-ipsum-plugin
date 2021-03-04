@@ -66,7 +66,5 @@ describe('replaceWithText()', () => {
 
         // Rectangle should be removed from selection
         expect(selectionAfter).not.toContain(myRectangle);
-
     });
-
 });

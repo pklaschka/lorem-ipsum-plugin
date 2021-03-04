@@ -10,8 +10,8 @@ jobs:
       matrix:
         node-version: [ 14.x ]
     env:
-      COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
-      COVERALLS_GIT_BRANCH: "${{ github.ref }}"
+      COVERALLS_REPO_TOKEN: '${{ secrets.COVERALLS_REPO_TOKEN }}'
+      COVERALLS_GIT_BRANCH: '${{ github.ref }}'
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
@@ -32,20 +32,20 @@ jobs:
         node-version: [ 13.x, 14.x, 15.x ]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm ci
-        npm run build --if-present
-        npm test
-      env:
-        CI: true
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: plugin-xdx
-        path: dist.xdx
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test
+        env:
+          CI: true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: plugin-xdx
+          path: dist.xdx

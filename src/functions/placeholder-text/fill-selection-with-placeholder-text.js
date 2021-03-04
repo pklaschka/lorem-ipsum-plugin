@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const {Text, Rectangle} = require('scenegraph');
@@ -23,10 +23,11 @@ const lang = require('xd-localization-helper');
 module.exports = function fillSelectionWithPlaceholderText(options) {
     const selection = require('scenegraph').selection;
 
-    debugHelper.log('Lorem ipsum with options ', (options));
+    debugHelper.log('Lorem ipsum with options ', options);
 
     // Parse termination string:
-    let terminationString = options.terminationString === 'n/a' ? '' : options.terminationString;
+    let terminationString =
+        options.terminationString === 'n/a' ? '' : options.terminationString;
 
     try {
         for (let sceneNode of selection.items) {
@@ -41,14 +42,19 @@ module.exports = function fillSelectionWithPlaceholderText(options) {
             }
         }
     } catch (e) {
-        showErrorDialog(lang.get('error.general.title'), lang.get('error.general.description') + '<br>' + e.message);
+        showErrorDialog(
+            lang.get('error.general.title'),
+            lang.get('error.general.description') + '<br>' + e.message
+        );
     }
 
-    analytics.verifyAcceptance({
-        pluginName: 'Lorem Ipsum',
-        privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
-        color: '#2D4E64'
-    }).then(()=>{
-        analytics.send('lorem', options);
-    });
+    analytics
+        .verifyAcceptance({
+            pluginName: 'Lorem Ipsum',
+            privacyPolicyLink: 'https://xdplugins.pabloklaschka.de/privacy-policy',
+            color: '#2D4E64'
+        })
+        .then(() => {
+            analytics.send('lorem', options);
+        });
 };

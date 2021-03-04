@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 /**
@@ -15,10 +15,27 @@ const texts = require('../../placeholder-texts.json');
  * @param {boolean} includeLineBreaks include line breaks in the placeholder text?
  * @return {string} placeholder text
  */
-module.exports = function generatePlaceholderText(length, textKey, includeLineBreaks) {
+module.exports = function generatePlaceholderText(
+    length,
+    textKey,
+    includeLineBreaks
+) {
     let originalString = texts[textKey];
-    let strReturn = trimToNWords(originalString, length, includeLineBreaks).trim();
-    if (strReturn.endsWith('.') || strReturn.endsWith(',') || strReturn.endsWith('?') || strReturn.endsWith(';') || strReturn.endsWith(':') || strReturn.endsWith('-') || strReturn.endsWith('–') || strReturn.endsWith('!'))
+    let strReturn = trimToNWords(
+        originalString,
+        length,
+        includeLineBreaks
+    ).trim();
+    if (
+        strReturn.endsWith('.') ||
+        strReturn.endsWith(',') ||
+        strReturn.endsWith('?') ||
+        strReturn.endsWith(';') ||
+        strReturn.endsWith(':') ||
+        strReturn.endsWith('-') ||
+        strReturn.endsWith('–') ||
+        strReturn.endsWith('!')
+    )
         strReturn = strReturn.substr(0, strReturn.length - 1);
     return strReturn;
 };
@@ -33,10 +50,9 @@ module.exports = function generatePlaceholderText(length, textKey, includeLineBr
 function trimToNWords(strText, n, includeLineBreaks) {
     // Ensure text is long enough:
     while (strText.split(' ').length < n) {
-        strText = includeLineBreaks ? (strText + '\n' + strText) : (strText + ' ' + strText);
+        strText = includeLineBreaks
+            ? strText + '\n' + strText
+            : strText + ' ' + strText;
     }
-    return strText
-        .split(' ')
-        .splice(0, n)
-        .join(' ');
+    return strText.split(' ').splice(0, n).join(' ');
 }

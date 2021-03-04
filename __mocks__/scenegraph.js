@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 /**
@@ -20,8 +20,14 @@ class SceneNode {
     constructor() {
         this._parent = null;
     }
-    get isContainer() { return false; }
-    get parent() { return this._parent; }
+
+    get isContainer() {
+        return false;
+    }
+
+    get parent() {
+        return this._parent;
+    }
 }
 
 class GraphicNode extends SceneNode {
@@ -34,13 +40,15 @@ class GraphicNode extends SceneNode {
         /**
          * @type {SceneNode}
          */
-        this._localBounds = { width: 240, height: 240, x: 5, y: 13 };
+        this._localBounds = {width: 240, height: 240, x: 5, y: 13};
         this._rotation = 0;
 
         this.removeFromParent = jest.fn();
     }
 
-    get rotation() { return this._rotation; }
+    get rotation() {
+        return this._rotation;
+    }
 
     rotateAround(reference, deltaRotation) {
         this._rotation += deltaRotation % 360;
@@ -64,7 +72,7 @@ class GraphicNode extends SceneNode {
 
 class Text extends GraphicNode {
     get clippedByArea() {
-        return (this.text.length / 20) > this.localBounds.height;
+        return this.text.length / 20 > this.localBounds.height;
     }
 
     get areaBox() {
@@ -81,7 +89,6 @@ class Text extends GraphicNode {
         this.text = '';
         this._isPointText = false;
     }
-
 }
 
 class RepeatGrid extends SceneNode {
@@ -100,7 +107,6 @@ class RepeatGrid extends SceneNode {
         node.text = texts[0];
     }
 
-
     get isContainer() {
         return true;
     }
@@ -110,7 +116,10 @@ class Rectangle extends GraphicNode {
 }
 
 class Group extends SceneNode {
-    get isContainer() { return true; }
+    get isContainer() {
+        return true;
+    }
+
     constructor() {
         super();
         this.addChildAfter = jest.fn();
@@ -124,4 +133,12 @@ class Color {
     }
 }
 
-module.exports = { selection, Text, Group, RepeatGrid, Rectangle, GraphicNode, Color };
+module.exports = {
+    selection,
+    Text,
+    Group,
+    RepeatGrid,
+    Rectangle,
+    GraphicNode,
+    Color
+};

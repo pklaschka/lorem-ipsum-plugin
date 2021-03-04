@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 const {Text, Color, selection} = require('scenegraph');
@@ -50,5 +50,5 @@ module.exports = function replaceWithText(oldNode) {
  * @returns {node is {addChildAfter: function}}
  */
 function isCompatible(node) {
-    return (node !== null) && node.isContainer;
+    return node !== null && node.isContainer;
 }

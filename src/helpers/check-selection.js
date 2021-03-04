@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. by Pablo Klaschka
+ * Copyright (c) 2021. by Pablo Klaschka
  */
 
 class SelectionChecker {
@@ -97,7 +97,9 @@ class SelectionChecker {
      * @returns {boolean} `true` if `node` matches specified ``type`
      */
     static checkForType(node, type) {
-        return (typeCheckLookupTable[type]) ? typeCheckLookupTable[type](node) : false;
+        return typeCheckLookupTable[type]
+            ? typeCheckLookupTable[type](node)
+            : false;
     }
 }
 
@@ -110,7 +112,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Text
      */
-    'Text': (node) => {
+    Text: node => {
         const {Text} = require('scenegraph');
         return node instanceof Text;
     },
@@ -118,15 +120,15 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Text as Area Text
      */
-    'AreaText': (node) => {
+    AreaText: node => {
         const {Text} = require('scenegraph');
-        return (node instanceof Text) && node.areaBox !== undefined;
+        return node instanceof Text && node.areaBox !== undefined;
     },
     /**
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Text as Point Text
      */
-    'PointText': (node) => {
+    PointText: node => {
         const {Text} = require('scenegraph');
         return node instanceof Text && node.areaBox === null;
     },
@@ -134,7 +136,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Rectangle
      */
-    'Rectangle': (node) => {
+    Rectangle: node => {
         const {Rectangle} = require('scenegraph');
         return node instanceof Rectangle;
     },
@@ -142,7 +144,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Artboard
      */
-    'Artboard': (node) => {
+    Artboard: node => {
         const {Artboard} = require('scenegraph');
         return node instanceof Artboard;
     },
@@ -150,7 +152,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Group
      */
-    'Group': (node) => {
+    Group: node => {
         const {Group} = require('scenegraph');
         return node instanceof Group;
     },
@@ -158,7 +160,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof BooleanGroup
      */
-    'BooleanGroup': (node) => {
+    BooleanGroup: node => {
         const {BooleanGroup} = require('scenegraph');
         return node instanceof BooleanGroup;
     },
@@ -166,7 +168,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Ellipse
      */
-    'Ellipse': (node) => {
+    Ellipse: node => {
         const {Ellipse} = require('scenegraph');
         return node instanceof Ellipse;
     },
@@ -174,7 +176,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof GraphicNode
      */
-    'GraphicNode': (node) => {
+    GraphicNode: node => {
         const {GraphicNode} = require('scenegraph');
         return node instanceof GraphicNode;
     },
@@ -182,7 +184,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Line
      */
-    'Line': (node) => {
+    Line: node => {
         const {Line} = require('scenegraph');
         return node instanceof Line;
     },
@@ -190,7 +192,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof LinkedGraphic
      */
-    'LinkedGraphic': (node) => {
+    LinkedGraphic: node => {
         const {LinkedGraphic} = require('scenegraph');
         return node instanceof LinkedGraphic;
     },
@@ -198,7 +200,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof Path
      */
-    'Path': (node) => {
+    Path: node => {
         const {Path} = require('scenegraph');
         return node instanceof Path;
     },
@@ -206,7 +208,7 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof RepeatGrid
      */
-    'RepeatGrid': (node) => {
+    RepeatGrid: node => {
         const {RepeatGrid} = require('scenegraph');
         return node instanceof RepeatGrid;
     },
@@ -214,10 +216,10 @@ const typeCheckLookupTable = {
      * @param {import('scenegraph').SceneNode} node
      * @return {boolean} node is instanceof SymbolInstance
      */
-    'SymbolInstance': (node) => {
+    SymbolInstance: node => {
         const {SymbolInstance} = require('scenegraph');
         return node instanceof SymbolInstance;
-    },
+    }
 };
 
 module.exports = SelectionChecker;
