@@ -15,8 +15,8 @@ const applyText = require('./apply-text');
  * @param {string} parsedTerminationString The parsed termination string, i.e., '' for 'n/a'
  */
 module.exports = function pointText(element, options, parsedTerminationString) {
-    applyText(
-        element,
-        generatePlaceholderText(2, options.text, false) + parsedTerminationString
-    );
+	applyText(
+		element,
+		generatePlaceholderText(2, options.text, false) + parsedTerminationString
+	);
 };

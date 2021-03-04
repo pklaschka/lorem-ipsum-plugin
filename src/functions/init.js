@@ -11,7 +11,7 @@ const SelectionChecker = require('../helpers/check-selection');
  * @return {Promise<boolean>} Selection contains text layer?
  */
 module.exports = async function init(selection) {
-    await lang.load();
-    let checker = new SelectionChecker(selection);
-    return checker.oneOrMore('Text') || checker.oneOrMore('Rectangle');
+	await lang.load();
+	let checker = new SelectionChecker(selection);
+	return checker.oneOrMore('Text') || checker.oneOrMore('Rectangle');
 };

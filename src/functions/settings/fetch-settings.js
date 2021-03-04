@@ -9,10 +9,10 @@ const storage = require('xd-storage-helper');
  * @returns {Promise<{text: string, terminationString: string, includeLineBreaks: boolean, trim: boolean}>}
  */
 module.exports = async function fetchSettings() {
-    return await storage.get('loremOptions', {
-        text: 'lorem-lat',
-        terminationString: '.',
-        includeLineBreaks: true,
-        trim: false
-    });
+	return await storage.get('loremOptions', {
+		text: 'lorem-lat',
+		terminationString: '.',
+		includeLineBreaks: true,
+		trim: false
+	});
 };

@@ -3,6 +3,6 @@
  */
 
 module.exports = {
-    showDialog: jest.fn(),
-    types: {TEXT: {}, TEXT_INPUT: {}, SELECT: {}}
+	showDialog: jest.fn(),
+	types: {TEXT: {}, TEXT_INPUT: {}, SELECT: {}}
 };

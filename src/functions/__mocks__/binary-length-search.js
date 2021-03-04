@@ -10,6 +10,6 @@
  * @returns {number}
  */
 module.exports = (val1, val2, cb) => {
-    cb();
-    return 5;
+	cb();
+	return 5;
 };

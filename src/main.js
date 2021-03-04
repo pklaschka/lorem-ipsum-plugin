@@ -16,10 +16,10 @@ const {handleErrors} = require('./helpers/error');
  * @return {Promise<void>}
  */
 async function lorem(selection) {
-    await handleErrors(async () => {
-        if (await init(selection)) await loremModal();
-        else await selectionError();
-    });
+	await handleErrors(async () => {
+		if (await init(selection)) await loremModal();
+		else await selectionError();
+	});
 }
 
 /**
@@ -28,10 +28,10 @@ async function lorem(selection) {
  * @return {Promise<void>}
  */
 async function quickLorem(selection) {
-    await handleErrors(async () => {
-        if (await init(selection)) await loremFunction(await fetchSettings());
-        else await selectionError();
-    });
+	await handleErrors(async () => {
+		if (await init(selection)) await loremFunction(await fetchSettings());
+		else await selectionError();
+	});
 }
 
 /**
@@ -40,16 +40,16 @@ async function quickLorem(selection) {
  * @return {Promise<void>}
  */
 async function loremPreconfigured(selection) {
-    await handleErrors(async () => {
-        if (await init(selection))
-            await loremFunction({
-                includeLineBreaks: true,
-                trim: false,
-                terminationString: 'n/a',
-                text: 'lorem-lat'
-            });
-        else await selectionError();
-    });
+	await handleErrors(async () => {
+		if (await init(selection))
+			await loremFunction({
+				includeLineBreaks: true,
+				trim: false,
+				terminationString: 'n/a',
+				text: 'lorem-lat'
+			});
+		else await selectionError();
+	});
 }
 
 /**
@@ -58,24 +58,24 @@ async function loremPreconfigured(selection) {
  * @return {Promise<void>}
  */
 async function loremPreconfiguredTrim(selection) {
-    await handleErrors(async () => {
-        if (await init(selection))
-            await loremFunction({
-                includeLineBreaks: true,
-                trim: true,
-                terminationString: '.',
-                text: 'lorem-lat'
-            });
-        else await selectionError();
-    });
+	await handleErrors(async () => {
+		if (await init(selection))
+			await loremFunction({
+				includeLineBreaks: true,
+				trim: true,
+				terminationString: '.',
+				text: 'lorem-lat'
+			});
+		else await selectionError();
+	});
 }
 
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
-    commands: {
-        lorem: lorem,
-        quickLorem: quickLorem,
-        loremPreconfigured: loremPreconfigured,
-        loremPreconfiguredTrim: loremPreconfiguredTrim
-    }
+	commands: {
+		lorem: lorem,
+		quickLorem: quickLorem,
+		loremPreconfigured: loremPreconfigured,
+		loremPreconfiguredTrim: loremPreconfiguredTrim
+	}
 };

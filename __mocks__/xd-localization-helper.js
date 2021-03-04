@@ -3,5 +3,5 @@
  */
 
 module.exports = {
-    get: jest.fn()
+	get: jest.fn()
 };

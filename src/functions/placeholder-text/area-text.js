@@ -19,53 +19,53 @@ const findNotClippingTextLength = require('../binary-length-search');
  * @param {string} parsedTerminationString The parsed termination string, i.e., '' for 'n/a'
  */
 module.exports = function applyToAreaText(
-    textNode,
-    options,
-    parsedTerminationString
+	textNode,
+	options,
+	parsedTerminationString
 ) {
-    /**
-     * Number of words n that clips the text area, such that n/2 doesn't clip
-     *
-     * A multiple of 2
-     * @type {number}
-     */
-    let numberOfWords = 1;
+	/**
+	 * Number of words n that clips the text area, such that n/2 doesn't clip
+	 *
+	 * A multiple of 2
+	 * @type {number}
+	 */
+	let numberOfWords = 1;
 
-    // Calculate numberOfWords:
-    debugHelper.log('Propagating forward');
-    do {
-        numberOfWords *= 2;
-        applyText(
-            textNode,
-            generatePlaceholderText(
-                numberOfWords,
-                options.text,
-                options.includeLineBreaks
-            ) + parsedTerminationString
-        );
-    } while (!textNode.clippedByArea && numberOfWords < 100000);
-    debugHelper.log('Propagating backwards from ', numberOfWords);
+	// Calculate numberOfWords:
+	debugHelper.log('Propagating forward');
+	do {
+		numberOfWords *= 2;
+		applyText(
+			textNode,
+			generatePlaceholderText(
+				numberOfWords,
+				options.text,
+				options.includeLineBreaks
+			) + parsedTerminationString
+		);
+	} while (!textNode.clippedByArea && numberOfWords < 100000);
+	debugHelper.log('Propagating backwards from ', numberOfWords);
 
-    /**
-     * Maximum number of words that doesn't clip the text area
-     * @type {number}
-     */
-    const n = findNotClippingTextLength(numberOfWords, numberOfWords / 2, n => {
-        applyText(
-            textNode,
-            generatePlaceholderText(n, options.text, options.includeLineBreaks) +
-            parsedTerminationString
-        );
-        return textNode.clippedByArea;
-    });
-    applyText(
-        textNode,
-        generatePlaceholderText(n, options.text, options.includeLineBreaks) +
-        parsedTerminationString
-    );
+	/**
+	 * Maximum number of words that doesn't clip the text area
+	 * @type {number}
+	 */
+	const n = findNotClippingTextLength(numberOfWords, numberOfWords / 2, n => {
+		applyText(
+			textNode,
+			generatePlaceholderText(n, options.text, options.includeLineBreaks) +
+			parsedTerminationString
+		);
+		return textNode.clippedByArea;
+	});
+	applyText(
+		textNode,
+		generatePlaceholderText(n, options.text, options.includeLineBreaks) +
+		parsedTerminationString
+	);
 
-    debugHelper.log('Completed at ', n);
-    if (options.trim) {
-        trimHeight(textNode);
-    }
+	debugHelper.log('Completed at ', n);
+	if (options.trim) {
+		trimHeight(textNode);
+	}
 };

@@ -9,19 +9,19 @@ const findContentFittingHeight = require('./binary-length-search');
  * @param {import('scenegraph').Text} node
  */
 module.exports = function trimAreaTextNode(node) {
-    node.resize(
-        node.localBounds.width,
-        findContentFittingHeight(
-            0,
-            node.localBounds.height,
-            /**
-             * @param {number} height
-             * @returns {boolean}
-             */
-            height => {
-                node.resize(node.localBounds.width, height);
-                return node.clippedByArea;
-            }
-        )
-    );
+	node.resize(
+		node.localBounds.width,
+		findContentFittingHeight(
+			0,
+			node.localBounds.height,
+			/**
+			 * @param {number} height
+			 * @returns {boolean}
+			 */
+			height => {
+				node.resize(node.localBounds.width, height);
+				return node.clippedByArea;
+			}
+		)
+	);
 };

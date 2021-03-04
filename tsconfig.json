@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "target": "es2015",
-    "noEmit": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
-    "lib": [
-      "dom",
-      "es2015"
-    ]
+	"strict": true,
+	"target": "es2015",
+	"noEmit": true,
+	"module": "commonjs",
+	"moduleResolution": "node",
+	"resolveJsonModule": true,
+	"allowJs": true,
+	"checkJs": true,
+	"lib": [
+	  "dom",
+	  "es2015"
+	]
   },
   "include": [
-    "src/**/*",
-    "types/**/*.d.ts"
+	"src/**/*",
+	"types/**/*.d.ts"
   ]
 }

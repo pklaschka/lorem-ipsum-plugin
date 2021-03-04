@@ -24,23 +24,23 @@ const debugHelper = require('../helpers/debug');
  * @returns {number} number n that's closest to the clipping number without clipping.
  */
 module.exports = function binaryLengthSearch(
-    clippingNumber,
-    notClippingNumber,
-    isClipping
+	clippingNumber,
+	notClippingNumber,
+	isClipping
 ) {
-    debugHelper.log(
-        'Checking between ',
-        clippingNumber,
-        ' and ',
-        notClippingNumber
-    );
+	debugHelper.log(
+		'Checking between ',
+		clippingNumber,
+		' and ',
+		notClippingNumber
+	);
 
-    if (Math.abs(clippingNumber - notClippingNumber) < 2)
-        return notClippingNumber;
+	if (Math.abs(clippingNumber - notClippingNumber) < 2)
+		return notClippingNumber;
 
-    let half = Math.floor((clippingNumber + notClippingNumber) / 2);
+	let half = Math.floor((clippingNumber + notClippingNumber) / 2);
 
-    return isClipping(half)
-        ? binaryLengthSearch(half, notClippingNumber, isClipping)
-        : binaryLengthSearch(clippingNumber, half, isClipping);
+	return isClipping(half)
+		? binaryLengthSearch(half, notClippingNumber, isClipping)
+		: binaryLengthSearch(clippingNumber, half, isClipping);
 };

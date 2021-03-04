@@ -10,16 +10,16 @@ const {RepeatGrid} = require('scenegraph');
  * @param {string} text
  */
 module.exports = function applyText(textLayer, text) {
-    let optRepeatGridNode;
-    if (
-        textLayer.parent &&
-        textLayer.parent.parent &&
-        textLayer.parent.parent instanceof RepeatGrid
-    ) {
-        optRepeatGridNode = textLayer.parent.parent;
-    }
+	let optRepeatGridNode;
+	if (
+		textLayer.parent &&
+		textLayer.parent.parent &&
+		textLayer.parent.parent instanceof RepeatGrid
+	) {
+		optRepeatGridNode = textLayer.parent.parent;
+	}
 
-    if (optRepeatGridNode)
-        optRepeatGridNode.attachTextDataSeries(textLayer, [text]);
-    else textLayer.text = text;
+	if (optRepeatGridNode)
+		optRepeatGridNode.attachTextDataSeries(textLayer, [text]);
+	else textLayer.text = text;
 };

@@ -7,11 +7,11 @@
  * @param {number} words
  */
 module.exports = function (words) {
-    let text = 'a';
+	let text = 'a';
 
-    for (let i = 1; i < words; i++) {
-        text += ' a';
-    }
+	for (let i = 1; i < words; i++) {
+		text += ' a';
+	}
 
-    return text;
+	return text;
 };
