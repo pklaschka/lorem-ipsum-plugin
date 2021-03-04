@@ -1,0 +1,38 @@
+name: Lint
+
+on: push
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 📥
+        uses: actions/checkout@v2.3.4
+      - name: Setup Node 💿
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 14
+
+      - name: Restore npm cache ♻️
+        uses: actions/cache@v2.1.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Eslint and Prettier must be in `package.json`
+      - name: Install development dependencies 📚
+        run: npm ci
+
+      - name: Run linters 📑
+        uses: wearerequired/lint-action@v1.7.0
+        with:
+          github_token: ${{ secrets.github_token }}
+          # Enable linters
+          eslint: true
+          eslint_extensions: 'js,jsx,ts,tsx'
+          eslint_args: '--ignore-pattern node_modules/ --no-error-on-unmatched-pattern'
+          prettier: true
+          prettier_extensions: 'ts,tsx,js,jsx,json,html,css,scss,sass,yaml,yml,md'
