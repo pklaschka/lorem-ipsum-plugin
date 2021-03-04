@@ -33,9 +33,7 @@ jobs:
       - run: npm ci
       - name: Tests
         run: npm test
-      - run: |
-          rm dist/debug.json
-          npm run build
+      - run: npm run build
       - name: Upload build
         id: upload-build
         uses: actions/upload-release-asset@v1
