@@ -67,14 +67,6 @@
 	"summary": "Insert placeholder text",
 	"website": "https://xdplugins.pabloklaschka.de/plugins/lorem-ipsum",
 	"helpUrl": "https://xdplugins.pabloklaschka.de/plugins/lorem-ipsum#support",
-	"keywords": [
-		"Text",
-		"Placeholder text",
-		"Lorem Ipsum",
-		"Fill"
-	],
-	"languages": [
-		"de",
-		"en"
-	]
+	"keywords": ["Text", "Placeholder text", "Lorem Ipsum", "Fill"],
+	"languages": ["de", "en"]
 }
