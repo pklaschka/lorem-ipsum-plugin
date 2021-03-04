@@ -9,15 +9,17 @@ describe('applyToPointText()', () => {
     let textNode;
 
     beforeEach(() => {
-        jest.mock('./apply-text');
-        jest.mock('./generate-placeholder-text');
-        jest.mock('../../helpers/debug');
+		jest.mock('./apply-text');
+		jest.mock('./generate-placeholder-text');
+		jest.mock('../../helpers/debug');
 
-        textNode = new (require('scenegraph').Text)();
-        textNode.resize(24, 1);
-        textNode.text = 'Some short text';
-        textNode._isPointText = true;
-    });
+		const Text = require('scenegraph').Text;
+		textNode = new Text();
+		textNode.resize(24, 1);
+		textNode.text = 'Some short text';
+		// @ts-ignore
+		textNode._mode = Text.POINT;
+	});
 
     it('should apply two words of placeholder text', () => {
         const applyToAreaText = require('./point-text');

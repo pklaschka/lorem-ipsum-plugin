@@ -43,36 +43,49 @@ describe('fillSelectionWithPlaceholderText()', () => {
     });
 
     it('should apply placeholder text to area text', () => {
-        const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
-        fillSelectionWithPlaceholderText(options);
-        expect(require('./area-text')).toHaveBeenLastCalledWith(
-            textNode,
-            options,
-            '.'
-        );
-    });
+		const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
+		textNode._mode = scenegraph.Text.FIXED_HEIGHT;
+		fillSelectionWithPlaceholderText(options);
+		expect(require('./area-text')).toHaveBeenLastCalledWith(
+			textNode,
+			options,
+			'.'
+		);
+	});
 
     it('should apply placeholder text to point text', () => {
-        const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
-        textNode._isPointText = true;
-        fillSelectionWithPlaceholderText(options);
-        expect(require('./point-text')).toHaveBeenLastCalledWith(
-            textNode,
-            options,
-            '.'
-        );
-    });
+		const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
+		textNode._mode = scenegraph.Text.POINT;
+		fillSelectionWithPlaceholderText(options);
+		expect(require('./point-text')).toHaveBeenLastCalledWith(
+			textNode,
+			options,
+			'.'
+		);
+	});
 
-    it('should convert Rectangles to text and apply placeholder text', () => {
-        const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
-        const rectangle = new scenegraph.Rectangle();
-        // noinspection JSConstantReassignment
-        rectangle.parent = new scenegraph.Group();
-        scenegraph.selection.items = [rectangle];
-        fillSelectionWithPlaceholderText(options);
-        expect(require('./replace-with-text')).toHaveBeenCalled();
-        expect(require('./area-text')).toHaveBeenCalled();
-    });
+	it('should apply placeholder text to auto-height text', () => {
+		const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
+		textNode._mode = scenegraph.Text.AUTO_HEIGHT;
+		fillSelectionWithPlaceholderText(options);
+		expect(require('./area-text')).toHaveBeenLastCalledWith(
+			textNode,
+			options,
+			'.'
+		);
+		expect(textNode._mode).toBe(scenegraph.Text.AUTO_HEIGHT);
+	});
+
+	it('should convert Rectangles to text and apply placeholder text', () => {
+		const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
+		const rectangle = new scenegraph.Rectangle();
+		// noinspection JSConstantReassignment
+		rectangle.parent = new scenegraph.Group();
+		scenegraph.selection.items = [rectangle];
+		fillSelectionWithPlaceholderText(options);
+		expect(require('./replace-with-text')).toHaveBeenCalled();
+		expect(require('./area-text')).toHaveBeenCalled();
+	});
 
     it('should ignore non-Text nodes in selection', () => {
         const fillSelectionWithPlaceholderText = require('./fill-selection-with-placeholder-text');
