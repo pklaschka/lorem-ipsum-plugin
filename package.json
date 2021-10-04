@@ -20,7 +20,7 @@
 		"style:check": "prettier --list-different package.json '**/*{.ts,.tsx,.js,.jsx,.json,.html,.css,.scss,.sass,.yaml,.yml,.md}'"
 	},
 	"dependencies": {
-		"xd-dialog-helper": "^1.0.5",
+		"xd-dialog-helper": "^1.1.0",
 		"xd-localization-helper": "^1.1.3",
 		"xd-storage-helper": "^1.2.3"
 	},
