@@ -29,7 +29,7 @@
 		"@types/adobe-xd": "AdobeXD/typings",
 		"@types/jest": "^27.4.1",
 		"coveralls": "^3.1.1",
-		"eslint": "^8.11.0",
+		"eslint": "^8.14.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"husky": "^7.0.4",
 		"jest": "^27.5.1",
