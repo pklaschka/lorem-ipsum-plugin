@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Run linters 📑
-        uses: wearerequired/lint-action@v2.1.0
+        uses: wearerequired/lint-action@v2.2.0
         with:
           github_token: ${{ secrets.github_token }}
           # Enable linters
