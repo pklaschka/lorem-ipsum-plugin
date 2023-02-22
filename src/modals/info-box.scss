@@ -1,0 +1,33 @@
+/*!
+ * Copyright (c) 2023. by Pablo Klaschka
+ */
+
+.info-box {
+	box-sizing: border-box;
+	display: block;
+	background-color: #fff;
+	border: 2px solid #fff;
+	padding: 1em;
+}
+
+.info-box--error {
+	border-color: #dd4b39;
+}
+
+.info-box--success {
+	border-color: #00a65a;
+}
+
+.info-box--warning {
+	border-color: #f39c12;
+}
+
+.info-box--info {
+	border-color: #1592E6;
+}
+
+.info-box__title {
+	font-size: 1em;
+	font-weight: 600;
+	margin: 0;
+}

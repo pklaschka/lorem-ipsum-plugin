@@ -1,0 +1,19 @@
+{
+	"error.general.description": "Une erreur inconnue s'est produite lors de l'exécution du plugin. Veuillez envisager d'en informer le développeur. Détails :",
+	"error.general.title": "Erreur",
+	"error.messages.incompatibleParentNode": "Le rectangle sélectionné a un type de couche parent inconnu. Il ne peut donc pas être remplacé par du texte.",
+	"error.selection.description": "Veuillez inclure au moins un nœud de texte ou de rectangle dans votre sélection et réessayez.",
+	"error.selection.title": "Aucun texte ou rectangle sélectionné",
+	"modal.lorem.btn.cancel": "Annuler",
+	"modal.lorem.btn.ok": "Insérer le texte",
+	"modal.lorem.description": "Remplit le ou les éléments de texte sélectionnés avec du texte de substitution.",
+	"modal.lorem.includeLineBreaks.label": "Inclure des sauts de ligne",
+	"modal.lorem.terminate.ellipsis": "Points de suspension ('…')",
+	"modal.lorem.terminate.label": "Terminer par une marque de ponctuation :",
+	"modal.lorem.terminate.none": "Aucune",
+	"modal.lorem.terminate.period": "Point ('.')",
+	"modal.lorem.text.label": "Texte de substitution :",
+	"modal.lorem.trim.label": "Ajuster la hauteur de la zone de texte pour s'adapter au texte inséré",
+	"modal.lorem.point-text-warning.title": "Point text sélectionné",
+	"modal.lorem.point-text-warning.description": "Si votre couche de texte sélectionnée est un point text, le plugin ne peut pas déterminer sa hauteur. Par conséquent, nous produirons deux mots appropriés pour les liens ou les boutons. Pour obtenir plus de mots, veuillez sélectionner une couche de texte avec une hauteur fixe."
+}

@@ -3,33 +3,12 @@ name: CI
 on: [push]
 
 jobs:
-  coveralls:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-    env:
-      COVERALLS_REPO_TOKEN: '${{ secrets.COVERALLS_REPO_TOKEN }}'
-      COVERALLS_GIT_BRANCH: '${{ github.ref }}'
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
-        run: |
-          npm ci
-          npm run test:coveralls
-        env:
-          CI: true
   build:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -37,15 +16,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
       - name: npm install, build, and test
         run: |
-          npm ci
-          npm run build --if-present
-          npm test
+          pnpm install
+          pnpm build
+          pnpm package
         env:
           CI: true
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: plugin-xdx
-          path: dist.xdx
+          path: builds/*.xdx

@@ -1,0 +1,19 @@
+{
+	"error.general.description": "Ha ocurrido un error desconocido al ejecutar el complemento. Considere informar al desarrollador. Detalles:",
+	"error.general.title": "Error",
+	"error.messages.incompatibleParentNode": "El rectángulo seleccionado tiene un tipo de capa de padre desconocido. Por lo tanto, no se puede reemplazar con texto.",
+	"error.selection.description": "Por favor, incluya al menos un nodo de texto o rectángulo en su selección y vuelva a intentarlo.",
+	"error.selection.title": "No se ha seleccionado ningún texto o rectángulo",
+	"modal.lorem.btn.cancel": "Cancelar",
+	"modal.lorem.btn.ok": "Insertar texto",
+	"modal.lorem.description": "Rellena el o los elementos de texto seleccionados con texto de relleno.",
+	"modal.lorem.includeLineBreaks.label": "Incluir saltos de línea",
+	"modal.lorem.terminate.ellipsis": "Elipsis ('…')",
+	"modal.lorem.terminate.label": "Terminar con signo de puntuación:",
+	"modal.lorem.terminate.none": "Ninguno",
+	"modal.lorem.terminate.period": "Punto ('.')",
+	"modal.lorem.text.label": "Texto de relleno:",
+	"modal.lorem.trim.label": "Ajustar la altura del área de texto para que se ajuste al texto insertado",
+	"modal.lorem.point-text-warning.title": "Texto de punto seleccionado",
+	"modal.lorem.point-text-warning.description": "Si su capa de texto seleccionada es un texto de punto, el complemento no puede determinar su altura. Por lo tanto, produciremos dos palabras apropiadas para enlaces o botones. Para obtener más palabras, seleccione una capa de texto con una altura definida."
+}

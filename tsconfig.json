@@ -8,7 +8,8 @@
 		"resolveJsonModule": true,
 		"allowJs": true,
 		"checkJs": true,
-		"lib": ["dom", "es2015"]
+		"lib": ["dom", "es2015"],
+		"allowSyntheticDefaultImports": true
 	},
 	"include": ["src/**/*", "types/**/*.d.ts"]
 }

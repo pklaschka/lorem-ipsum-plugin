@@ -4,18 +4,10 @@
 	"description": "Lorem Ipsum Plugin for Adobe XD CC",
 	"private": true,
 	"scripts": {
-		"start": "npm run debug:watch",
-		"test": "jest --coverage",
-		"test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
-		"build": "npm run compile:production && xdpm package dist",
-		"compile": "webpack --config webpack.config.js",
-		"compile:production": "npm run compile -- --mode production",
-		"debug:install": "webpack --config webpack.config.js --mode development && xdpm install dist -o",
-		"debug:watch": "xdpm watch dist | webpack --config webpack.config.js --mode development --watch",
-		"debug:watch-prerelease": "xdpm watch dist -w p | webpack --config webpack.config.js --mode development --watch",
-		"lint": "eslint src/**/*.js --ignore-pattern node_modules/",
+		"start": "node scripts/watch.mjs",
+		"build": "tsc && node scripts/build.mjs",
+		"package": "node scripts/package.mjs",
 		"release": "standard-version",
-		"stats": "sloc src",
 		"style": "prettier --write package.json '**/*{.ts,.tsx,.js,.jsx,.json,.html,.css,.scss,.sass,.yaml,.yml,.md}'",
 		"style:check": "prettier --list-different package.json '**/*{.ts,.tsx,.js,.jsx,.json,.html,.css,.scss,.sass,.yaml,.yml,.md}'"
 	},
@@ -29,29 +21,25 @@
 		"@types/adobe-xd": "AdobeXD/typings",
 		"@types/jest": "29.4.0",
 		"coveralls": "3.1.1",
+		"esbuild": "^0.17.8",
+		"esbuild-sass-plugin": "^2.5.0",
 		"eslint": "8.34.0",
 		"eslint-plugin-prettier": "4.2.1",
-		"husky": "8.0.3",
 		"jest": "29.4.3",
 		"lint-staged": "13.1.2",
 		"prettier": "2.8.4",
+		"sass": "^1.58.1",
 		"sloc": "0.2.1",
 		"standard-version": "9.5.0",
 		"webpack": "5.75.0",
-		"webpack-cli": "4.10.0"
+		"webpack-cli": "4.10.0",
+		"ws": "^8.12.1",
+		"zip-a-folder": "^1.1.5"
 	},
 	"keywords": [
 		"adobe",
 		"xd"
 	],
 	"author": "Pablo Klaschka",
-	"license": "GPL-3",
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.js": "eslint --cache --fix"
-	}
+	"license": "GPL-3"
 }
