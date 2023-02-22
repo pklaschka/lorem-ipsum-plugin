@@ -7,7 +7,7 @@
 	],
 	"bumpFiles": [
 		{
-			"filename": "dist/manifest.json",
+			"filename": "static/manifest.json",
 			"type": "json"
 		},
 		{

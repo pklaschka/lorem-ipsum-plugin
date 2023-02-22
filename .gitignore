@@ -1,8 +1,8 @@
 docs
 node_modules
 .idea
-dist/main.js
 coverage
+dist
 
 dist.xdx
 

@@ -1,4 +1,4 @@
-![Lorem Ipsum Plugin Logo](./dist/icons/icon@3x.png)
+![Lorem Ipsum Plugin Logo](static/icons/icon@3x.png)
 
 # Lorem Ipsum plugin for Adobe XD
 
