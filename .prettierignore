@@ -1,8 +1,9 @@
 node_modules
-coverage
-release
+builds
+dist
 docs
 .vscode
 .idea
-package-lock.json
+package.json
+pnpm-lock.yaml
 CHANGELOG.md
