@@ -24,8 +24,7 @@ jobs:
             ${{ runner.os }}-node-
       # Eslint and Prettier must be in `package.json`
       - name: Install development dependencies 📚
-        run: npm ci
-
+        run: pnpm install
       - name: Run linters 📑
         uses: wearerequired/lint-action@v2.3.0
         with:
