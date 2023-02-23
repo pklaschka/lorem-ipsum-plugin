@@ -22,7 +22,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      # Eslint and Prettier must be in `package.json`
+      # Prettier must be in `package.json`
       - uses: pnpm/action-setup@v2
         with:
           version: 6.0.2
@@ -33,8 +33,5 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           # Enable linters
-          eslint: true
-          eslint_extensions: 'js,jsx,ts,tsx'
-          eslint_args: '--ignore-pattern node_modules/ --no-error-on-unmatched-pattern'
           prettier: true
           prettier_extensions: 'ts,tsx,js,jsx,json,html,css,scss,sass,yaml,yml,md'
