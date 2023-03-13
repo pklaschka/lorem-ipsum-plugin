@@ -22,7 +22,7 @@
 		"@types/jest": "29.4.0",
 		"esbuild": "^0.17.8",
 		"esbuild-sass-plugin": "^2.5.0",
-		"lint-staged": "13.1.2",
+		"lint-staged": "13.2.0",
 		"prettier": "2.8.4",
 		"sass": "^1.58.1",
 		"sloc": "0.2.1",
