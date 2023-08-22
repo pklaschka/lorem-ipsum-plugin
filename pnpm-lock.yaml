@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@adobe/xdpm': 4.1.1
   '@types/adobe-xd': AdobeXD/typings
-  '@types/jest': 29.4.0
+  '@types/jest': 29.5.4
   esbuild: ^0.17.8
   esbuild-sass-plugin: ^2.5.0
   lint-staged: 13.1.2
@@ -25,7 +25,7 @@ dependencies:
 devDependencies:
   '@adobe/xdpm': 4.1.1
   '@types/adobe-xd': github.com/AdobeXD/typings/05b3b86a209aa25dd2e334bdb7086ce164c04a21
-  '@types/jest': 29.4.0
+  '@types/jest': 29.5.4
   esbuild: 0.17.8
   esbuild-sass-plugin: 2.5.0_esbuild@0.17.8+sass@1.58.1
   lint-staged: 13.1.2
@@ -323,8 +323,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/29.4.0:
-    resolution: {integrity: sha512-VaywcGQ9tPorCX/Jkkni7RWGFfI11whqzs8dvxF41P17Z+z872thvEvlIbznjPJ02kl1HMX3LmLOonsj2n7HeQ==}
+  /@types/jest/29.5.4:
+    resolution: {integrity: sha512-PhglGmhWeD46FYOVLt3X7TiWjzwuVGW9wG/4qocPevXMjCmrIc5b6db9WjeGE4QYVpUAWMDv3v0IiBwObY289A==}
     dependencies:
       expect: 29.4.3
       pretty-format: 29.4.3
