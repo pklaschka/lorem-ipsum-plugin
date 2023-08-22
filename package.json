@@ -19,7 +19,7 @@
 	"devDependencies": {
 		"@adobe/xdpm": "4.1.1",
 		"@types/adobe-xd": "AdobeXD/typings",
-		"@types/jest": "29.4.0",
+		"@types/jest": "29.5.4",
 		"esbuild": "^0.17.8",
 		"esbuild-sass-plugin": "^2.5.0",
 		"lint-staged": "13.1.2",
