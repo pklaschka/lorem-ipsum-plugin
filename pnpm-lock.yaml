@@ -7,7 +7,7 @@ specifiers:
   esbuild: ^0.19.0
   esbuild-sass-plugin: ^2.5.0
   lint-staged: 13.1.2
-  prettier: 2.8.4
+  prettier: 2.8.8
   sass: ^1.58.1
   sloc: 0.2.1
   standard-version: 9.5.0
@@ -29,7 +29,7 @@ devDependencies:
   esbuild: 0.19.2
   esbuild-sass-plugin: 2.5.0_esbuild@0.19.2+sass@1.58.1
   lint-staged: 13.1.2
-  prettier: 2.8.4
+  prettier: 2.8.8
   sass: 1.58.1
   sloc: 0.2.1
   standard-version: 9.5.0
@@ -2383,8 +2383,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /prettier/2.8.4:
-    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
+  /prettier/2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
