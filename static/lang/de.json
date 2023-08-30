@@ -14,6 +14,7 @@
 	"modal.lorem.terminate.period": "Punkt ('.')",
 	"modal.lorem.text.label": "Platzhaltertext:",
 	"modal.lorem.trim.label": "Höhe dem eingefügten Text genau anpassen",
+	"modal.lorem.randomize.label": "Zufällige Satzreihenfolge",
 	"modal.lorem.point-text-warning.title": "Punkttext ausgewählt",
 	"modal.lorem.point-text-warning.description": "Wenn Ihre ausgewählte Ebene ein Punkttext ist, kann das Plugin seine Höhe nicht bestimmen. Daher werden wir zwei Wörter erzeugen, die für Links oder Schaltflächen geeignet sind. Um weitere Wörter zu erhalten, wählen Sie bitte eine Textebene mit definierter Höhe."
 }

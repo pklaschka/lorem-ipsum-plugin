@@ -14,6 +14,7 @@
 	"modal.lorem.terminate.period": "Punto ('.')",
 	"modal.lorem.text.label": "Texto de relleno:",
 	"modal.lorem.trim.label": "Ajustar la altura del área de texto para que se ajuste al texto insertado",
+	"modal.lorem.randomize.label": "Ordenar oraciones al azar",
 	"modal.lorem.point-text-warning.title": "Texto de punto seleccionado",
 	"modal.lorem.point-text-warning.description": "Si su capa de texto seleccionada es un texto de punto, el complemento no puede determinar su altura. Por lo tanto, produciremos dos palabras apropiadas para enlaces o botones. Para obtener más palabras, seleccione una capa de texto con una altura definida."
 }

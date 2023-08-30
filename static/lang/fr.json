@@ -14,6 +14,7 @@
 	"modal.lorem.terminate.period": "Point ('.')",
 	"modal.lorem.text.label": "Texte de substitution :",
 	"modal.lorem.trim.label": "Ajuster la hauteur de la zone de texte pour s'adapter au texte inséré",
+	"modal.lorem.randomize.label": "Mélanger l'ordre des phrases",
 	"modal.lorem.point-text-warning.title": "Point text sélectionné",
 	"modal.lorem.point-text-warning.description": "Si votre couche de texte sélectionnée est un point text, le plugin ne peut pas déterminer sa hauteur. Par conséquent, nous produirons deux mots appropriés pour les liens ou les boutons. Pour obtenir plus de mots, veuillez sélectionner une couche de texte avec une hauteur fixe."
 }
