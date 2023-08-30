@@ -89,7 +89,7 @@ function onMessage(data) {
 	if (message.command === 'didAddRuntimeClient') {
 		try {
 			setClientId(message.id);
-			setSandboxStoragePath(message.app.sandboxStoragePath);
+			setSandboxStoragePath(message.app.sandboxStoragePath ?? '~/Library/Application Support/CUdtCli/sandbox_storage');
 			log('✅', 'Client ID and Sandbox Storage Path set');
 		} catch (e) {
 			log('❌', 'Cannot set client ID and sandbox storage path.', e.message);
