@@ -46,7 +46,11 @@
 						"fr": "Remplir avec du texte de substitution (derniers paramètres)",
 						"es": "Rellenar con texto de relleno (última configuración)"
 					},
-					"commandId": "quickLorem"
+					"commandId": "quickLorem",
+					"shortcut": {
+						"mac": "Cmd+Shift+Alt+L",
+						"win": "Ctrl+Shift+Alt+L"
+					}
 				},
 				{
 					"type": "menu",
