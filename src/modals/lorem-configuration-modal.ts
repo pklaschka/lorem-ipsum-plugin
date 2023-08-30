@@ -88,6 +88,13 @@ export async function showLoremIpsumOptionsModal() {
 				},
 				{
 					type: types.CHECKBOX,
+					id: 'randomize',
+					label: lang.get('modal.lorem.randomize.label'),
+					htmlAttributes: {},
+					value: uiOptions.randomize
+				},
+				{
+					type: types.CHECKBOX,
 					id: 'trim',
 					label: lang.get('modal.lorem.trim.label'),
 					htmlAttributes: {},

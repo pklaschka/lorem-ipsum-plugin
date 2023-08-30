@@ -14,6 +14,7 @@
 	"modal.lorem.terminate.period": "Period ('.')",
 	"modal.lorem.text.label": "Placeholder text:",
 	"modal.lorem.trim.label": "Trim text area height to fit inserted text",
+	"modal.lorem.randomize.label": "Randomize order of sentences",
 	"modal.lorem.point-text-warning.title": "Point text selected",
 	"modal.lorem.point-text-warning.description": "If your selected layer is a point text layer, the plugin cannot ascertain its height. Therefore, we will produce two words appropriate for links or buttons. To obtain additional words, please choose a text layer with a defined height."
 }

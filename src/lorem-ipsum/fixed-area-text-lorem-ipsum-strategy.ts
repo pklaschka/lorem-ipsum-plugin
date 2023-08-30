@@ -17,6 +17,7 @@ export class FixedAreaTextLoremIpsumStrategy
 	private numberOfWords =
 		FixedAreaTextLoremIpsumStrategy.INITIAL_NUMBER_OF_WORDS;
 	private readonly node: Text;
+	private seed = Date.now();
 
 	constructor(node: SceneNode) {
 		if (!(node instanceof Text)) throw new Error('Node is not a text node');
@@ -35,7 +36,7 @@ export class FixedAreaTextLoremIpsumStrategy
 		this.binarySearchNumberOfWords(options);
 
 		// Apply the text
-		applyText(this.node, getLoremIpsum(options, this.numberOfWords));
+		applyText(this.node, getLoremIpsum(options, this.numberOfWords, this.seed));
 
 		// Apply post-processing
 		this.trimIfSpecified(options);
@@ -65,7 +66,7 @@ export class FixedAreaTextLoremIpsumStrategy
 			this.numberOfWords,
 			this.numberOfWords / 2,
 			n => {
-				applyText(this.node, getLoremIpsum(options, n));
+				applyText(this.node, getLoremIpsum(options, n, this.seed));
 				return this.node.clippedByArea;
 			}
 		);
@@ -74,7 +75,10 @@ export class FixedAreaTextLoremIpsumStrategy
 	private doubleWordsUntilItClips(options: LoremIpsumOptions) {
 		do {
 			this.numberOfWords *= 2;
-			applyText(this.node, getLoremIpsum(options, this.numberOfWords));
+			applyText(
+				this.node,
+				getLoremIpsum(options, this.numberOfWords, this.seed)
+			);
 		} while (
 			!this.node.clippedByArea &&
 			this.numberOfWords < FixedAreaTextLoremIpsumStrategy.MAX_NUMBER_OF_WORDS

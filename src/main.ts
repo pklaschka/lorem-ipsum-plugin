@@ -54,6 +54,7 @@ async function loremPreconfigured() {
 			includeLineBreaks: true,
 			trim: false,
 			terminationString: 'n/a',
+			randomize: true,
 			text: 'lorem-lat'
 		});
 	});
@@ -69,6 +70,7 @@ async function loremPreconfiguredTrim() {
 			includeLineBreaks: true,
 			trim: true,
 			terminationString: '.',
+			randomize: true,
 			text: 'lorem-lat'
 		});
 	});

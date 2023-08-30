@@ -23,7 +23,7 @@ export class PointTextLoremIpsumStrategy implements ApplyLoremIpsumStrategy {
 	}
 
 	async apply(options: LoremIpsumOptions) {
-		applyText(this.textNode, getLoremIpsum(options, 2));
+		applyText(this.textNode, getLoremIpsum(options, 2, Date.now()));
 		return true;
 	}
 }

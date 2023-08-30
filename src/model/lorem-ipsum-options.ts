@@ -8,5 +8,6 @@ export interface LoremIpsumOptions {
 	trim: boolean;
 	terminationString: '.' | '!' | '?' | 'n/a';
 	includeLineBreaks: boolean;
+	randomize: boolean;
 	text: keyof typeof texts;
 }

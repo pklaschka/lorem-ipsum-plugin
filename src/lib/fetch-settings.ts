@@ -15,6 +15,7 @@ export async function fetchSettings(): Promise<LoremIpsumOptions> {
 		text: 'lorem-lat',
 		terminationString: 'n/a',
 		includeLineBreaks: true,
+		randomize: true,
 		trim: false
 	});
 }
