@@ -23,8 +23,8 @@ devDependencies:
     specifier: AdobeXD/typings
     version: github.com/AdobeXD/typings/05b3b86a209aa25dd2e334bdb7086ce164c04a21
   '@types/jest':
-    specifier: 29.5.4
-    version: 29.5.4
+    specifier: 29.5.5
+    version: 29.5.5
   esbuild:
     specifier: ^0.19.0
     version: 0.19.2
@@ -340,8 +340,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest@29.5.4:
-    resolution: {integrity: sha512-PhglGmhWeD46FYOVLt3X7TiWjzwuVGW9wG/4qocPevXMjCmrIc5b6db9WjeGE4QYVpUAWMDv3v0IiBwObY289A==}
+  /@types/jest@29.5.5:
+    resolution: {integrity: sha512-ebylz2hnsWR9mYvmBFbXJXr+33UPc4+ZdxyDXh5w0FlPBTfCVN3wPL+kuOiQt3xvrK419v7XWeAs+AeOksafXg==}
     dependencies:
       expect: 29.4.3
       pretty-format: 29.4.3
