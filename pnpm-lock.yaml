@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^1.58.1
     version: 1.58.1
   sloc:
-    specifier: 0.3.0
-    version: 0.3.0
+    specifier: 0.3.1
+    version: 0.3.1
   standard-version:
     specifier: 9.5.0
     version: 9.5.0
@@ -2127,8 +2127,8 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: true
 
-  /sloc@0.3.0:
-    resolution: {integrity: sha512-fKmMA8q5OyeZpFCxBa3FuFywQcziQXKBw9B8jwDJ/Ra3H/pkZpQJl9g5s3MIjUo2jwUDHUnaxXgVXObXFdiJBw==}
+  /sloc@0.3.1:
+    resolution: {integrity: sha512-ImBLf1q0R7OHUqAVVjUkW8q1qqGL3hI4ThWbKd8EMe1l1gGmxu062zSHyD/kz8B0Wii5boVYJ3/ZnFatpikBkw==}
     hasBin: true
     dependencies:
       async: 3.2.4
