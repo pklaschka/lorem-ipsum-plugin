@@ -30,7 +30,7 @@ devDependencies:
     version: 0.19.11
   esbuild-sass-plugin:
     specifier: ^2.5.0
-    version: 2.5.0(esbuild@0.19.11)(resolve@1.22.1)(sass@1.58.1)
+    version: 2.5.0(esbuild@0.19.11)(resolve@1.22.1)(sass@1.69.7)
   lint-staged:
     specifier: 13.3.0
     version: 13.3.0
@@ -38,8 +38,8 @@ devDependencies:
     specifier: 2.8.8
     version: 2.8.8
   sass:
-    specifier: ^1.58.1
-    version: 1.58.1
+    specifier: ^1.69.7
+    version: 1.69.7
   sloc:
     specifier: 0.3.1
     version: 0.3.1
@@ -994,7 +994,7 @@ packages:
       is-arrayish: 0.2.1
     dev: true
 
-  /esbuild-sass-plugin@2.5.0(esbuild@0.19.11)(resolve@1.22.1)(sass@1.58.1):
+  /esbuild-sass-plugin@2.5.0(esbuild@0.19.11)(resolve@1.22.1)(sass@1.69.7):
     resolution: {integrity: sha512-SKWcvZwB+3/3eLhSCscJfb9AEOgL3oYlwOaItnXpXNPVj9Hc1Iwf5Cx4muUd+H+6zKyUwviAtVdRwcUsocUYgA==}
     peerDependencies:
       esbuild: ^0.16.17
@@ -1003,7 +1003,7 @@ packages:
     dependencies:
       esbuild: 0.19.11
       resolve: 1.22.1
-      sass: 1.58.1
+      sass: 1.69.7
     dev: true
 
   /esbuild@0.19.11:
@@ -2070,9 +2070,9 @@ packages:
       truncate-utf8-bytes: 1.0.2
     dev: true
 
-  /sass@1.58.1:
-    resolution: {integrity: sha512-bnINi6nPXbP1XNRaranMFEBZWUfdW/AF16Ql5+ypRxfTvCRTTKrLsMIakyDcayUt2t/RZotmL4kgJwNH5xO+bg==}
-    engines: {node: '>=12.0.0'}
+  /sass@1.69.7:
+    resolution: {integrity: sha512-rzj2soDeZ8wtE2egyLXgOOHQvaC2iosZrkF6v3EUG+tBwEvhqUCzm0VP3k9gHF9LXbSrRhT5SksoI56Iw8NPnQ==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
