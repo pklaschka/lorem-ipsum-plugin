@@ -25,7 +25,7 @@
 		"lint-staged": "13.3.0",
 		"prettier": "3.1.1",
 		"sass": "^1.69.7",
-		"sloc": "0.3.1",
+		"sloc": "0.3.2",
 		"standard-version": "9.5.0",
 		"ws": "^8.16.0",
 		"zip-a-folder": "^3.1.5"
