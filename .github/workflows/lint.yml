@@ -25,7 +25,7 @@ jobs:
       # Prettier must be in `package.json`
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 6.35.1
       - name: Install development dependencies 📚
         run: pnpm install
       - name: Run linters 📑
